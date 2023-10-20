@@ -1,0 +1,1588 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>3&nbsp; Microbiome Data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./10_manipulation.html" rel="next">
+<link href="./06_packages.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04_containers.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Microbiome Data</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Orchestrating Microbiome Analysis with Bioconductor</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="" rel="" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-twitter"></i></a>
+    <a href="https://microbiome.github.io/mia/" rel="" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-facebook"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Orchestrating Microbiome Analysis with Bioconductor</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">(PART) Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06_packages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Packages</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_containers.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Microbiome Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10_manipulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">(PART) Focus Topics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12_quality_control.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Exploration and Quality Control</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14_alpha_diversity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Community Diversity</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20_beta_diversity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">global knitr options</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./21_microbiome_community.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Community Composition</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./30_differential_abundance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Differential Abundance</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./40_machine_learning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Machine Learning</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./23_multi-assay_analyses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Multi-Assay Analyses</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19_visualization_techniques.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Visualization</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./80_training.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">(PART) Training</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./95_resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Resources</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./98_exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Exercises</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./97_extra_materials.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">(PART) Appendix</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./90_acknowledgments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Developers</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Session_info.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sessioninfo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./99_bibliography.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bibliography</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#data-science-framework" id="toc-data-science-framework" class="nav-link active" data-scroll-target="#data-science-framework"><span class="header-section-number">3.1</span> Data science framework</a></li>
+  <li><a href="#data-containers" id="toc-data-containers" class="nav-link" data-scroll-target="#data-containers"><span class="header-section-number">3.2</span> Data containers</a>
+  <ul class="collapse">
+  <li><a href="#assay-slot" id="toc-assay-slot" class="nav-link" data-scroll-target="#assay-slot"><span class="header-section-number">3.2.1</span> Assay data</a></li>
+  <li><a href="#coldata" id="toc-coldata" class="nav-link" data-scroll-target="#coldata"><span class="header-section-number">3.2.2</span> colData</a></li>
+  <li><a href="#rowdata" id="toc-rowdata" class="nav-link" data-scroll-target="#rowdata"><span class="header-section-number">3.2.3</span> rowData</a></li>
+  <li><a href="#rowtree" id="toc-rowtree" class="nav-link" data-scroll-target="#rowtree"><span class="header-section-number">3.2.4</span> rowTree</a></li>
+  <li><a href="#alt-exp" id="toc-alt-exp" class="nav-link" data-scroll-target="#alt-exp"><span class="header-section-number">3.2.5</span> Alternative experiments</a></li>
+  <li><a href="#mae" id="toc-mae" class="nav-link" data-scroll-target="#mae"><span class="header-section-number">3.2.6</span> MultiAssayExperiments</a></li>
+  </ul></li>
+  <li><a href="#example-data" id="toc-example-data" class="nav-link" data-scroll-target="#example-data"><span class="header-section-number">3.3</span> Demonstration data</a>
+  <ul class="collapse">
+  <li><a href="#package-data" id="toc-package-data" class="nav-link" data-scroll-target="#package-data"><span class="header-section-number">3.3.1</span> Package data</a></li>
+  <li><a href="#experimenthub-data" id="toc-experimenthub-data" class="nav-link" data-scroll-target="#experimenthub-data"><span class="header-section-number">3.3.2</span> ExperimentHub data</a></li>
+  <li><a href="#curated-metagenomic-data" id="toc-curated-metagenomic-data" class="nav-link" data-scroll-target="#curated-metagenomic-data"><span class="header-section-number">3.3.3</span> Curated metagenomic data</a></li>
+  <li><a href="#other-data-sources" id="toc-other-data-sources" class="nav-link" data-scroll-target="#other-data-sources"><span class="header-section-number">3.3.4</span> Other data sources</a></li>
+  </ul></li>
+  <li><a href="#loading-experimental-microbiome-data" id="toc-loading-experimental-microbiome-data" class="nav-link" data-scroll-target="#loading-experimental-microbiome-data"><span class="header-section-number">3.4</span> Loading experimental microbiome data</a>
+  <ul class="collapse">
+  <li><a href="#s-workflow" id="toc-s-workflow" class="nav-link" data-scroll-target="#s-workflow"><span class="header-section-number">3.4.1</span> 16S workflow</a></li>
+  <li><a href="#import-from-file" id="toc-import-from-file" class="nav-link" data-scroll-target="#import-from-file"><span class="header-section-number">3.4.2</span> Import from external files</a></li>
+  <li><a href="#constructing-treesummarizedexperiment" id="toc-constructing-treesummarizedexperiment" class="nav-link" data-scroll-target="#constructing-treesummarizedexperiment"><span class="header-section-number">3.4.3</span> Constructing TreeSummarizedExperiment</a></li>
+  <li><a href="#constructing-multiassayexperiment" id="toc-constructing-multiassayexperiment" class="nav-link" data-scroll-target="#constructing-multiassayexperiment"><span class="header-section-number">3.4.4</span> Constructing MultiAssayExperiment</a></li>
+  <li><a href="#import-functions-for-standard-formats" id="toc-import-functions-for-standard-formats" class="nav-link" data-scroll-target="#import-functions-for-standard-formats"><span class="header-section-number">3.4.5</span> Import functions for standard formats</a></li>
+  <li><a href="#conversions-between-data-formats-in-r" id="toc-conversions-between-data-formats-in-r" class="nav-link" data-scroll-target="#conversions-between-data-formats-in-r"><span class="header-section-number">3.4.6</span> Conversions between data formats in R</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="containers" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Microbiome Data</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<script>
+document.addEventListener("click", function (event) {
+    if (event.target.classList.contains("rebook-collapse")) {
+        event.target.classList.toggle("active");
+        var content = event.target.nextElementSibling;
+        if (content.style.display === "block") {
+            content.style.display = "none";
+        } else {
+            content.style.display = "block";
+        }
+    }
+})
+</script>
+<style>
+.rebook-collapse {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.rebook-content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+</style>
+<section id="data-science-framework" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="data-science-framework"><span class="header-section-number">3.1</span> Data science framework</h2>
+<p>The building blocks of the framework are <strong>data container</strong> (SummarizedExperiment and its derivatives), <strong>packages</strong> from various developers using the TreeSE container, open <strong>demonstration data sets</strong>, in a separate chapter @ref(example-data), and <strong>online tutorials</strong> including this online book as well as the various package vignettes and other materials.</p>
+<div class="cell" data-hash="04_containers_cache/html/unnamed-chunk-2_7ad7a566e5e2971494df8e3657f2b14c">
+<div class="cell-output-display">
+<p><img src="general/figures/FigureOverviewV2_mod.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="data-containers" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="data-containers"><span class="header-section-number">3.2</span> Data containers</h2>
+<p><code>SummarizedExperiment</code> (<code>SE</code>) <span class="citation" data-cites="R_SummarizedExperiment">[@R_SummarizedExperiment]</span> is a generic and highly optimized container for complex data structures. It has become a common choice for analysing various types of biomedical profiling data, such as RNAseq, ChIp-Seq, microarrays, flow cytometry, proteomics, and single-cell sequencing.</p>
+<p>[<code>TreeSummarizedExperiment</code>] (<code>TreeSE</code>) <span class="citation" data-cites="R_TreeSummarizedExperiment">[@R_TreeSummarizedExperiment]</span> was developed as an extension to incorporate hierarchical information (such as phylogenetic trees and sample hierarchies) and reference sequences.</p>
+<p>[<code>MultiAssayExperiment</code>] (<code>MAE</code>) <span class="citation" data-cites="Ramos2017">[@Ramos2017]</span> provides an organized way to bind several different data containers together in a single object. For example, we can bind microbiome data (in <code>TreeSE</code> container) with metabolomic profiling data (in <code>SE</code>) container, with (partially) shared sample metadata. This is convenient and robust for instance in subsetting and other data manipulation tasks. Microbiome data can be part of multiomics experiments and analysis strategies. We highlight how the methods used througout in this book relate to this data framework by using the <code>TreeSummarizedExperiment</code>, <code>MultiAssayExperiment</code>, and classes beyond.</p>
+<p>This section provides an introductions to these data containers. In microbiome data science, these containers link taxonomic abundance tables with rich side information on the features and samples. Taxonomic abundance data can be obtained by 16S rRNA amplicon or metagenomic sequencing, phylogenetic microarrays, or by other means. Many microbiome experiments include multiple versions and types of data generated independently or derived from each other through transformation or agglomeration. We start by providing recommendations on how to represent different varieties of multi-table data within the <code>TreeSummarizedExperiment</code> class.</p>
+<p>The options and recommendations are summarized in Table @ref(tab:options).</p>
+<section id="assay-slot" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="assay-slot"><span class="header-section-number">3.2.1</span> Assay data</h3>
+<p>The original count-based taxonomic abundance tables may have different transformations, such as logarithmic, Centered Log-Ratio (CLR), or relative abundance. These are typically stored in <em><strong>assays</strong></em>.</p>
+<p>Let us load example data and rename it as tse.</p>
+<div class="cell" data-hash="04_containers_cache/html/unnamed-chunk-3_688bc815af326627bb837cca4c0e53d5">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mia)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"hitchip1006"</span>, <span class="at">package =</span> <span class="st">"miaTime"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>tse <span class="ot">&lt;-</span> hitchip1006</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The <code>assays</code> slot contains the experimental data as multiple count matrices. The result of <code>assays</code> is a list of matrices.</p>
+<div class="cell" data-hash="04_containers_cache/html/unnamed-chunk-4_de1fd1f1f97cc94984cdc7670477a072">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assays</span>(tse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>List of length 1
+names(1): counts</code></pre>
+</div>
+</div>
+<p>Individual assays can be accessed via <code>assay</code></p>
+<div class="cell" data-hash="04_containers_cache/html/unnamed-chunk-5_eb6a44a2f2c23bf59db055f1d00f0f70">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(tse, <span class="st">"counts"</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                             Sample-1 Sample-2 Sample-3 Sample-4 Sample-5
+Actinomycetaceae                    0        0        0        0        0
+Aerococcus                          0        0        0        0        0
+Aeromonas                           0        0        0        0        0
+Akkermansia                        21       36      475       61       34
+Alcaligenes faecalis et rel.        1        1        1        2        1
+                             Sample-6 Sample-7
+Actinomycetaceae                    0        0
+Aerococcus                          0        0
+Aeromonas                           0        0
+Akkermansia                        14       27
+Alcaligenes faecalis et rel.        1        1</code></pre>
+</div>
+</div>
+<p>To illustrate the use of multiple assays, the relative abundance data can be calculated and stored along the original count data using <code>transformAssay</code>.</p>
+<div class="cell" data-hash="04_containers_cache/html/unnamed-chunk-6_ab16f9aea25e72b745e5ec9c5b0458c8">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>tse <span class="ot">&lt;-</span> <span class="fu">transformAssay</span>(tse, <span class="at">assay.type =</span> <span class="st">"counts"</span>, <span class="at">method =</span> <span class="st">"relabundance"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">assays</span>(tse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>List of length 2
+names(2): counts relabundance</code></pre>
+</div>
+</div>
+<p>Now there are two assays available in the <code>tse</code> object, <code>counts</code> and <code>relabundance</code>.</p>
+<div class="cell" data-hash="04_containers_cache/html/unnamed-chunk-7_cc3620aeb67fac75fcd959fac500a5b9">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(tse, <span class="st">"relabundance"</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                              Sample-1  Sample-2  Sample-3  Sample-4  Sample-5
+Actinomycetaceae             0.0000000 0.000e+00 0.0000000 0.0000000 0.000e+00
+Aerococcus                   0.0000000 0.000e+00 0.0000000 0.0000000 0.000e+00
+Aeromonas                    0.0000000 0.000e+00 0.0000000 0.0000000 0.000e+00
+Akkermansia                  0.0027657 3.547e-03 0.0666106 0.0056195 2.833e-03
+Alcaligenes faecalis et rel. 0.0001317 9.854e-05 0.0001402 0.0001842 8.333e-05
+                              Sample-6  Sample-7
+Actinomycetaceae             0.0000000 0.0000000
+Aerococcus                   0.0000000 0.0000000
+Aeromonas                    0.0000000 0.0000000
+Akkermansia                  0.0017690 0.0045570
+Alcaligenes faecalis et rel. 0.0001264 0.0001688</code></pre>
+</div>
+</div>
+<p>Here the dimension of the count data remains unchanged in transformation. This is in fact, a requirement for the assays.</p>
+</section>
+<section id="coldata" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="coldata"><span class="header-section-number">3.2.2</span> colData</h3>
+<p><code>colData</code> contains data on the samples.</p>
+<div class="cell" data-hash="04_containers_cache/html/coldata_b3d39435172289441b7654d95a4615c2">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(tse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>DataFrame with 1151 rows and 10 columns
+                  age      sex nationality DNA_extraction_method  project
+            &lt;integer&gt; &lt;factor&gt;    &lt;factor&gt;              &lt;factor&gt; &lt;factor&gt;
+Sample-1           28   male            US                    NA        1
+Sample-2           24   female          US                    NA        1
+Sample-3           52   male            US                    NA        1
+Sample-4           22   female          US                    NA        1
+Sample-5           25   female          US                    NA        1
+...               ...      ...         ...                   ...      ...
+Sample-1168        50   female Scandinavia                     r       40
+Sample-1169        31   female Scandinavia                     r       40
+Sample-1170        31   female Scandinavia                     r       40
+Sample-1171        52   male   Scandinavia                     r       40
+Sample-1172        52   male   Scandinavia                     r       40
+            diversity   bmi_group  subject      time      sample
+            &lt;numeric&gt;    &lt;factor&gt; &lt;factor&gt; &lt;numeric&gt; &lt;character&gt;
+Sample-1         5.76 severeobese        1         0    Sample-1
+Sample-2         6.06 obese              2         0    Sample-2
+Sample-3         5.50 lean               3         0    Sample-3
+Sample-4         5.87 underweight        4         0    Sample-4
+Sample-5         5.89 lean               5         0    Sample-5
+...               ...         ...      ...       ...         ...
+Sample-1168      5.87 severeobese      244       8.1 Sample-1168
+Sample-1169      5.87 overweight       245       2.3 Sample-1169
+Sample-1170      5.92 overweight       245       8.2 Sample-1170
+Sample-1171      6.04 overweight       246       2.1 Sample-1171
+Sample-1172      5.74 overweight       246       7.9 Sample-1172</code></pre>
+</div>
+</div>
+</section>
+<section id="rowdata" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="rowdata"><span class="header-section-number">3.2.3</span> rowData</h3>
+<p><code>rowData</code> contains data on the features of the analyzed samples. Of particular interest to the microbiome field, this is used to store taxonomic information.</p>
+<div class="cell" data-hash="04_containers_cache/html/rowdata_ab7315eec9959da171ae108bbe43d633">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowData</span>(tse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>DataFrame with 130 rows and 3 columns
+                                      Phylum          Family
+                                 &lt;character&gt;     &lt;character&gt;
+Actinomycetaceae              Actinobacteria  Actinobacteria
+Aerococcus                        Firmicutes         Bacilli
+Aeromonas                     Proteobacteria  Proteobacteria
+Akkermansia                  Verrucomicrobia Verrucomicrobia
+Alcaligenes faecalis et rel.  Proteobacteria  Proteobacteria
+...                                      ...             ...
+Vibrio                        Proteobacteria  Proteobacteria
+Weissella et rel.                 Firmicutes         Bacilli
+Wissella et rel.                  Firmicutes         Bacilli
+Xanthomonadaceae              Proteobacteria  Proteobacteria
+Yersinia et rel.              Proteobacteria  Proteobacteria
+                                              Genus
+                                        &lt;character&gt;
+Actinomycetaceae                   Actinomycetaceae
+Aerococcus                               Aerococcus
+Aeromonas                                 Aeromonas
+Akkermansia                             Akkermansia
+Alcaligenes faecalis et rel. Alcaligenes faecalis..
+...                                             ...
+Vibrio                                       Vibrio
+Weissella et rel.                 Weissella et rel.
+Wissella et rel.                   Wissella et rel.
+Xanthomonadaceae                   Xanthomonadaceae
+Yersinia et rel.                   Yersinia et rel.</code></pre>
+</div>
+</div>
+</section>
+<section id="rowtree" class="level3" data-number="3.2.4">
+<h3 data-number="3.2.4" class="anchored" data-anchor-id="rowtree"><span class="header-section-number">3.2.4</span> rowTree</h3>
+<p>Phylogenetic trees also play an important role in the microbiome field. The <code>TreeSummarizedExperiment</code> class can keep track of features and node relations via two functions, <code>rowTree</code> and <code>rowLinks</code>.</p>
+<p>A tree can be accessed via <code>rowTree</code> as <code>phylo</code> object.</p>
+<div class="cell" data-hash="04_containers_cache/html/rowtree_35649570f606adc349ba95ae9cf4087e">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowTree</span>(tse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>NULL</code></pre>
+</div>
+</div>
+<p>The links to the individual features are available through <code>rowLinks</code>.</p>
+<div class="cell" data-hash="04_containers_cache/html/rowlinks_9237a840a4e5b82359b943c1d1ca0360">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowLinks</span>(tse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>NULL</code></pre>
+</div>
+</div>
+<p>Please note that there can be a 1:1 relationship between tree nodes and features, but this is not a must-have. This means there can be features, which are not linked to nodes, and nodes, which are not linked to features. To change the links in an existing object, the <code>changeTree</code> function is available.</p>
+</section>
+<section id="alt-exp" class="level3" data-number="3.2.5">
+<h3 data-number="3.2.5" class="anchored" data-anchor-id="alt-exp"><span class="header-section-number">3.2.5</span> Alternative experiments</h3>
+<p><em><strong>Alternative experiments</strong></em> complement <em>assays</em>. They can contain complementary data, which is no longer tied to the same dimensions as the assay data. However, the number of samples (columns) must be the same.</p>
+<p>This can come into play, for instance, when one has taxonomic abundance profiles quantified with different measurement technologies, such as phylogenetic microarrays, amplicon sequencing, or metagenomic sequencing. Another common use case is including abundance tables for different taxonomic ranks. Such alternative experiments concerning the same set of samples can be stored as</p>
+<ol type="1">
+<li>Separate <em>assays</em> assuming that the taxonomic information can be mapped between features directly 1:1; or</li>
+<li>Data in the <em>altExp</em> slot of the <code>TreeSummarizedExperiment</code>, if the feature dimensions differ. Each element of the <em>altExp</em> slot is a <code>SummarizedExperiment</code> or an object from a derived class with independent feature data.</li>
+</ol>
+<p>The following shows how to store taxonomic abundance tables agglomerated at different taxonomic levels. However, the data could as well originate from entirely different measurement sources as long as the samples match.</p>
+<p>Let us first agglomerate the data to Phylum level. This yields a new TreeSE data object.</p>
+<div class="cell" data-hash="04_containers_cache/html/altexp_agglomerate_b173cbde7b1e359b37e610c3cdd5e9f3">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>tse_phylum <span class="ot">&lt;-</span> <span class="fu">mergeFeaturesByRank</span>(tse, <span class="st">"Phylum"</span>, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Both have the same number of columns (samples)</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(tse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  130 1151</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(tse_phylum)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]    8 1151</code></pre>
+</div>
+</div>
+<p>Then we can add the new phylum-level data object as an alternative experiment in the original data.</p>
+<div class="cell" data-hash="04_containers_cache/html/altexp_agglomerate2_6d412e476f9de076c3656d853f772fad">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the new data object to the original data object as an alternative experiment with the name "Phylum"</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">altExp</span>(tse, <span class="st">"Phylum"</span>) <span class="ot">&lt;-</span> tse_phylum</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the alternative experiment names available in the data</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">altExpNames</span>(tse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Phylum"</code></pre>
+</div>
+</div>
+<p>We can now subset the data, for instance, and this acts on both altExp and assay data.</p>
+<div class="cell" data-hash="04_containers_cache/html/altexp_agglomerate3_0c9c2bcc310131394f334029b5339760">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>tse[,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>class: TreeSummarizedExperiment 
+dim: 130 10 
+metadata(0):
+assays(2): counts relabundance
+rownames(130): Actinomycetaceae Aerococcus ... Xanthomonadaceae
+  Yersinia et rel.
+rowData names(3): Phylum Family Genus
+colnames(10): Sample-1 Sample-2 ... Sample-9 Sample-10
+colData names(10): age sex ... time sample
+reducedDimNames(0):
+mainExpName: NULL
+altExpNames(1): Phylum
+rowLinks: NULL
+rowTree: NULL
+colLinks: NULL
+colTree: NULL</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(<span class="fu">altExp</span>(tse[,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>],<span class="st">"Phylum"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  8 10</code></pre>
+</div>
+</div>
+<p>For more details on <em>altExp</em>, you can check the <a href="https://bioconductor.org/packages/release/bioc/vignettes/SingleCellExperiment/inst/doc/intro.html">introduction</a> to the <code>SingleCellExperiment</code> package <span class="citation" data-cites="R_SingleCellExperiment">[@R_SingleCellExperiment]</span>.</p>
+</section>
+<section id="mae" class="level3" data-number="3.2.6">
+<h3 data-number="3.2.6" class="anchored" data-anchor-id="mae"><span class="header-section-number">3.2.6</span> MultiAssayExperiments</h3>
+<p><em><strong>Multiple experiments</strong></em> relate to complementary measurement types, such as transcriptomic or metabolomic profiling of the microbiome or the host. Multiple experiments can be represented using the same options as alternative experiments, or by using the <code>MultiAssayExperiment</code> class <span class="citation" data-cites="Ramos2017">[@Ramos2017]</span>. Depending on how the datasets relate to each other the data can be stored as:</p>
+<ol type="1">
+<li>Separate <em>altExp</em> if the samples can be matched directly 1:1; or</li>
+<li>As <code>MultiAssayExperiment</code> objects, in which the connections between samples are defined through a <code>sampleMap</code>. Each element on the <code>experimentsList</code> of an <code>MultiAssayExperiment</code> is <code>matrix</code> or <code>matrix</code>-like objects, including <code>SummarizedExperiment</code> objects, and the number of samples can differ between the elements.</li>
+</ol>
+<!--
+
+::: {.cell hash='04_containers_cache/html/unnamed-chunk-15_f0d8b2875812ec3cc8a82f29f09c64c2'}
+
+```{.r .cell-code}
+#TODO: Find the right dataset to explain a non 1:1 sample relationship
+```
+:::
+
+-->
+<p>For information have a look at the <a href="https://bioconductor.org/packages/release/bioc/vignettes/MultiAssayExperiment/inst/doc/MultiAssayExperiment.html">intro vignette</a> of the <code>MultiAssayExperiment</code> package.</p>
+<table class="table">
+<caption>(#tab:options) <strong>Recommended options for storing multiple data tables in microbiome studies</strong> The <em>assays</em> are best suited for data transformations (one-to-one match between samples and columns across the assays). The <em>alternative experiments</em> are particularly suitable for alternative versions of the data that are of same type but may have a different number of features (e.g.&nbsp;taxonomic groups); this is for instance the case with taxonomic abundance tables agglomerated at different levels (e.g.&nbsp;genus vs.&nbsp;phyla) or alternative profiling technologies (e.g.&nbsp;amplicon sequencing vs.&nbsp;shallow shotgun metagenomics). For alternative experiments one-to-one match between samples (cols) is libraryd but the alternative experiment tables can have different numbers of features (rows). Finally, elements of the <em>MultiAssayExperiment</em> provide the most flexible way to incorporate multi-omic data tables with flexible numbers of samples and features. We recommend these conventions as the basis for methods development and application in microbiome studies.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Option</th>
+<th>Rows (features)</th>
+<th style="text-align: right;">Cols (samples)</th>
+<th style="text-align: right;">Recommended</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">assays</td>
+<td>match</td>
+<td style="text-align: right;">match</td>
+<td style="text-align: right;">Data transformations</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">altExp</td>
+<td>free</td>
+<td style="text-align: right;">match</td>
+<td style="text-align: right;">Alternative experiments</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">MultiAssay</td>
+<td>free</td>
+<td style="text-align: right;">free (mapping)</td>
+<td style="text-align: right;">Multi-omic experiments</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="example-data" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="example-data"><span class="header-section-number">3.3</span> Demonstration data</h2>
+<p>Open demonstration data for testing and benchmarking purposes is available from multiple locations. This chapter introduces some options. The other chapters of this book provide ample examples about the use of the data.</p>
+<section id="package-data" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="package-data"><span class="header-section-number">3.3.1</span> Package data</h3>
+<p>The <code>mia</code> R package contains example datasets that are direct conversions from the alternative <code>phyloseq</code> container to the <code>TreeSummarizedExperiment</code> container.</p>
+<p>List the <a href="https://microbiome.github.io/mia/reference/index.html">available datasets</a> in the <code>mia</code> package:</p>
+<div class="cell" data-hash="04_containers_cache/html/unnamed-chunk-16_227aa30e98b763f468509654d00d01d2">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mia)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="at">package=</span><span class="st">"mia"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Load the <code>GlobalPatterns</code> data from the <code>mia</code> package:</p>
+<div class="cell" data-hash="04_containers_cache/html/unnamed-chunk-17_1f17492aa8310a94a56198c81415a379">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"GlobalPatterns"</span>, <span class="at">package=</span><span class="st">"mia"</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>GlobalPatterns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>class: TreeSummarizedExperiment 
+dim: 19216 26 
+metadata(0):
+assays(1): counts
+rownames(19216): 549322 522457 ... 200359 271582
+rowData names(7): Kingdom Phylum ... Genus Species
+colnames(26): CL3 CC1 ... Even2 Even3
+colData names(7): X.SampleID Primer ... SampleType Description
+reducedDimNames(0):
+mainExpName: NULL
+altExpNames(0):
+rowLinks: a LinkDataFrame (19216 rows)
+rowTree: 1 phylo tree(s) (19216 leaves)
+colLinks: NULL
+colTree: NULL</code></pre>
+</div>
+</div>
+<section id="tengeler-desc" class="level4" data-number="3.3.1.1">
+<h4 data-number="3.3.1.1" class="anchored" data-anchor-id="tengeler-desc"><span class="header-section-number">3.3.1.1</span> Tengeler2020</h4>
+<p>Tengeler2020 is derived from a randomised blinded study on the effects of gut microbiome on attention-deficit/hyperactivity disorder (ADHD) in humanised mice <span class="citation" data-cites="Tengeler2020">[@Tengeler2020]</span>. The dataset is briefly presented in <a href="https://microbiome.github.io/outreach/tengeler2020_presentation.html">these slides</a>.</p>
+</section>
+<section id="hintikka-desc" class="level4" data-number="3.3.1.2">
+<h4 data-number="3.3.1.2" class="anchored" data-anchor-id="hintikka-desc"><span class="header-section-number">3.3.1.2</span> HintikkaXOData</h4>
+<p><a href="https://microbiome.github.io/microbiomeDataSets/reference/HintikkaXOData.html">HintikkaXOData</a> is derived from a study about the effects of fat diet and prebiotics on the microbiome of rat models <span class="citation" data-cites="Hintikka2021">[@Hintikka2021]</span>. It is available in the MAE data container for R. The dataset is briefly summarized in <a href="https://microbiome.github.io/outreach/hintikkaxo_presentation.html">these slides</a>.</p>
+</section>
+</section>
+<section id="experimenthub-data" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="experimenthub-data"><span class="header-section-number">3.3.2</span> ExperimentHub data</h3>
+<p><a href="https://bioconductor.org/packages/release/bioc/vignettes/ExperimentHub/inst/doc/ExperimentHub.html">ExperimentHub</a> provides a variety of data resources, including the <a href="https://bioconductor.org/packages/release/data/experiment/html/microbiomeDataSets.html">microbiomeDataSets</a> package <span class="citation" data-cites="Morgan2021 microlahti2021">[@Morgan2021; @microlahti2021]</span>.</p>
+<p>A table of the available datasets is available through the <code>availableDataSets</code> function.</p>
+<div class="cell" data-hash="04_containers_cache/html/unnamed-chunk-18_f5e836283a684b6c81bf3d367f9772f2">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(microbiomeDataSets)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">availableDataSets</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            Dataset
+1  GrieneisenTSData
+2    HintikkaXOData
+3       LahtiMLData
+4        LahtiMData
+5       LahtiWAData
+6      OKeefeDSData
+7 SilvermanAGutData
+8        SongQAData
+9   SprockettTHData</code></pre>
+</div>
+</div>
+<p>All data are downloaded from ExperimentHub and cached for local re-use. Check the <a href="https://microbiome.github.io/microbiomeDataSets/reference/index.html">man pages of each function</a> for a detailed documentation of the data contents and references. Let us retrieve a <em><a href="https://bioconductor.org/packages/3.17/MultiAssayExperiment">MultiAssayExperiment</a></em> dataset:</p>
+<div class="cell" data-hash="04_containers_cache/html/unnamed-chunk-19_0cc3249305f672846fec129b213f6869">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mae &lt;- HintikkaXOData()</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Since HintikkaXOData is now added to mia, we can load it directly from there</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="co"># We suggest to check other datasets from microbiomeDataSets</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(HintikkaXOData, <span class="at">package =</span> <span class="st">"mia"</span>)</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>mae <span class="ot">&lt;-</span> HintikkaXOData</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Data is available in <em><a href="https://bioconductor.org/packages/3.17/SummarizedExperiment">SummarizedExperiment</a></em>, <code>r Biocpkg("TreeSummarizedExperiment")</code> and <code>r Biocpkg("MultiAssayExperiment")</code> data containers; see the separate page on <a href="https://microbiome.github.io/OMA/multitable.html">alternative containers</a> for more details.</p>
+</section>
+<section id="curated-metagenomic-data" class="level3" data-number="3.3.3">
+<h3 data-number="3.3.3" class="anchored" data-anchor-id="curated-metagenomic-data"><span class="header-section-number">3.3.3</span> Curated metagenomic data</h3>
+<p><a href="https://bioconductor.org/packages/release/data/experiment/html/curatedMetagenomicData.html">curatedMetagenomicData</a> is a large collection of curated human microbiome datasets, provided as <code>(Tree)SummarizedExperiment</code> objects <span class="citation" data-cites="Pasolli2017">[@Pasolli2017]</span>. The resource provides curated human microbiome data including gene families, marker abundance, marker presence, pathway abundance, pathway coverage, and relative abundance for samples from different body sites. See the package homepage for more details on data availability and access.</p>
+<p>As one example, let us retrieve the Vatanen (2016) <span class="citation" data-cites="Vatanen2016">[@Vatanen2016]</span> data set. This is a larger collection with a bit longer download time.</p>
+<div class="cell" data-hash="04_containers_cache/html/unnamed-chunk-20_50a072bcbe7b9a1fad5b3e587b27ee59">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(curatedMetagenomicData)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>tse <span class="ot">&lt;-</span> <span class="fu">curatedMetagenomicData</span>(<span class="st">"Vatanen*"</span>, <span class="at">dryrun =</span> <span class="cn">FALSE</span>, <span class="at">counts =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="other-data-sources" class="level3" data-number="3.3.4">
+<h3 data-number="3.3.4" class="anchored" data-anchor-id="other-data-sources"><span class="header-section-number">3.3.4</span> Other data sources</h3>
+<p>The current collections provide access to vast microbiome data resources. The output has to be converted into TreeSE/MAE separately.</p>
+<ul>
+<li><a href="https://github.com/beadyallen/MGnifyR">MGnifyR</a> provides access to <a href="https://www.ebi.ac.uk/metagenomics/">EBI/MGnify</a></li>
+<li><a href="https://github.com/cran/qiitr">qiitr</a> provides access to <a href="https://qiita.com/about">QIITA</a></li>
+</ul>
+</section>
+</section>
+<section id="loading-experimental-microbiome-data" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="loading-experimental-microbiome-data"><span class="header-section-number">3.4</span> Loading experimental microbiome data</h2>
+<section id="s-workflow" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="s-workflow"><span class="header-section-number">3.4.1</span> 16S workflow</h3>
+<p>Result of amplicon sequencing is a large number of files that include all the sequences that were read from samples. Those sequences need to be matched with taxa. Additionally, we need to know how many times each taxa were found from each sample.</p>
+<p>There are several algorithms to do that, and DADA2 is one of the most common. You can find DADA2 pipeline tutorial, for example, <a href="https://benjjneb.github.io/dada2/tutorial.html">here</a>. After the DADA2 portion of the tutorial is completed, the data is stored into <em>phyloseq</em> object (Bonus: Handoff to phyloseq). To store the data to <em>TreeSummarizedExperiment</em>, follow the example below.</p>
+<p>You can find full workflow script without further explanations and comments from <a href="https://github.com/microbiome/OMA/blob/master/dada2_workflow.Rmd">here</a></p>
+<p>Load required packages.</p>
+<div class="cell" data-hash="04_containers_cache/html/dada2_2_604881ff0e51825eeb42a66a8e668de9">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mia)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(BiocManager)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Biostrings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Create arbitrary example sample metadata like it was done in the tutorial. Usually, sample metadata is imported as a file.</p>
+<div class="cell" data-hash="04_containers_cache/html/dada2_3_2e4fe390ac19eef85fd2ea7319b309ce">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>samples.out <span class="ot">&lt;-</span> <span class="fu">rownames</span>(seqtab.nochim)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>subject <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">strsplit</span>(samples.out, <span class="st">"D"</span>), <span class="st">`</span><span class="at">[</span><span class="st">`</span>, <span class="dv">1</span>)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>gender <span class="ot">&lt;-</span> <span class="fu">substr</span>(subject,<span class="dv">1</span>,<span class="dv">1</span>)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>subject <span class="ot">&lt;-</span> <span class="fu">substr</span>(subject,<span class="dv">2</span>,<span class="dv">999</span>)</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>day <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(<span class="fu">sapply</span>(<span class="fu">strsplit</span>(samples.out, <span class="st">"D"</span>), <span class="st">`</span><span class="at">[</span><span class="st">`</span>, <span class="dv">2</span>))</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>samdf <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Subject=</span>subject, <span class="at">Gender=</span>gender, <span class="at">Day=</span>day)</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>samdf<span class="sc">$</span>When <span class="ot">&lt;-</span> <span class="st">"Early"</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>samdf<span class="sc">$</span>When[samdf<span class="sc">$</span>Day<span class="sc">&gt;</span><span class="dv">100</span>] <span class="ot">&lt;-</span> <span class="st">"Late"</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(samdf) <span class="ot">&lt;-</span> samples.out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Convert data into right format and create a <em>TreeSE</em> object.</p>
+<div class="cell" data-hash="04_containers_cache/html/dada2_4_60164dc2a55a0348287546f407e53619">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a list that contains assays</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>counts <span class="ot">&lt;-</span> <span class="fu">t</span>(seqtab.nochim)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>counts <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(counts)</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>assays <span class="ot">&lt;-</span> <span class="fu">SimpleList</span>(<span class="at">counts =</span> counts)</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert colData and rowData into DataFrame</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>samdf <span class="ot">&lt;-</span> <span class="fu">DataFrame</span>(samdf)</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>taxa <span class="ot">&lt;-</span> <span class="fu">DataFrame</span>(taxa)</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Create TreeSE</span></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>tse <span class="ot">&lt;-</span> <span class="fu">TreeSummarizedExperiment</span>(<span class="at">assays =</span> assays,</span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>                                <span class="at">colData =</span> samdf,</span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>                                <span class="at">rowData =</span> taxa</span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>                                )</span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove mock sample like it is also done in DADA2 pipeline tutorial</span></span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>tse <span class="ot">&lt;-</span> tse[ , <span class="fu">colnames</span>(tse) <span class="sc">!=</span> <span class="st">"mock"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Add sequences into <em>referenceSeq</em> slot and convert rownames into simpler format.</p>
+<div class="cell" data-hash="04_containers_cache/html/dada2_5_ba55bc7fcdd6549e95f007b1cc861b8f">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert sequences into right format</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>dna <span class="ot">&lt;-</span> Biostrings<span class="sc">::</span><span class="fu">DNAStringSet</span>( <span class="fu">rownames</span>(tse) )</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Add sequences into referenceSeq slot</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="fu">referenceSeq</span>(tse) <span class="ot">&lt;-</span> dna</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert rownames into ASV_number format</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(tse) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"ASV"</span>, <span class="fu">seq</span>( <span class="fu">nrow</span>(tse) ))</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>tse</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>class: TreeSummarizedExperiment 
+dim: 232 20 
+metadata(0):
+assays(1): counts
+rownames(232): ASV1 ASV2 ... ASV231 ASV232
+rowData names(7): Kingdom Phylum ... Genus Species
+colnames(20): F3D0 F3D1 ... F3D9 Mock
+colData names(4): Subject Gender Day When
+reducedDimNames(0):
+mainExpName: NULL
+altExpNames(0):
+rowLinks: NULL
+rowTree: NULL
+colLinks: NULL
+colTree: NULL
+referenceSeq: a DNAStringSet (232 sequences)</code></pre>
+</div>
+</div>
+</section>
+<section id="import-from-file" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="import-from-file"><span class="header-section-number">3.4.2</span> Import from external files</h3>
+<p>Microbiome (taxonomic) profiling data is commonly distributed in various file formats. You can import such external data files as a (Tree)SummarizedExperiment object, but the details depend on the file format. Here, we provide examples for common formats. Some datasets and raw files to learn how to import raw data and construct TreeSE/MAE containers are available in the <a href="https://github.com/microbiome/data">microbiome data repository</a>.</p>
+<section id="csv-import" class="level4" data-number="3.4.2.1">
+<h4 data-number="3.4.2.1" class="anchored" data-anchor-id="csv-import"><span class="header-section-number">3.4.2.1</span> CSV import</h4>
+<p><strong>CSV data tables</strong> can be imported with the standard R functions, then converted to the desired format. For detailed examples, you can check the <a href="https://bioconductor.org/help/course-materials/2019/BSS2019/04_Practical_CoreApproachesInBioconductor.html">Bioconductor course material</a> by Martin Morgan. You can also check the <a href="https://github.com/microbiome/OMA/tree/master/data">example files</a> and construct your own CSV files accordingly.</p>
+<p>Recommendations for the CSV files are the following. File names are arbitrary; we refer here to the same names as in the examples:</p>
+<ul>
+<li><p>Abundance table (<code>assay_taxa.csv</code>): data matrix (features x samples); first column provides feature IDs, the first row provides sample IDs; other values should be numeric (abundances).</p></li>
+<li><p>Row data (<code>rowdata_taxa.csv</code>): data table (features x info); first column provides feature IDs, the first row provides column headers; this file usually contains the taxonomic mapping between different taxonomic levels. Ideally, the feature IDs (row names) match one-to-one with the abundance table row names.</p></li>
+<li><p>Column data (<code>coldata.csv</code>): data table (samples x info); first column provides sample IDs, the first row provides column headers; this file usually contains the sample metadata/phenodata (such as subject age, health etc). Ideally, the sample IDs match one-to-one with the abundance table column names.</p></li>
+</ul>
+<p>After you have set up the CSV files, you can read them in R:</p>
+<div class="cell" data-hash="04_containers_cache/html/importingcsv1_57ce1ecc60a5b1bd9662d681a1a071af">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>count_file  <span class="ot">&lt;-</span> <span class="st">"data/assay_taxa.csv"</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>tax_file    <span class="ot">&lt;-</span> <span class="st">"data/rowdata_taxa.csv"</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>sample_file <span class="ot">&lt;-</span> <span class="st">"data/coldata.csv"</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load files</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>counts  <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(count_file, <span class="at">row.names=</span><span class="dv">1</span>)   <span class="co"># Abundance table (e.g. ASV data; to assay data)</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>tax     <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(tax_file, <span class="at">row.names=</span><span class="dv">1</span>)     <span class="co"># Taxonomy table (to rowData)</span></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(sample_file, <span class="at">row.names=</span><span class="dv">1</span>)  <span class="co"># Sample data (to colData)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>After reading the data in R, ensure the following:</p>
+<ul>
+<li><p>abundance table (<code>counts</code>): numeric <code>matrix</code>, with feature IDs as rownames and sample IDs as column names</p></li>
+<li><p>rowdata (<code>tax</code>): <code>DataFrame</code>, with feature IDs as rownames. If this is a <code>data.frame</code> you can use the function <code>DataFrame()</code> to change the format. Column names are free but in microbiome analysis they usually they refer to taxonomic ranks. The rownames in rowdata should match with rownames in abundance table.</p></li>
+<li><p>coldata (<code>samples</code>): <code>DataFrame</code>, with sample IDs as rownames. If this is a <code>data.frame</code> you can use the function <code>DataFrame()</code> to change the format. Column names are free. The rownames in coldata should match with colnames in abundance table.</p></li>
+</ul>
+<p><strong>Always ensure that the tables have rownames!</strong> The <em>TreeSE</em> constructor compares rownames and ensures that, for example, right samples are linked with right patient.</p>
+<p>Also ensure that the row and column names match one-to-one between abundance table, rowdata, and coldata:</p>
+<div class="cell" data-hash="04_containers_cache/html/importingcsv2_7c16b3c41eae41b15e1d40497de9129e">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Match rows and columns</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>counts <span class="ot">&lt;-</span> counts[<span class="fu">rownames</span>(tax), <span class="fu">rownames</span>(samples)]</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Let us ensure that the data is in correct (numeric matrix) format:</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>counts <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(counts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If you hesitate about the format of the data, you can compare to one of the available demonstration datasets, and make sure that your data components have the same format.</p>
+<p>There are many different source files and many different ways to read data in R. One can do data manipulation in R as well. Investigate the entries as follows.</p>
+<div class="cell" data-hash="04_containers_cache/html/demodata_da1d0edbde1c02e3f6cdb2794af11aa4">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># coldata rownames match assay colnames</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">all</span>(<span class="fu">rownames</span>(samples) <span class="sc">==</span> <span class="fu">colnames</span>(counts)) <span class="co"># our dataset</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(samples) <span class="co"># should be data.frame or DataFrame</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "data.frame"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># rowdata rownames match assay rownames</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">all</span>(<span class="fu">rownames</span>(tax) <span class="sc">==</span> <span class="fu">rownames</span>(counts)) <span class="co"># our dataset</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(tax) <span class="co"># should be data.frame or DataFrame</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "data.frame"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Counts </span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(counts) <span class="co"># should be a numeric matrix</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "matrix" "array" </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="constructing-treesummarizedexperiment" class="level3" data-number="3.4.3">
+<h3 data-number="3.4.3" class="anchored" data-anchor-id="constructing-treesummarizedexperiment"><span class="header-section-number">3.4.3</span> Constructing TreeSummarizedExperiment</h3>
+<p>Now let us create the TreeSE object from the input data tables. Here we also convert the data objects in their preferred formats:</p>
+<ul>
+<li>counts –&gt; numeric matrix</li>
+<li>rowData –&gt; DataFrame</li>
+<li>colData –&gt; DataFrame</li>
+</ul>
+<p>The <code>SimpleList</code> could be used to include multiple alternative assays, if necessary.</p>
+<div class="cell" data-hash="04_containers_cache/html/importingcsv3_f14f79f4726f4add4303c75b5aee9407">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a TreeSE</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>tse_taxa <span class="ot">&lt;-</span> <span class="fu">TreeSummarizedExperiment</span>(<span class="at">assays =</span>  <span class="fu">SimpleList</span>(<span class="at">counts =</span> counts),</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">colData =</span> <span class="fu">DataFrame</span>(samples),</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">rowData =</span> <span class="fu">DataFrame</span>(tax))</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>tse_taxa</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>class: TreeSummarizedExperiment 
+dim: 12706 40 
+metadata(0):
+assays(1): counts
+rownames(12706): GAYR01026362.62.2014 CVJT01000011.50.2173 ...
+  JRJTB:03787:02429 JRJTB:03787:02478
+rowData names(7): Phylum Class ... Species OTU
+colnames(40): C1 C2 ... C39 C40
+colData names(6): Sample Rat ... Fat XOS
+reducedDimNames(0):
+mainExpName: NULL
+altExpNames(0):
+rowLinks: NULL
+rowTree: NULL
+colLinks: NULL
+colTree: NULL</code></pre>
+</div>
+</div>
+<p>Now you should have a ready-made TreeSE data object that can be used in downstream analyses.</p>
+</section>
+<section id="constructing-multiassayexperiment" class="level3" data-number="3.4.4">
+<h3 data-number="3.4.4" class="anchored" data-anchor-id="constructing-multiassayexperiment"><span class="header-section-number">3.4.4</span> Constructing MultiAssayExperiment</h3>
+<p>To construct a <em>MultiAssayExperiment</em> object, just combine multiple <em>TreeSE</em> data containers. Here we import metabolite data from the same study.</p>
+<div class="cell" data-hash="04_containers_cache/html/importingcsv4_39e1698b9015c5100c264dd504ae2406">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>count_file <span class="ot">&lt;-</span> <span class="st">"data/assay_metabolites.csv"</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>sample_file <span class="ot">&lt;-</span> <span class="st">"data/coldata.csv"</span></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load files</span></span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>counts  <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(count_file, <span class="at">row.names=</span><span class="dv">1</span>)  </span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(sample_file, <span class="at">row.names=</span><span class="dv">1</span>)</span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a TreeSE for the metabolite data</span></span>
+<span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a>tse_metabolite <span class="ot">&lt;-</span> <span class="fu">TreeSummarizedExperiment</span>(<span class="at">assays =</span> <span class="fu">SimpleList</span>(<span class="at">concs =</span> <span class="fu">as.matrix</span>(counts)),</span>
+<span id="cb54-10"><a href="#cb54-10" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">colData =</span> <span class="fu">DataFrame</span>(samples))</span>
+<span id="cb54-11"><a href="#cb54-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-12"><a href="#cb54-12" aria-hidden="true" tabindex="-1"></a>tse_metabolite</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>class: TreeSummarizedExperiment 
+dim: 38 40 
+metadata(0):
+assays(1): concs
+rownames(38): Butyrate Acetate ... Malonate 1,3-dihydroxyacetone
+rowData names(0):
+colnames(40): C1 C2 ... C39 C40
+colData names(6): Sample Rat ... Fat XOS
+reducedDimNames(0):
+mainExpName: NULL
+altExpNames(0):
+rowLinks: NULL
+rowTree: NULL
+colLinks: NULL
+colTree: NULL</code></pre>
+</div>
+</div>
+<p>Now we can combine these two experiments into <em>MAE</em>.</p>
+<div class="cell" data-hash="04_containers_cache/html/importingcsv5_e019ce00ff76713e11510f0ba6ecc1c5">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an ExperimentList that includes experiments</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>experiments <span class="ot">&lt;-</span> <span class="fu">ExperimentList</span>(<span class="at">microbiome =</span> tse_taxa, </span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">metabolite =</span> tse_metabolite)</span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a MAE</span></span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>mae <span class="ot">&lt;-</span> <span class="fu">MultiAssayExperiment</span>(<span class="at">experiments =</span> experiments)</span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a>mae</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>A MultiAssayExperiment object of 2 listed
+ experiments with user-defined names and respective classes.
+ Containing an ExperimentList class object of length 2:
+ [1] microbiome: TreeSummarizedExperiment with 12706 rows and 40 columns
+ [2] metabolite: TreeSummarizedExperiment with 38 rows and 40 columns
+Functionality:
+ experiments() - obtain the ExperimentList instance
+ colData() - the primary/phenotype DataFrame
+ sampleMap() - the sample coordination DataFrame
+ `$`, `[`, `[[` - extract colData columns, subset, or experiment
+ *Format() - convert into a long or wide DataFrame
+ assays() - convert ExperimentList to a SimpleList of matrices
+ exportClass() - save data to flat files</code></pre>
+</div>
+</div>
+</section>
+<section id="import-functions-for-standard-formats" class="level3" data-number="3.4.5">
+<h3 data-number="3.4.5" class="anchored" data-anchor-id="import-functions-for-standard-formats"><span class="header-section-number">3.4.5</span> Import functions for standard formats</h3>
+<p>Specific import functions are provided for:</p>
+<ul>
+<li>Biom files (see <code>help(mia::loadFromBiom)</code>)</li>
+<li>QIIME2 files (see <code>help(mia::loadFromQIIME2)</code>)</li>
+<li>Mothur files (see <code>help(mia::loadFromMothur)</code>)</li>
+</ul>
+<section id="biom-import" class="level4" data-number="3.4.5.1">
+<h4 data-number="3.4.5.1" class="anchored" data-anchor-id="biom-import"><span class="header-section-number">3.4.5.1</span> Biom import</h4>
+<p>Here we show how <a href="https://biom-format.org/">Biom files</a> are imported into a TreeSE object using as an example Tengeler2020, which is further described in section @ref(tengeler-desc). This dataset consists of 3 files, which can be fetched or downloaded from <a href="https://github.com/microbiome/data/tree/main/Tengeler2020">this repository</a>:</p>
+<ul>
+<li>biom file: abundance table and taxonomy information</li>
+<li>csv file: sample metadata</li>
+<li>tree file: phylogenetic tree</li>
+</ul>
+<p>To begin with, we store the data in a local directory within the working directory, such as <em>data/</em>, and define the source file paths.</p>
+<div class="cell" data-hash="04_containers_cache/html/unnamed-chunk-32_b31aa03bbcee78c2c4c936cfb6cf3fd6">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>biom_file_path <span class="ot">&lt;-</span> <span class="st">"data/Aggregated_humanization2.biom"</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>sample_meta_file_path <span class="ot">&lt;-</span> <span class="st">"data/Mapping_file_ADHD_aggregated.csv"</span></span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>tree_file_path <span class="ot">&lt;-</span> <span class="st">"data/Data_humanization_phylo_aggregation.tre"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now we can read in the biom file and convert it into a TreeSE object. In addition, we retrieve the rank names from the prefixes of the feature names and then remove them with the <code>rankFromPrefix</code> and <code>removeTaxaPrefixes</code> optional arguments.</p>
+<div class="cell" data-hash="04_containers_cache/html/unnamed-chunk-33_fe312c836f8994fa190c48f8fd8d586d">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mia)</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="co"># read biom and convert it to TreeSE</span></span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>tse <span class="ot">&lt;-</span> <span class="fu">loadFromBiom</span>(biom_file_path,</span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">rankFromPrefix =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">removeTaxaPrefixes =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Check</span></span>
+<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a>tse</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>class: TreeSummarizedExperiment 
+dim: 151 27 
+metadata(0):
+assays(1): counts
+rownames(151): 1726470 1726471 ... 17264756 17264757
+rowData names(6): taxonomy1 Phylum ... Family Genus
+colnames(27): A110 A111 ... A38 A39
+colData names(0):
+reducedDimNames(0):
+mainExpName: NULL
+altExpNames(0):
+rowLinks: NULL
+rowTree: NULL
+colLinks: NULL
+colTree: NULL</code></pre>
+</div>
+</div>
+<p>The <code>assays</code> slot includes a list of abundance tables. The imported abundance table is named as “counts”. Let us inspect only the first cols and rows.</p>
+<div class="cell" data-hash="04_containers_cache/html/unnamed-chunk-34_7de8f9eb1decc987ac88598ae9361d60">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(tse, <span class="st">"counts"</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          A110  A111  A12
+1726470  17722 11630    0
+1726471  12052     0 2679
+17264731     0   970    0</code></pre>
+</div>
+</div>
+<p>The <code>rowdata</code> includes taxonomic information from the biom file. The <code>head()</code> command shows just the beginning of the data table for an overview.</p>
+<p><code>knitr::kable()</code> helps print the information more nicely.</p>
+<div class="cell" data-hash="04_containers_cache/html/unnamed-chunk-35_96dc5eafe32bf6beec96b5ced63a474c">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">rowData</span>(tse))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>DataFrame with 6 rows and 6 columns
+           taxonomy1          Phylum            Class              Order
+         &lt;character&gt;     &lt;character&gt;      &lt;character&gt;        &lt;character&gt;
+1726470    "Bacteria   Bacteroidetes      Bacteroidia      Bacteroidales
+1726471    "Bacteria   Bacteroidetes      Bacteroidia      Bacteroidales
+17264731   "Bacteria   Bacteroidetes      Bacteroidia      Bacteroidales
+17264726   "Bacteria   Bacteroidetes      Bacteroidia      Bacteroidales
+1726472    "Bacteria Verrucomicrobia Verrucomicrobiae Verrucomicrobiales
+17264724   "Bacteria   Bacteroidetes      Bacteroidia      Bacteroidales
+                      Family            Genus
+                 &lt;character&gt;      &lt;character&gt;
+1726470       Bacteroidaceae     Bacteroides"
+1726471       Bacteroidaceae     Bacteroides"
+17264731  Porphyromonadaceae Parabacteroides"
+17264726      Bacteroidaceae     Bacteroides"
+1726472  Verrucomicrobiaceae     Akkermansia"
+17264724      Bacteroidaceae     Bacteroides"</code></pre>
+</div>
+</div>
+<p>We further polish the feature names by removing unnecessary characters and then replace the original rowData with its updated version.</p>
+<div class="cell" data-hash="04_containers_cache/html/unnamed-chunk-36_f9059b226c0c7d6de30d3b153a54d80b">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Genus level has additional '\"', so let's delete that also</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>rowdata_modified <span class="ot">&lt;-</span> BiocParallel<span class="sc">::</span><span class="fu">bplapply</span>(<span class="fu">rowData</span>(tse), </span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">FUN =</span> stringr<span class="sc">::</span>str_remove, </span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">pattern =</span> <span class="st">'</span><span class="sc">\"</span><span class="st">'</span>)</span>
+<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a><span class="co"># rowdata_modified is a list, so convert this back to DataFrame format. </span></span>
+<span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a><span class="co"># and assign the cleaned data back to the TSE rowData</span></span>
+<span id="cb65-8"><a href="#cb65-8" aria-hidden="true" tabindex="-1"></a><span class="fu">rowData</span>(tse) <span class="ot">&lt;-</span> <span class="fu">DataFrame</span>(rowdata_modified)</span>
+<span id="cb65-9"><a href="#cb65-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-10"><a href="#cb65-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Now we have a nicer table</span></span>
+<span id="cb65-11"><a href="#cb65-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">rowData</span>(tse))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>DataFrame with 6 rows and 6 columns
+           taxonomy1          Phylum            Class              Order
+         &lt;character&gt;     &lt;character&gt;      &lt;character&gt;        &lt;character&gt;
+1726470     Bacteria   Bacteroidetes      Bacteroidia      Bacteroidales
+1726471     Bacteria   Bacteroidetes      Bacteroidia      Bacteroidales
+17264731    Bacteria   Bacteroidetes      Bacteroidia      Bacteroidales
+17264726    Bacteria   Bacteroidetes      Bacteroidia      Bacteroidales
+1726472     Bacteria Verrucomicrobia Verrucomicrobiae Verrucomicrobiales
+17264724    Bacteria   Bacteroidetes      Bacteroidia      Bacteroidales
+                      Family           Genus
+                 &lt;character&gt;     &lt;character&gt;
+1726470       Bacteroidaceae     Bacteroides
+1726471       Bacteroidaceae     Bacteroides
+17264731  Porphyromonadaceae Parabacteroides
+17264726      Bacteroidaceae     Bacteroides
+1726472  Verrucomicrobiaceae     Akkermansia
+17264724      Bacteroidaceae     Bacteroides</code></pre>
+</div>
+</div>
+<p>We notice that the imported biom file did not contain any colData yet, so only an empty dataframe appears in this slot.</p>
+<div class="cell" data-hash="04_containers_cache/html/unnamed-chunk-37_82c8d12f5c057d497c119d6e5030a4e5">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">colData</span>(tse))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>DataFrame with 6 rows and 0 columns</code></pre>
+</div>
+</div>
+<p>Let us add colData from the sample metadata, which is stored in a CSV file.</p>
+<div class="cell" data-hash="04_containers_cache/html/unnamed-chunk-38_d310d38eafb95d3f4c00add47060f5ca">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># CSV file with colnames in the first row and rownames in the first column</span></span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>sample_meta <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(sample_meta_file_path,</span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">sep =</span> <span class="st">","</span>, <span class="at">row.names =</span> <span class="dv">1</span>)</span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Add this sample data to colData of the taxonomic data object</span></span>
+<span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that the data must be given in a DataFrame format (required for our purposes)</span></span>
+<span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(tse) <span class="ot">&lt;-</span> <span class="fu">DataFrame</span>(sample_meta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now the colData includes the sample metadata.</p>
+<div class="cell" data-hash="04_containers_cache/html/unnamed-chunk-39_5e80a689985c3ac84aac5a12eddc225d">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">colData</span>(tse))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>DataFrame with 6 rows and 4 columns
+       Treatment      Cohort TreatmentxCohort Description
+     &lt;character&gt; &lt;character&gt;      &lt;character&gt; &lt;character&gt;
+A110        ADHD    Cohort_1    ADHD_Cohort_1        A110
+A12         ADHD    Cohort_1    ADHD_Cohort_1         A12
+A15         ADHD    Cohort_1    ADHD_Cohort_1         A15
+A19         ADHD    Cohort_1    ADHD_Cohort_1         A19
+A21         ADHD    Cohort_2    ADHD_Cohort_2         A21
+A23         ADHD    Cohort_2    ADHD_Cohort_2         A23</code></pre>
+</div>
+</div>
+<p>Finally, we add a phylogenetic tree to the rowData slot. Such feature is available only in TreeSE objects. Similarly, Trees specifying the sample hierarchy can be stored in the colTree slot.</p>
+<p>Here, we read in the file containing the phylogenetic tree and insert it in corresponding slot of the TreeSE object.</p>
+<div class="cell" data-hash="04_containers_cache/html/unnamed-chunk-40_935e7336a72965942fe2aed3bfcbc8a4">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reads the tree file</span></span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>tree <span class="ot">&lt;-</span> ape<span class="sc">::</span><span class="fu">read.tree</span>(tree_file_path)</span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Add tree to rowTree</span></span>
+<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rowTree</span>(tse) <span class="ot">&lt;-</span> tree</span>
+<span id="cb72-6"><a href="#cb72-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-7"><a href="#cb72-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Check</span></span>
+<span id="cb72-8"><a href="#cb72-8" aria-hidden="true" tabindex="-1"></a>tse</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>class: TreeSummarizedExperiment 
+dim: 151 27 
+metadata(0):
+assays(1): counts
+rownames(151): 1726470 1726471 ... 17264756 17264757
+rowData names(6): taxonomy1 Phylum ... Family Genus
+colnames(27): A110 A12 ... A35 A38
+colData names(4): Treatment Cohort TreatmentxCohort Description
+reducedDimNames(0):
+mainExpName: NULL
+altExpNames(0):
+rowLinks: a LinkDataFrame (151 rows)
+rowTree: 1 phylo tree(s) (151 leaves)
+colLinks: NULL
+colTree: NULL</code></pre>
+</div>
+</div>
+<p>Now the rowTree slot contains the phylogenetic tree:</p>
+<div class="cell" data-hash="04_containers_cache/html/unnamed-chunk-41_b545c31cc4e5ac0657b56caaddb0cc36">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">rowTree</span>(tse))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="conversions-between-data-formats-in-r" class="level3" data-number="3.4.6">
+<h3 data-number="3.4.6" class="anchored" data-anchor-id="conversions-between-data-formats-in-r"><span class="header-section-number">3.4.6</span> Conversions between data formats in R</h3>
+<p>If the data has already been imported in R in another format, it can be readily converted into <code>TreeSummarizedExperiment</code>, as shown in our next example. Note that similar conversion functions to <code>TreeSummarizedExperiment</code> are available for multiple data formats via the <code>mia</code> package (see makeTreeSummarizedExperimentFrom* for phyloseq, Biom, and DADA2).</p>
+<div class="cell" data-hash="04_containers_cache/html/unnamed-chunk-42_bad7994f221caa11d4896e6b5ad700d0">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mia)</span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a><span class="co"># phyloseq example data</span></span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(GlobalPatterns, <span class="at">package=</span><span class="st">"phyloseq"</span>) </span>
+<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a>GlobalPatterns_phyloseq <span class="ot">&lt;-</span> GlobalPatterns</span>
+<span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a>GlobalPatterns_phyloseq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>phyloseq-class experiment-level object
+otu_table()   OTU Table:         [ 19216 taxa and 26 samples ]
+sample_data() Sample Data:       [ 26 samples by 7 sample variables ]
+tax_table()   Taxonomy Table:    [ 19216 taxa by 7 taxonomic ranks ]
+phy_tree()    Phylogenetic Tree: [ 19216 tips and 19215 internal nodes ]</code></pre>
+</div>
+</div>
+<div class="cell" data-hash="04_containers_cache/html/unnamed-chunk-43_33d7663ad2da951edee5e760aa925c95">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># convert phyloseq to TSE</span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>GlobalPatterns_TSE <span class="ot">&lt;-</span> <span class="fu">makeTreeSummarizedExperimentFromPhyloseq</span>(GlobalPatterns_phyloseq) </span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>GlobalPatterns_TSE</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>class: TreeSummarizedExperiment 
+dim: 19216 26 
+metadata(0):
+assays(1): counts
+rownames(19216): 549322 522457 ... 200359 271582
+rowData names(7): Kingdom Phylum ... Genus Species
+colnames(26): CL3 CC1 ... Even2 Even3
+colData names(7): X.SampleID Primer ... SampleType Description
+reducedDimNames(0):
+mainExpName: NULL
+altExpNames(0):
+rowLinks: a LinkDataFrame (19216 rows)
+rowTree: 1 phylo tree(s) (19216 leaves)
+colLinks: NULL
+colTree: NULL</code></pre>
+</div>
+</div>
+<p>We can also convert <code>TreeSummarizedExperiment</code> objects into <code>phyloseq</code> with respect to the shared components that are supported by both formats (i.e.&nbsp;taxonomic abundance table, sample metadata, taxonomic table, phylogenetic tree, sequence information). This is useful for instance when additional methods are available for <code>phyloseq</code>.</p>
+<div class="cell" data-hash="04_containers_cache/html/unnamed-chunk-44_84e1f053a0e8b5c9968f9ce4e1b23d3d">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="co"># convert TSE to phyloseq</span></span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>GlobalPatterns_phyloseq2 <span class="ot">&lt;-</span> <span class="fu">makePhyloseqFromTreeSummarizedExperiment</span>(GlobalPatterns_TSE) </span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a>GlobalPatterns_phyloseq2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>phyloseq-class experiment-level object
+otu_table()   OTU Table:         [ 19216 taxa and 26 samples ]
+sample_data() Sample Data:       [ 26 samples by 7 sample variables ]
+tax_table()   Taxonomy Table:    [ 19216 taxa by 7 taxonomic ranks ]
+phy_tree()    Phylogenetic Tree: [ 19216 tips and 19215 internal nodes ]</code></pre>
+</div>
+</div>
+<p>Conversion is possible between other data formats. Interested readers can refer to the following functions: * <a href="https://microbiome.github.io/mia/reference/makeTreeSummarizedExperimentFromDADA2.html">makeTreeSummarizedExperimentFromDADA2</a> * <a href="https://microbiome.github.io/mia/reference/makeSummarizedExperimentFromBiom.html">makeSummarizedExperimentFromBiom</a> * <a href="https://microbiome.github.io/mia/reference/loadFromMetaphlan.html">loadFromMetaphlan</a> * <a href="https://microbiome.github.io/mia/reference/loadFromQIIME2.html">readQZA</a></p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./06_packages.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Packages</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./10_manipulation.html" class="pagination-link">
+        <span class="nav-page-text">(PART) Focus Topics</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

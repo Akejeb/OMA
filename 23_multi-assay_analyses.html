@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>10&nbsp; Multi-Assay Analyses</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./19_visualization_techniques.html" rel="next">
+<link href="./40_machine_learning.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./23_multi-assay_analyses.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Multi-Assay Analyses</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Orchestrating Microbiome Analysis with Bioconductor</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="" rel="" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-twitter"></i></a>
+    <a href="https://microbiome.github.io/mia/" rel="" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-facebook"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Orchestrating Microbiome Analysis with Bioconductor</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">(PART) Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06_packages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Packages</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_containers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Microbiome Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10_manipulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">(PART) Focus Topics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12_quality_control.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Exploration and Quality Control</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14_alpha_diversity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Community Diversity</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20_beta_diversity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">global knitr options</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./21_microbiome_community.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Community Composition</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./30_differential_abundance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Differential Abundance</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./40_machine_learning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Machine Learning</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./23_multi-assay_analyses.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Multi-Assay Analyses</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19_visualization_techniques.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Visualization</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./80_training.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">(PART) Training</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./95_resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Resources</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./98_exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Exercises</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./97_extra_materials.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">(PART) Appendix</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./90_acknowledgments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Developers</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Session_info.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sessioninfo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./99_bibliography.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bibliography</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#cross-correlation" id="toc-cross-correlation" class="nav-link active" data-scroll-target="#cross-correlation"><span class="header-section-number">10.1</span> Cross-correlation Analysis</a></li>
+  <li><a href="#mofa" id="toc-mofa" class="nav-link" data-scroll-target="#mofa"><span class="header-section-number">10.2</span> Multi-Omics Factor Analysis</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="multi-assay-analyses" class="quarto-section-identifier"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Multi-Assay Analyses</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<script>
+document.addEventListener("click", function (event) {
+    if (event.target.classList.contains("rebook-collapse")) {
+        event.target.classList.toggle("active");
+        var content = event.target.nextElementSibling;
+        if (content.style.display === "block") {
+            content.style.display = "none";
+        } else {
+            content.style.display = "block";
+        }
+    }
+})
+</script>
+<style>
+.rebook-collapse {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.rebook-content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+</style>
+<div class="cell" data-hash="23_multi-assay_analyses_cache/html/load-pkg-data_cf04d9a273b6270d31347e3e44ceaad4">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mia)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Multi-omics approaches integrate data from multiple sources. For example, we can integrate taxonomic abundance profiles with metabolomic or other biomolecular profiling data to observe associations, make predictions, or aim at causal inferences. Integrating evidence across multiple sources can lead to enhanced predictions, more holistic understanding, or facilitate the discovery of novel biomarkers. In this section we demonstrate common multi-assay data integration tasks.</p>
+<p>Cross-correlation analysis is a straightforward approach that can reveal strength and type of assocations between data sets. For instance, we can analyze if higher presence of a specific taxon relates to higher levels of a biomolecule.</p>
+<p>The analyses can be facilitated by the multi-assay data containers, <em>TreeSummarizedExperiment</em> and <em>MultiAssayExperiment</em>. These are scalable and contain different types of data in a single container, making this framework particularly suited for multi-assay microbiome data incorporating different types of complementary data sources in a single reproducible workflow. Solutions to a number of data integration problems are discussed in more detail in Section @ref(containers). Another experiment can be stored in <em>altExp</em> slot of SE data container. Alternatively, both experiments can be stored side-by-side in a MAE data container (see sections @ref(alt-exp) and @ref(mae) to learn more about altExp and MAE objects, respectively). Different experiments are first imported as single-assay data containers similarly to the case when only one experiment is present. After that, the different experiments can be combined into one multi-assay data container. The result is a MAE object with multiple experiments in its experiment slot, or a TreeSE object with alternative experiments in the altExp slot.</p>
+<p>As an example, we use a dataset from the following publication: <span class="citation" data-cites="Hintikka2021">[-@Hintikka2021]</span> Xylo-oligosaccharides in prevention of hepatic steatosis and adipose tissue inflammation: associating taxonomic and metabolomic patterns in fecal microbiota with biclustering. In this study, mice were fed either with a high-fat or a low-fat diet, and with or without prebiotics, for the purpose studying whether prebiotics attenuate the negative impact of a high-fat diet on health.</p>
+<p>This example data can be loaded from microbiomeDataSets. The data is already in MAE format. It includes three different experiments: microbial abundance data, metabolite concentrations, and data about different biomarkers. If you like to construct the same data object from the original files instead, <a href="https://microbiome.github.io/OMA/containers.html#loading-experimental-microbiome-data">here</a> you can find help for importing data into an SE object.</p>
+<div class="cell" data-hash="23_multi-assay_analyses_cache/html/cross-correlation1_2014f2b9218d30d05ba85a1bd98d2e16">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(HintikkaXOData, <span class="at">package =</span> <span class="st">"mia"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>mae <span class="ot">&lt;-</span> HintikkaXOData</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-hash="23_multi-assay_analyses_cache/html/cross-correlation2_be9e55d8be67758e6c36c81e900b4045">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop off those bacteria that do not include information in Phylum or lower levels</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>mae[[<span class="dv">1</span>]] <span class="ot">&lt;-</span> mae[[<span class="dv">1</span>]][<span class="sc">!</span><span class="fu">is.na</span>(<span class="fu">rowData</span>(mae[[<span class="dv">1</span>]])<span class="sc">$</span>Phylum), ]</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean taxonomy data, so that names do not include additional characters</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rowData</span>(mae[[<span class="dv">1</span>]]) <span class="ot">&lt;-</span> <span class="fu">DataFrame</span>(<span class="fu">apply</span>(<span class="fu">rowData</span>(mae[[<span class="dv">1</span>]]), <span class="dv">2</span>, </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                                     str_remove, <span class="at">pattern =</span> <span class="st">"._[0-9]__"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-hash="23_multi-assay_analyses_cache/html/unnamed-chunk-1_3061d1cde5f41680ce55a34379b12600">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Available alternative experiments</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">experiments</span>(mae)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>ExperimentList class object of length 3:
+ [1] microbiota: TreeSummarizedExperiment with 12613 rows and 40 columns
+ [2] metabolites: TreeSummarizedExperiment with 38 rows and 40 columns
+ [3] biomarkers: TreeSummarizedExperiment with 39 rows and 40 columns</code></pre>
+</div>
+</div>
+<div class="cell" data-hash="23_multi-assay_analyses_cache/html/unnamed-chunk-2_8088b6463ce8c092b21e93f282d577de">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Microbiome data</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">getWithColData</span>(mae, <span class="st">"microbiota"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>class: TreeSummarizedExperiment 
+dim: 12613 40 
+metadata(0):
+assays(1): counts
+rownames(12613): GAYR01026362.62.2014 CVJT01000011.50.2173 ...
+  JRJTB:03787:02429 JRJTB:03787:02478
+rowData names(7): Phylum Class ... Species OTU
+colnames(40): C1 C2 ... C39 C40
+colData names(6): Sample Rat ... Fat XOS
+reducedDimNames(0):
+mainExpName: NULL
+altExpNames(0):
+rowLinks: NULL
+rowTree: NULL
+colLinks: NULL
+colTree: NULL</code></pre>
+</div>
+</div>
+<div class="cell" data-hash="23_multi-assay_analyses_cache/html/cross-correlation3_31d821d2e0f11b21f9440bc64e40da00">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Metabolite data</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">getWithColData</span>(mae, <span class="st">"metabolites"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>class: TreeSummarizedExperiment 
+dim: 38 40 
+metadata(0):
+assays(1): nmr
+rownames(38): Butyrate Acetate ... Malonate 1,3-dihydroxyacetone
+rowData names(0):
+colnames(40): C1 C2 ... C39 C40
+colData names(6): Sample Rat ... Fat XOS
+reducedDimNames(0):
+mainExpName: NULL
+altExpNames(0):
+rowLinks: NULL
+rowTree: NULL
+colLinks: NULL
+colTree: NULL</code></pre>
+</div>
+</div>
+<div class="cell" data-hash="23_multi-assay_analyses_cache/html/cross-correlation4_21fbb6355a0535ad085875cbd3fbb907">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Biomarker data</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">getWithColData</span>(mae, <span class="st">"biomarkers"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>class: TreeSummarizedExperiment 
+dim: 39 40 
+metadata(0):
+assays(1): signals
+rownames(39): Triglycerides_liver CLSs_epi ... NPY_serum Glycogen_liver
+rowData names(0):
+colnames(40): C1 C2 ... C39 C40
+colData names(6): Sample Rat ... Fat XOS
+reducedDimNames(0):
+mainExpName: NULL
+altExpNames(0):
+rowLinks: NULL
+rowTree: NULL
+colLinks: NULL
+colTree: NULL</code></pre>
+</div>
+</div>
+<section id="cross-correlation" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="cross-correlation"><span class="header-section-number">10.1</span> Cross-correlation Analysis</h2>
+<p>Next we can perform a cross-correlation analysis. Let us analyze if individual bacteria genera are correlated with concentrations of individual metabolites. This helps to answer the following question: “If bacterium X is present, is the concentration of metabolite Y lower or higher”?</p>
+<div class="cell" data-hash="23_multi-assay_analyses_cache/html/cross-correlation5_9c52222adea5fce2002931e09702458d">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Agglomerate microbiome data at family level</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>mae[[<span class="dv">1</span>]] <span class="ot">&lt;-</span> <span class="fu">mergeFeaturesByPrevalence</span>(mae[[<span class="dv">1</span>]], <span class="at">rank =</span> <span class="st">"Family"</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Does log10 transform for microbiome data</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>mae[[<span class="dv">1</span>]] <span class="ot">&lt;-</span> <span class="fu">transformAssay</span>(mae[[<span class="dv">1</span>]], <span class="at">method =</span> <span class="st">"log10"</span>, <span class="at">pseudocount =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Give unique names so that we do not have problems when we are creating a plot</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(mae[[<span class="dv">1</span>]]) <span class="ot">&lt;-</span> <span class="fu">getTaxonomyLabels</span>(mae[[<span class="dv">1</span>]])</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Cross correlates data sets</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>correlations <span class="ot">&lt;-</span> <span class="fu">testExperimentCrossCorrelation</span>(mae, </span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">experiment1 =</span> <span class="dv">1</span>,</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">experiment2 =</span> <span class="dv">2</span>,</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">assay.type1 =</span> <span class="st">"log10"</span>, </span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">assay.type2 =</span> <span class="st">"nmr"</span>,</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">method =</span> <span class="st">"spearman"</span>, </span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">p_adj_threshold =</span> <span class="cn">NULL</span>,</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">cor_threshold =</span> <span class="cn">NULL</span>,</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>                                               <span class="co"># Remove when mia is fixed</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">mode =</span> <span class="st">"matrix"</span>,</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">sort =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">show_warnings =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next, we create a heatmap depicting all cross-correlations between bacterial genera and metabolite concentrations.</p>
+<div class="cell" data-hash="23_multi-assay_analyses_cache/html/cross-correlation6_fa21a42b1f5fa5dfd2d22e2e7f310730">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ComplexHeatmap) </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a heatmap and store it</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>plot <span class="ot">&lt;-</span> <span class="fu">Heatmap</span>(correlations<span class="sc">$</span>cor,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Print values to cells</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">cell_fun =</span> <span class="cf">function</span>(j, i, x, y, width, height, fill) {</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># If the p-value is under threshold</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">if</span>( <span class="sc">!</span><span class="fu">is.na</span>(correlations<span class="sc">$</span>p_adj[i, j]) <span class="sc">&amp;</span> correlations<span class="sc">$</span>p_adj[i, j] <span class="sc">&lt;</span> <span class="fl">0.05</span> ){</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>                        <span class="co"># Print "X"</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">grid.text</span>(<span class="fu">sprintf</span>(<span class="st">"%s"</span>, <span class="st">"X"</span>), x, y, <span class="at">gp =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">10</span>, <span class="at">col =</span> <span class="st">"#1dff00"</span>))</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>                        }</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>                    },</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>                <span class="at">heatmap_legend_param =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">""</span>, <span class="at">legend_height =</span> <span class="fu">unit</span>(<span class="dv">5</span>, <span class="st">"cm"</span>))</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="23_multi-assay_analyses_files/figure-html/cross-correlation6-1.png" class="img-fluid" width="960"></p>
+</div>
+</div>
+</section>
+<section id="mofa" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="mofa"><span class="header-section-number">10.2</span> Multi-Omics Factor Analysis</h2>
+<p>Multi-Omics Factor Analysis (MOFA) is an unsupervised method for integrating multi-omic data sets in a downstream analysis <span class="citation" data-cites="Argelaguet2018">[@Argelaguet2018]</span>. It could be seen as a generalization of principal component analysis. Yet, with the ability to infer a latent (low-dimensional) representation, shared among the multiple (-omics) data sets in hand.</p>
+<p>We use the R <a href="https://biofam.github.io/MOFA2/index.html">MOFA2</a> package for the analysis, and <a href="https://biofam.github.io/MOFA2/installation.html">install</a> the corresponding dependencies.</p>
+<div class="cell" data-hash="23_multi-assay_analyses_cache/html/MOFA2_24b6306d1ec85d8a93e4986bd27ba20d">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MOFA2)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># For inter-operability between Python and R, and setting Python dependencies,</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># reticulate package is needed</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reticulate)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Let us assume that these have been installed already.</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">#reticulate::install_miniconda(force = TRUE)</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">#reticulate::use_miniconda(condaenv = "env1", required = FALSE)</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">#reticulate::py_install(packages = c("mofapy2"), pip = TRUE, python_version=3.6)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The <code>mae</code> object could be used straight to create the MOFA model. Yet, we transform our assays since the model assumes normality per default. We can also use Poisson or Bernoulli distributions among others.</p>
+<p>Note that duplicates, such as “uncultured”, might appear when aggregating the microbiome data by a taxonomic rank. To check for duplicates, run <code>any(duplicated(rownames(mae[[1]])))</code>. If it returns <code>TRUE</code>, then the duplicates are present. We can add <code>rownames(mae[[1]]) &lt;- getTaxonomyLabels(mae[[1]], make_unique=TRUE)</code> to remove them.</p>
+<div class="cell" data-hash="23_multi-assay_analyses_cache/html/unnamed-chunk-3_09649c280d8a9e479b0b2c73cadf6aa8">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MOFA2)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># For simplicity, classify all high-fat diets as high-fat, and all the low-fat </span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># diets as low-fat diets</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(mae)<span class="sc">$</span>Diet <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">colData</span>(mae)<span class="sc">$</span>Diet <span class="sc">==</span> <span class="st">"High-fat"</span> <span class="sc">|</span> </span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>                              <span class="fu">colData</span>(mae)<span class="sc">$</span>Diet <span class="sc">==</span> <span class="st">"High-fat + XOS"</span>, </span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"High-fat"</span>, <span class="st">"Low-fat"</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Transforming microbiome data with rclr</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>mae[[<span class="dv">1</span>]] <span class="ot">&lt;-</span> <span class="fu">transformAssay</span>(mae[[<span class="dv">1</span>]], <span class="at">method =</span> <span class="st">"relabundance"</span>)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>mae[[<span class="dv">1</span>]] <span class="ot">&lt;-</span> <span class="fu">transformAssay</span>(mae[[<span class="dv">1</span>]], <span class="at">assay.type =</span> <span class="st">"relabundance"</span>, <span class="at">method =</span> <span class="st">"rclr"</span>)</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Transforming metabolomic data with log10</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>mae[[<span class="dv">2</span>]] <span class="ot">&lt;-</span> <span class="fu">transformAssay</span>(mae[[<span class="dv">2</span>]], <span class="at">assay.type =</span> <span class="st">"nmr"</span>,</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>                            <span class="at">MARGIN =</span> <span class="st">"samples"</span>,</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>                            <span class="at">method =</span> <span class="st">"log10"</span>)</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Transforming biomarker data with z-transform</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>mae[[<span class="dv">3</span>]] <span class="ot">&lt;-</span> <span class="fu">transformAssay</span>(mae[[<span class="dv">3</span>]], <span class="at">assay.type =</span> <span class="st">"signals"</span>,</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>                           <span class="at">MARGIN =</span> <span class="st">"features"</span>,</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>                           <span class="at">method =</span> <span class="st">"z"</span>, <span class="at">pseudocount =</span> <span class="dv">1</span>)</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Removing assays no longer needed</span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(mae[[<span class="dv">1</span>]], <span class="st">"counts"</span>) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(mae[[<span class="dv">1</span>]], <span class="st">"log10"</span>) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(mae[[<span class="dv">2</span>]], <span class="st">"nmr"</span>) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(mae[[<span class="dv">3</span>]], <span class="st">"signals"</span>) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Building our mofa model</span></span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">create_mofa_from_MultiAssayExperiment</span>(mae,</span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">groups =</span> <span class="st">"Diet"</span>, </span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">extract_metadata =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Untrained MOFA model with the following characteristics: 
+ Number of views: 3 
+ Views names: microbiota metabolites biomarkers 
+ Number of features (per view): 38 38 39 
+ Number of groups: 2 
+ Groups names: High-fat Low-fat 
+ Number of samples (per group): 20 20 
+ </code></pre>
+</div>
+</div>
+<p>Model options can be defined as follows:</p>
+<div class="cell" data-hash="23_multi-assay_analyses_cache/html/unnamed-chunk-4_6a6f70c4092b7d158ddca423e0ab24f7">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>model_opts <span class="ot">&lt;-</span> <span class="fu">get_default_model_options</span>(model)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>model_opts<span class="sc">$</span>num_factors <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(model_opts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$likelihoods
+ microbiota metabolites  biomarkers 
+ "gaussian"  "gaussian"  "gaussian" 
+
+$num_factors
+[1] 5
+
+$spikeslab_factors
+[1] FALSE
+
+$spikeslab_weights
+[1] FALSE
+
+$ard_factors
+[1] TRUE
+
+$ard_weights
+[1] TRUE</code></pre>
+</div>
+</div>
+<p>Training options for the model are defined in the following way:</p>
+<div class="cell" data-hash="23_multi-assay_analyses_cache/html/unnamed-chunk-5_df111a1d170acd7c844e63e05ddb0790">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>train_opts <span class="ot">&lt;-</span> <span class="fu">get_default_training_options</span>(model)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(train_opts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$maxiter
+[1] 1000
+
+$convergence_mode
+[1] "fast"
+
+$drop_factor_threshold
+[1] -1
+
+$verbose
+[1] FALSE
+
+$startELBO
+[1] 1
+
+$freqELBO
+[1] 5</code></pre>
+</div>
+</div>
+<p>The model is then prepared with <code>prepare_mofa</code> and trained with <code>run_mofa</code>:</p>
+<div class="cell" data-hash="23_multi-assay_analyses_cache/html/unnamed-chunk-6_0045a014139d45363e050540ec7f0fb7">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>model.prepared <span class="ot">&lt;-</span> <span class="fu">prepare_mofa</span>(</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">object =</span> model,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">model_options =</span> model_opts</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Some systems may require the specification `use_basilisk = TRUE`</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co"># so it has been added to the following code</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>model.trained <span class="ot">&lt;-</span> <span class="fu">run_mofa</span>(model.prepared, <span class="at">use_basilisk =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+        #########################################################
+        ###           __  __  ____  ______                    ### 
+        ###          |  \/  |/ __ \|  ____/\    _             ### 
+        ###          | \  / | |  | | |__ /  \ _| |_           ### 
+        ###          | |\/| | |  | |  __/ /\ \_   _|          ###
+        ###          | |  | | |__| | | / ____ \|_|            ###
+        ###          |_|  |_|\____/|_|/_/    \_\              ###
+        ###                                                   ### 
+        ######################################################### 
+       
+ 
+        
+use_float32 set to True: replacing float64 arrays by float32 arrays to speed up computations...
+
+Successfully loaded view='microbiota' group='High-fat' with N=20 samples and D=38 features...
+Successfully loaded view='microbiota' group='Low-fat' with N=20 samples and D=38 features...
+Successfully loaded view='metabolites' group='High-fat' with N=20 samples and D=38 features...
+Successfully loaded view='metabolites' group='Low-fat' with N=20 samples and D=38 features...
+Successfully loaded view='biomarkers' group='High-fat' with N=20 samples and D=39 features...
+Successfully loaded view='biomarkers' group='Low-fat' with N=20 samples and D=39 features...
+
+
+Model options:
+- Automatic Relevance Determination prior on the factors: True
+- Automatic Relevance Determination prior on the weights: True
+- Spike-and-slab prior on the factors: False
+- Spike-and-slab prior on the weights: False
+Likelihoods:
+- View 0 (microbiota): gaussian
+- View 1 (metabolites): gaussian
+- View 2 (biomarkers): gaussian
+
+
+
+
+######################################
+## Training the model with seed 42 ##
+######################################
+
+
+ELBO before training: -22013.97 
+
+Iteration 1: time=0.00, ELBO=-4042.78, deltaELBO=17971.192 (81.63540032%), Factors=5
+Iteration 2: time=0.00, Factors=5
+Iteration 3: time=0.00, Factors=5
+Iteration 4: time=0.00, Factors=5
+Iteration 5: time=0.00, Factors=5
+Iteration 6: time=0.00, ELBO=826.57, deltaELBO=4869.348 (22.11935643%), Factors=5
+Iteration 7: time=0.00, Factors=5
+Iteration 8: time=0.00, Factors=5
+Iteration 9: time=0.00, Factors=5
+Iteration 10: time=0.00, Factors=5
+Iteration 11: time=0.00, ELBO=861.41, deltaELBO=34.839 (0.15825956%), Factors=5
+Iteration 12: time=0.00, Factors=5
+Iteration 13: time=0.00, Factors=5
+Iteration 14: time=0.00, Factors=5
+Iteration 15: time=0.00, Factors=5
+Iteration 16: time=0.00, ELBO=867.97, deltaELBO=6.560 (0.02980063%), Factors=5
+Iteration 17: time=0.00, Factors=5
+Iteration 18: time=0.00, Factors=5
+Iteration 19: time=0.00, Factors=5
+Iteration 20: time=0.00, Factors=5
+Iteration 21: time=0.00, ELBO=871.04, deltaELBO=3.072 (0.01395293%), Factors=5
+Iteration 22: time=0.00, Factors=5
+Iteration 23: time=0.00, Factors=5
+Iteration 24: time=0.00, Factors=5
+Iteration 25: time=0.00, Factors=5
+Iteration 26: time=0.00, ELBO=872.88, deltaELBO=1.842 (0.00836904%), Factors=5
+Iteration 27: time=0.00, Factors=5
+Iteration 28: time=0.00, Factors=5
+Iteration 29: time=0.00, Factors=5
+Iteration 30: time=0.00, Factors=5
+Iteration 31: time=0.00, ELBO=874.12, deltaELBO=1.240 (0.00563399%), Factors=5
+Iteration 32: time=0.00, Factors=5
+Iteration 33: time=0.00, Factors=5
+Iteration 34: time=0.00, Factors=5
+Iteration 35: time=0.00, Factors=5
+Iteration 36: time=0.00, ELBO=875.02, deltaELBO=0.895 (0.00406653%), Factors=5
+Iteration 37: time=0.00, Factors=5
+Iteration 38: time=0.00, Factors=5
+Iteration 39: time=0.00, Factors=5
+Iteration 40: time=0.00, Factors=5
+Iteration 41: time=0.00, ELBO=875.70, deltaELBO=0.678 (0.00308090%), Factors=5
+Iteration 42: time=0.00, Factors=5
+Iteration 43: time=0.00, Factors=5
+Iteration 44: time=0.00, Factors=5
+Iteration 45: time=0.00, Factors=5
+Iteration 46: time=0.00, ELBO=876.23, deltaELBO=0.531 (0.00241399%), Factors=5
+Iteration 47: time=0.00, Factors=5
+Iteration 48: time=0.00, Factors=5
+Iteration 49: time=0.00, Factors=5
+Iteration 50: time=0.00, Factors=5
+Iteration 51: time=0.00, ELBO=876.66, deltaELBO=0.431 (0.00195876%), Factors=5
+Iteration 52: time=0.00, Factors=5
+Iteration 53: time=0.00, Factors=5
+Iteration 54: time=0.00, Factors=5
+Iteration 55: time=0.00, Factors=5
+Iteration 56: time=0.00, ELBO=877.02, deltaELBO=0.355 (0.00161258%), Factors=5
+Iteration 57: time=0.00, Factors=5
+Iteration 58: time=0.00, Factors=5
+Iteration 59: time=0.00, Factors=5
+Iteration 60: time=0.00, Factors=5
+Iteration 61: time=0.00, ELBO=877.31, deltaELBO=0.299 (0.00135840%), Factors=5
+Iteration 62: time=0.00, Factors=5
+Iteration 63: time=0.00, Factors=5
+Iteration 64: time=0.00, Factors=5
+Iteration 65: time=0.00, Factors=5
+Iteration 66: time=0.00, ELBO=877.57, deltaELBO=0.259 (0.00117674%), Factors=5
+Iteration 67: time=0.00, Factors=5
+Iteration 68: time=0.00, Factors=5
+Iteration 69: time=0.00, Factors=5
+Iteration 70: time=0.00, Factors=5
+Iteration 71: time=0.00, ELBO=877.80, deltaELBO=0.224 (0.00101856%), Factors=5
+Iteration 72: time=0.00, Factors=5
+Iteration 73: time=0.00, Factors=5
+Iteration 74: time=0.00, Factors=5
+Iteration 75: time=0.00, Factors=5
+Iteration 76: time=0.00, ELBO=878.00, deltaELBO=0.199 (0.00090239%), Factors=5
+Iteration 77: time=0.00, Factors=5
+Iteration 78: time=0.00, Factors=5
+Iteration 79: time=0.00, Factors=5
+Iteration 80: time=0.00, Factors=5
+Iteration 81: time=0.00, ELBO=878.17, deltaELBO=0.177 (0.00080298%), Factors=5
+Iteration 82: time=0.00, Factors=5
+Iteration 83: time=0.00, Factors=5
+Iteration 84: time=0.00, Factors=5
+Iteration 85: time=0.00, Factors=5
+Iteration 86: time=0.00, ELBO=878.33, deltaELBO=0.161 (0.00073358%), Factors=5
+Iteration 87: time=0.00, Factors=5
+Iteration 88: time=0.00, Factors=5
+Iteration 89: time=0.00, Factors=5
+Iteration 90: time=0.00, Factors=5
+Iteration 91: time=0.00, ELBO=878.48, deltaELBO=0.144 (0.00065322%), Factors=5
+Iteration 92: time=0.00, Factors=5
+Iteration 93: time=0.00, Factors=5
+Iteration 94: time=0.00, Factors=5
+Iteration 95: time=0.00, Factors=5
+Iteration 96: time=0.00, ELBO=878.61, deltaELBO=0.132 (0.00059933%), Factors=5
+Iteration 97: time=0.00, Factors=5
+Iteration 98: time=0.00, Factors=5
+Iteration 99: time=0.00, Factors=5
+Iteration 100: time=0.00, Factors=5
+Iteration 101: time=0.00, ELBO=878.73, deltaELBO=0.122 (0.00055240%), Factors=5
+Iteration 102: time=0.00, Factors=5
+Iteration 103: time=0.00, Factors=5
+Iteration 104: time=0.00, Factors=5
+Iteration 105: time=0.00, Factors=5
+Iteration 106: time=0.00, ELBO=878.84, deltaELBO=0.112 (0.00051068%), Factors=5
+Iteration 107: time=0.00, Factors=5
+Iteration 108: time=0.00, Factors=5
+Iteration 109: time=0.00, Factors=5
+Iteration 110: time=0.00, Factors=5
+Iteration 111: time=0.00, ELBO=878.95, deltaELBO=0.103 (0.00046697%), Factors=5
+Iteration 112: time=0.00, Factors=5
+Iteration 113: time=0.00, Factors=5
+Iteration 114: time=0.00, Factors=5
+Iteration 115: time=0.00, Factors=5
+Iteration 116: time=0.00, ELBO=879.04, deltaELBO=0.095 (0.00042938%), Factors=5
+
+Converged!
+
+
+
+#######################
+## Training finished ##
+#######################
+
+
+Saving model in /tmp/Rtmphy6qx4/mofa_20231020-133458.hdf5...</code></pre>
+</div>
+</div>
+<p>The explained variance is visualized with the <code>plot_variance_explained</code> function:</p>
+<div class="cell" data-hash="23_multi-assay_analyses_cache/html/unnamed-chunk-7_ab06437e7139c6b94e948e586c4fe7a4">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>plot_list <span class="ot">&lt;-</span> <span class="fu">plot_variance_explained</span>(model.trained,</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">x =</span> <span class="st">"view"</span>, <span class="at">y =</span> <span class="st">"factor"</span>,</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">plot_total =</span> T)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="fu">wrap_plots</span>(plot_list, <span class="at">nrow =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_annotation</span>(<span class="at">title =</span> <span class="st">"Variance Explained per factor and assay"</span>,</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>                  <span class="at">theme =</span> <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="23_multi-assay_analyses_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="960"></p>
+</div>
+</div>
+<p>The top weights for each assay using all five factors:</p>
+<div class="cell" data-hash="23_multi-assay_analyses_cache/html/unnamed-chunk-8_8233b44f3d04fc04cd5a76d15c196d3e">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>custom_plotter <span class="ot">&lt;-</span> <span class="cf">function</span>(name) {</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">plot_top_weights</span>(model.trained,</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">view =</span> name,</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">factors =</span> <span class="st">"all"</span>,</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">nfeatures =</span> <span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">"Top weights of the "</span>, name, <span class="st">" assay"</span>))</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>plot_list <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">c</span>(<span class="st">"microbiota"</span>, <span class="st">"metabolites"</span>, <span class="st">"biomarkers"</span>), custom_plotter)</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="fu">wrap_plots</span>(plot_list, <span class="at">nrow =</span> <span class="dv">3</span>) <span class="sc">&amp;</span> <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="23_multi-assay_analyses_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="960"></p>
+</div>
+</div>
+<p>More tutorials and examples of using the package are found at <a href="https://biofam.github.io/MOFA2/tutorials.html">link</a></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./40_machine_learning.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Machine Learning</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./19_visualization_techniques.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Visualization</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
