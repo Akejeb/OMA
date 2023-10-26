@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -293,12 +259,6 @@ div.csl-indent {
  <span class="menu-text">Sessioninfo</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./99_bibliography.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Bibliography</span></a>
-  </div>
-</li>
       </ul>
   </li>
     </ul>
@@ -331,7 +291,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date"><strong>Authors:</strong> Leo Lahti [aut], Tuomas Borman [aut, cre], Felix GM Ernst [aut], and others (see the full list of contributors) [ctb]<br> <strong>Version:</strong> 0.98.16<br> <strong>Modified:</strong> 2023-07-29<br> <strong>Compiled:</strong> 2023-10-25<br> <strong>Environment:</strong> R version 4.3.1 (2023-06-16), Bioconductor 3.18<br> <strong>License:</strong> CC BY-NC-SA 3.0 US<br> <strong>Copyright:</strong> <br> <strong>Source:</strong> https://github.com/microbiome/OMA</p>
+      <p class="date"><strong>Authors:</strong> Leo Lahti [aut], Tuomas Borman [aut, cre], Felix GM Ernst [aut], and others (see the full list of contributors) [ctb]<br> <strong>Version:</strong> 0.98.16<br> <strong>Modified:</strong> 2023-07-29<br> <strong>Compiled:</strong> 2023-10-26<br> <strong>Environment:</strong> R version 4.3.1 (2023-06-16), Bioconductor 3.18<br> <strong>License:</strong> CC BY-NC-SA 3.0 US<br> <strong>Copyright:</strong> <br> <strong>Source:</strong> https://github.com/microbiome/OMA</p>
     </div>
   </div>
   
@@ -341,39 +301,44 @@ div.csl-indent {
 
 </header>
 
+<script>
+// JavaScript code to inject HTML content
+document.write(`
+  <div id="header">
+    <img src="https://user-images.githubusercontent.com/60338854/128359392-6feef8df-30e9-4ea0-ae3b-4bb619d746ed.png" alt="Microbiome" width="50%" />
+    <p style="font-size:12px">Figure source: Moreno-Indias <i>et al</i>. (2021) <a href="https://doi.org/10.3389/fmicb.2021.635781">Statistical and Machine Learning Techniques in Human Microbiome Studies: Contemporary Challenges and Solutions</a>. Frontiers in Microbiology 12:11.</p>
+  </div>
+`);
+</script>
 <section id="welcome" class="level1 unnumbered">
 <h1 class="unnumbered">Welcome</h1>
 <p>You are reading the online book, <a href="https://microbiome.github.io/OMA/"><strong>Orchestrating Microbiome Analysis with Bioconductor</strong></a> <span class="citation" data-cites="OMA">(Lahti et al. 2021)</span>, where we walk through common strategies and workflows in microbiome data science.</p>
 <p>The book shows through concrete examples how you can take advantage of the latest developments in R/Bioconductor for the manipulation, analysis, and reproducible reporting of hierarchical and heterogeneous microbiome profiling data sets. The book was borne out of necessity, while updating microbiome analysis tools to work with Bioconductor classes that provide support for multi-modal data collections. Many of these techniques are generic and widely applicable in other contexts as well.</p>
 <p>This work has been heavily influenced by other similar resources, in particular the Orchestrating Single-Cell Analysis with Bioconductor <span class="citation" data-cites="Amezquita2020">(Amezquita et al. 2020)</span>, <a href="http://joey711.github.io/phyloseq/tutorials-index">phyloseq tutorials</a> <span class="citation" data-cites="Callahan2016">(Callahan et al. 2016)</span> and <a href="https://microbiome.github.io/tutorials/">microbiome tutorials</a> <span class="citation" data-cites="Shetty2019">(Shetty and Lahti 2019)</span>. This book extends these resources to teach the grammar of Bioconductor workflows in the context of microbiome data science. As such, it supports the adoption of general skills in the analysis of large, hierarchical, and multi-modal data collections. We focus on microbiome analysis tools, including entirely new, partially updated as well as previously established methods.</p>
 <p>This online resource and its associated ecosystem of microbiome data science tools are a result of a community-driven development process, and welcoming new contributors. Several individuals have <a href="https://github.com/microbiome/OMA/graphs/contributors">contributed</a> methods, workflows and improvements as acknowledged in the Introduction. You can find more information on how to find us online and join the developer community through the project homepage at <a href="https://microbiome.github.io">microbiome.github.io</a>. This online resource has been written in RMarkdown with the bookdown R package. The material is <strong>free to use</strong> with the <a href="https://creativecommons.org/licenses/by-nc/3.0/us/">Creative Commons Attribution-NonCommercial 3.0</a> License.</p>
-<hr>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// This block adds image to the front page</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>title<span class="op">=</span><span class="bu">document</span><span class="op">.</span><span class="fu">getElementById</span>(<span class="st">'header'</span>)<span class="op">;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>title<span class="op">.</span><span class="at">innerHTML</span> <span class="op">=</span> title<span class="op">.</span><span class="at">innerHTML</span> <span class="op">+</span> </span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="st">'&lt;img src="https://user-images.githubusercontent.com/60338854/128359392</span><span class="sc">\</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="st">-6feef8df-30e9-4ea0-ae3b-4bb619d746ed.png" alt="Microbiome" width="50%"/&gt;'</span> <span class="op">+</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="st">'&lt;p style="font-size:12px"&gt;Figure source: Moreno-Indias &lt;i&gt;et al&lt;/i&gt;. (2021) </span><span class="sc">\</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;a href="https://doi.org/10.3389/fmicb.2021.635781"&gt;Statistical and </span><span class="sc">\</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="st">Machine Learning Techniques in Human Microbiome Studies: Contemporary </span><span class="sc">\</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="st">Challenges and Solutions&lt;/a&gt;. Frontiers in Microbiology 12:11.&lt;/p&gt;'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<script>
-// This block adds image to the front page
-title=document.getElementById('header');
-title.innerHTML = title.innerHTML + 
-
-'<img src="https://user-images.githubusercontent.com/60338854/128359392\
--6feef8df-30e9-4ea0-ae3b-4bb619d746ed.png" alt="Microbiome" width="50%"/>' +
-
-'<p style="font-size:12px">Figure source: Moreno-Indias <i>et al</i>. (2021) \
-<a href="https://doi.org/10.3389/fmicb.2021.635781">Statistical and \
-Machine Learning Techniques in Human Microbiome Studies: Contemporary \
-Challenges and Solutions</a>. Frontiers in Microbiology 12:11.</p>'
-</script>
-</div>
+<!-- -------------- -->
+<!-- ```{r} -->
+<!-- #| include = FALSE -->
+<!-- library(Cairo) -->
+<!-- # global knitr options -->
+<!-- knitr::opts_chunk$set( -->
+<!--   fig.width=10, -->
+<!--   dpi=300, -->
+<!--   dev = "png", -->
+<!--   dev.args = list(type = "cairo-png") -->
+<!-- ) -->
+<!-- ``` -->
+<!-- ```{js} -->
+<!-- // This block adds image to the front page -->
+<!-- title=document.getElementById('header'); -->
+<!-- title.innerHTML = title.innerHTML + -->
+<!-- '<img src="https://user-images.githubusercontent.com/60338854/128359392\ -->
+<!-- -6feef8df-30e9-4ea0-ae3b-4bb619d746ed.png" alt="Microbiome" width="50%"/>' + -->
+<!-- '<p style="font-size:12px">Figure source: Moreno-Indias <i>et al</i>. (2021) \ -->
+<!-- <a href="https://doi.org/10.3389/fmicb.2021.635781">Statistical and \ -->
+<!-- Machine Learning Techniques in Human Microbiome Studies: Contemporary \ -->
+<!-- Challenges and Solutions</a>. Frontiers in Microbiology 12:11.</p>' -->
+<!-- ``` -->
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">

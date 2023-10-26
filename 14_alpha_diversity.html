@@ -54,7 +54,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -275,12 +294,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Sessioninfo</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./99_bibliography.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Bibliography</span></a>
-  </div>
-</li>
       </ul>
   </li>
     </ul>
@@ -361,7 +374,7 @@ document.addEventListener("click", function (event) {
 }
 </style>
 <p>Diversity estimates are a central topic in microbiome data analysis.</p>
-<p>There are three commonly employed levels of diversity measurements, which are trying to put a number on different aspects of the questions associated with diversity <span class="citation" data-cites="Whittaker1960">[@Whittaker1960]</span>.</p>
+<p>There are three commonly employed levels of diversity measurements, which are trying to put a number on different aspects of the questions associated with diversity <span class="citation" data-cites="Whittaker1960">(<a href="#ref-Whittaker1960" role="doc-biblioref">Whittaker 1960</a>)</span>.</p>
 <p>Many different ways for estimating such diversity measurements have been described in the literature. Which measurement is best or applicable for your samples, is not the aim of the following sections.</p>
 <div class="cell" data-hash="14_alpha_diversity_cache/html/load-pkg-data_bc7120b12674a80167c50478ce486484">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mia)</span>
@@ -369,14 +382,14 @@ document.addEventListener("click", function (event) {
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>tse <span class="ot">&lt;-</span> GlobalPatterns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong><em>Alpha diversity</em></strong>, also sometimes interchangeably used with the term <strong><em>species diversity</em></strong>, summarizes the distribution of species abundances in a given sample into a single number that depends on species richness and evenness. Diversity indices measure the overall community heterogeneity. A number of ecological diversity measures are available. The Hill coefficient combines many standard indices into a single equation that provides observed richness, inverse Simpson, and Shannon diversity, and generalized diversity as special cases. In general, diversity increases together with increasing richness and evenness. Sometimes richness, phylogenetic diversity, evenness, dominance, and rarity are considered to be variants of alpha diversity.</p>
-<p><strong>Richness</strong> refers to the total number of species in a community (sample). The simplest richness index is the number of observed species (observed richness). Assuming limited sampling from the community, however, this may underestimate the true species richness. Several estimators are available, including for instance ACE <span class="citation" data-cites="Chao1992">[@Chao1992]</span> and Chao1 <span class="citation" data-cites="Chao1984">[@Chao1984]</span>. Richness estimates are unaffected by species abundances.</p>
-<p><strong>Phylogenetic diversity</strong> was first proposed by <span class="citation" data-cites="Faith1992">[@Faith1992]</span>. Unlike the diversity measures mentioned above, Phylogenetic diversity (PD) measure incorporates information from phylogenetic relationships stored in <code>phylo</code> tree between species in a community (sample). The Faith’s PD is calculated as the sum of branch length of all species in a community (sample).</p>
+<p><strong>Richness</strong> refers to the total number of species in a community (sample). The simplest richness index is the number of observed species (observed richness). Assuming limited sampling from the community, however, this may underestimate the true species richness. Several estimators are available, including for instance ACE <span class="citation" data-cites="Chao1992">(<a href="#ref-Chao1992" role="doc-biblioref">A and SM 1992</a>)</span> and Chao1 <span class="citation" data-cites="Chao1984">(<a href="#ref-Chao1984" role="doc-biblioref">A 1984</a>)</span>. Richness estimates are unaffected by species abundances.</p>
+<p><strong>Phylogenetic diversity</strong> was first proposed by <span class="citation" data-cites="Faith1992">(<a href="#ref-Faith1992" role="doc-biblioref">Faith 1992</a>)</span>. Unlike the diversity measures mentioned above, Phylogenetic diversity (PD) measure incorporates information from phylogenetic relationships stored in <code>phylo</code> tree between species in a community (sample). The Faith’s PD is calculated as the sum of branch length of all species in a community (sample).</p>
 <p><strong>Evenness</strong> focuses on species abundances, and can thus complement the number of species. A typical evenness index is the Pielou’s evenness, which is Shannon diversity normalized by the observed richness.</p>
 <p><strong>Dominance</strong> indices are in general negatively correlated with diversity, and sometimes used in ecological literature. High dominance is obtained when one or few species have a high share of the total species abundance in the community.</p>
 <p><strong>Rarity</strong> indices characterize the concentration of taxa at low abundance. Prevalence and detection thresholds determine rare taxa whose total concentration is represented as a rarity index.</p>
 <section id="estimation" class="level2" data-number="8.1">
 <h2 data-number="8.1" class="anchored" data-anchor-id="estimation"><span class="header-section-number">8.1</span> Estimation</h2>
-<p>Alpha diversity can be estimated with wrapper functions that interact with other packages implementing the calculation, such as <em><code>vegan</code></em> <span class="citation" data-cites="R_vegan">[@R_vegan]</span>.</p>
+<p>Alpha diversity can be estimated with wrapper functions that interact with other packages implementing the calculation, such as <em><code>vegan</code></em> <span class="citation" data-cites="R_vegan">(<a href="#ref-R_vegan" role="doc-biblioref">Oksanen et al. 2020</a>)</span>.</p>
 <section id="richness" class="level3" data-number="8.1.1">
 <h3 data-number="8.1.1" class="anchored" data-anchor-id="richness"><span class="header-section-number">8.1.1</span> Richness</h3>
 <p>Richness gives the number of features present within a community and can be calculated with <code>estimateRichness</code>. Each of the estimate diversity/richness/evenness/dominance functions adds the calculated measure(s) to the <code>colData</code> of the <code>SummarizedExperiment</code> under the given column <code>name</code>. Here, we calculate <code>observed</code> features as a measure of richness.</p>
@@ -392,7 +405,7 @@ document.addEventListener("click", function (event) {
    6964    7679    5729    2667    2574    3214 </code></pre>
 </div>
 </div>
-<p>This allows access to the values to be analyzed directly from the <code>colData</code>, for example by plotting them using <code>plotColData</code> from the <em><code>scater</code></em> package <span class="citation" data-cites="R_scater">[@R_scater]</span>.</p>
+<p>This allows access to the values to be analyzed directly from the <code>colData</code>, for example by plotting them using <code>plotColData</code> from the <em><code>scater</code></em> package <span class="citation" data-cites="R_scater">(<a href="#ref-R_scater" role="doc-biblioref">McCarthy et al. 2020</a>)</span>.</p>
 <div class="cell" data-hash="14_alpha_diversity_cache/html/plot-div-shannon_c5392d2e73ecddd8d1c07cd117854da5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scater)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotColData</span>(tse, </span>
@@ -481,7 +494,7 @@ document.addEventListener("click", function (event) {
 </div>
 </div>
 <p>Alternatively, the phylogenetic diversity can be calculated by <code>mia::estimateDiversity</code>. This is a faster re-implementation of<br>
-the widely used function in <em><code>picante</code></em> <span class="citation" data-cites="R_picante">[@R_picante, @Kembel2010]</span>.</p>
+the widely used function in <em><code>picante</code></em> <span class="citation" data-cites="R_picante">W et al. (<a href="#ref-Kembel2010" role="doc-biblioref">2010</a>)</span>.</p>
 <p>Load <code>picante</code> R package and get the <code>phylo</code> stored in <code>rowTree</code>.</p>
 <div class="cell" data-hash="14_alpha_diversity_cache/html/phylo-div-3_3b7d49057ba2d299a2149f4621ca37a4">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>tse <span class="ot">&lt;-</span> mia<span class="sc">::</span><span class="fu">estimateDiversity</span>(tse, </span>
@@ -569,6 +582,32 @@ the widely used function in <em><code>picante</code></em> <span class="citation"
 </div>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Chao1984" class="csl-entry" role="listitem">
+A, Chao. 1984. <span>“Non-Parametric Estimation of the Number of Classes in a Population.”</span> <em>Scandinavian Journal of Statistics</em> 11 (4): 265–70. <a href="https://www.jstor.org/stable/4615964">https://www.jstor.org/stable/4615964</a>.
+</div>
+<div id="ref-Chao1992" class="csl-entry" role="listitem">
+A, Chao, and Lee SM. 1992. <span>“Estimating the Number of Classes via Sample Coverage.”</span> <em>Journal of the American Statistical Association</em> 87 (417): 210–17. https://doi.org/<a href="https://doi.org/10.1080/01621459.1992.10475194">https://doi.org/10.1080/01621459.1992.10475194</a>.
+</div>
+<div id="ref-Faith1992" class="csl-entry" role="listitem">
+Faith, D. P. 1992. <span>“Conservation Evaluation and Phylogenetic Diversity.”</span> <em>Biological Conservation</em> 61 (1): 10. https://doi.org/<a href="https://doi.org/10.1016/0006-3207(92)91201-3">https://doi.org/10.1016/0006-3207(92)91201-3</a>.
+</div>
+<div id="ref-R_picante" class="csl-entry" role="listitem">
+Kembel, Steven W, Peter D Cowan, Matthew R Helmus, William K Cornwell, Helene Morlon, David D Ackerly, Simon P Blomberg, and Campbell O Webb. 2010. <em>Picante: R Tools for Integrating Phylogenies and Ecology</em>. <a href="https://cran.r-project.org/web/packages/picante">https://cran.r-project.org/web/packages/picante</a>.
+</div>
+<div id="ref-R_scater" class="csl-entry" role="listitem">
+McCarthy, Davis, Kieran Campbell, Aaron Lun, and Quin Wills. 2020. <em>Scater: Single-Cell Analysis Toolkit for Gene Expression Data in r</em>. <a href="http://bioconductor.org/packages/scater/">http://bioconductor.org/packages/scater/</a>.
+</div>
+<div id="ref-R_vegan" class="csl-entry" role="listitem">
+Oksanen, Jari, F. Guillaume Blanchet, Michael Friendly, Roeland Kindt, Pierre Legendre, Dan McGlinn, Peter R. Minchin, et al. 2020. <em>Vegan: Community Ecology Package</em>. <a href="https://CRAN.R-project.org/package=vegan">https://CRAN.R-project.org/package=vegan</a>.
+</div>
+<div id="ref-Kembel2010" class="csl-entry" role="listitem">
+W, Kembel Steven, Cowan Peter D, Helmus Matthew R, Cornwell William K, Morlon Helene, Ackerly David D, Blomberg Simon P, and Webb Campbell O. 2010. <span>“<span class="nocase">Picante: R tools for integrating phylogenies and ecology</span>.”</span> <em>Bioinformatics</em> 26 (11): 1463–64. https://doi.org/<a href="https://doi.org/10.1093/bioinformatics/btq166">https://doi.org/10.1093/bioinformatics/btq166</a>.
+</div>
+<div id="ref-Whittaker1960" class="csl-entry" role="listitem">
+Whittaker, R. H. 1960. <span>“Vegetation of the Siskiyou Mountains, Oregon and California.”</span> <em>Ecological Monographs</em> 30 (3): 279–338. https://doi.org/<a href="https://doi.org/10.2307/1943563">https://doi.org/10.2307/1943563</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->

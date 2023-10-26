@@ -20,7 +20,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -241,12 +260,6 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Sessioninfo</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./99_bibliography.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Bibliography</span></a>
-  </div>
-</li>
       </ul>
   </li>
     </ul>
@@ -349,11 +362,11 @@ document.addEventListener("click", function (event) {
 </section>
 <section id="acknowledgments" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="acknowledgments">Acknowledgments</h3>
-<p>This work would not have been possible without the countless contributions and interactions with other researchers, developers, and users. We express our gratitude to the entire Bioconductor community for developing this high-quality open research software repository for life science analytics, continuously pushing the limits in emerging fields <span class="citation" data-cites="Gentleman2004">[@Gentleman2004]</span>, <span class="citation" data-cites="Huber2015">[@Huber2015]</span>.</p>
-<p>The presented framework for microbiome data science is based on the <em>TreeSummarizedExperiment</em> data container created by Ruizhu Huang and others <span class="citation" data-cites="R_TreeSummarizedExperiment">[@R_TreeSummarizedExperiment]</span>, <span class="citation" data-cites="Ernst2020">[@Ernst2020]</span>, and on the <em>MultiAssayExperiment</em> by Marcel Ramos et al. <span class="citation" data-cites="Ramos2017">[@Ramos2017]</span>. The idea of using these containers as a basis for microbiome data science was initially advanced by the groundwork of Domenick Braccia, Héctor Corrada Bravo and others and brought together with other microbiome data science developers <span class="citation" data-cites="Shetty2019">[@Shetty2019]</span>. Setting up the base ecosystem of packages and tutorials was then subsequently led by Tuomas Borman, Felix Ernst, and <a href="http://www.iki.fi/Leo.Lahti">Leo Lahti</a>. We would specifically like to thank everyone who contributed to the work supporting the <em>TreeSummarizedExperiment</em> ecosystem for microbiome research, including but not limited to the R packages mia, miaViz, miaTime, miaSim, philr, ANCOMBC, curatedMetagenomicData, scater, scuttle, and other packages, some of which are listed in Section @ref(ecosystem). A number of other contributors have advanced the ecosystem further, and will be acknowledged in the individual packages, <a href="https://github.com/microbiome/OMA/graphs/contributors">pull requests</a>, <a href="https://github.com/microbiome/OMA/issues">issues</a>, and other work.</p>
-<p>Ample demonstration data resources supporting this framework have been made available through the <a href="https://waldronlab.io/curatedMetagenomicData/">curatedMetagenomicData</a> project by Edoardo Pasolli, Lucas Schiffer, Levi Waldron and others <span class="citation" data-cites="Pasolli2017">[@Pasolli2017]</span>.</p>
-<p>The work has drawn initial inspiration from many sources, most notably from the work on <em>phyloseq</em> by Paul McMurdie and Susan Holmes <span class="citation" data-cites="McMurdie2013">[@McMurdie2013]</span> who pioneered the work on rigorous and reproducible microbiome data science ecosystems in R/Bioconductor. The phyloseq framework continues to provide a vast array of complementary packages and methods for microbiome studies. The Orchestrating Single-Cell Analysis with Bioconductor, or <a href="https://bioconductor.org/books/release/OSCA/"><em>OSCA</em></a> book by Robert Amezquita, Aaron Lun, Stephanie Hicks, and Raphael Gottardo <span class="citation" data-cites="Amezquita2020natmeth">[@Amezquita2020natmeth]</span> has implemented closely related work on the <em>SummarizedExperiment</em> data container and its derivatives in the field of single cell sequencing studies that have inspired this work.</p>
-<p>In the background, the open source books by Susan Holmes and Wolfgang Huber, Modern Statistics for Modern Biology <span class="citation" data-cites="Holmes2019">[@Holmes2019]</span> and by Garret Grolemund and Hadley Wickham, the R for Data Science <span class="citation" data-cites="Grolemund2017">[@Grolemund2017]</span>, and Richard McElreath’s Statistical Rethinking and the associated online resources by Solomon Kurz <span class="citation" data-cites="McElreath2020">[@McElreath2020]</span> are key references that have advanced reproducible data science training and dissemination.</p>
+<p>This work would not have been possible without the countless contributions and interactions with other researchers, developers, and users. We express our gratitude to the entire Bioconductor community for developing this high-quality open research software repository for life science analytics, continuously pushing the limits in emerging fields <span class="citation" data-cites="Gentleman2004">(<a href="#ref-Gentleman2004" role="doc-biblioref">Gentleman et al. 2004</a>)</span>, <span class="citation" data-cites="Huber2015">(<a href="#ref-Huber2015" role="doc-biblioref">Huber et al. 2015</a>)</span>.</p>
+<p>The presented framework for microbiome data science is based on the <em>TreeSummarizedExperiment</em> data container created by Ruizhu Huang and others <span class="citation" data-cites="R_TreeSummarizedExperiment">(<a href="#ref-R_TreeSummarizedExperiment" role="doc-biblioref">Huang 2020</a>)</span>, <span class="citation" data-cites="Ernst2020">(<a href="#ref-Ernst2020" role="doc-biblioref">Ernst et al. 2020</a>)</span>, and on the <em>MultiAssayExperiment</em> by Marcel Ramos et al. <span class="citation" data-cites="Ramos2017">(<a href="#ref-Ramos2017" role="doc-biblioref">Ramos et al. 2017</a>)</span>. The idea of using these containers as a basis for microbiome data science was initially advanced by the groundwork of Domenick Braccia, Héctor Corrada Bravo and others and brought together with other microbiome data science developers <span class="citation" data-cites="Shetty2019">(<a href="#ref-Shetty2019" role="doc-biblioref">Shetty and Lahti 2019</a>)</span>. Setting up the base ecosystem of packages and tutorials was then subsequently led by Tuomas Borman, Felix Ernst, and <a href="http://www.iki.fi/Leo.Lahti">Leo Lahti</a>. We would specifically like to thank everyone who contributed to the work supporting the <em>TreeSummarizedExperiment</em> ecosystem for microbiome research, including but not limited to the R packages mia, miaViz, miaTime, miaSim, philr, ANCOMBC, curatedMetagenomicData, scater, scuttle, and other packages, some of which are listed in Section @ref(ecosystem). A number of other contributors have advanced the ecosystem further, and will be acknowledged in the individual packages, <a href="https://github.com/microbiome/OMA/graphs/contributors">pull requests</a>, <a href="https://github.com/microbiome/OMA/issues">issues</a>, and other work.</p>
+<p>Ample demonstration data resources supporting this framework have been made available through the <a href="https://waldronlab.io/curatedMetagenomicData/">curatedMetagenomicData</a> project by Edoardo Pasolli, Lucas Schiffer, Levi Waldron and others <span class="citation" data-cites="Pasolli2017">(<a href="#ref-Pasolli2017" role="doc-biblioref">Pasolli et al. 2017</a>)</span>.</p>
+<p>The work has drawn initial inspiration from many sources, most notably from the work on <em>phyloseq</em> by Paul McMurdie and Susan Holmes <span class="citation" data-cites="McMurdie2013">(<a href="#ref-McMurdie2013" role="doc-biblioref">McMurdie and Holmes 2013</a>)</span> who pioneered the work on rigorous and reproducible microbiome data science ecosystems in R/Bioconductor. The phyloseq framework continues to provide a vast array of complementary packages and methods for microbiome studies. The Orchestrating Single-Cell Analysis with Bioconductor, or <a href="https://bioconductor.org/books/release/OSCA/"><em>OSCA</em></a> book by Robert Amezquita, Aaron Lun, Stephanie Hicks, and Raphael Gottardo <span class="citation" data-cites="Amezquita2020natmeth">(<a href="#ref-Amezquita2020natmeth" role="doc-biblioref">Amezquita et al. 2020</a>)</span> has implemented closely related work on the <em>SummarizedExperiment</em> data container and its derivatives in the field of single cell sequencing studies that have inspired this work.</p>
+<p>In the background, the open source books by Susan Holmes and Wolfgang Huber, Modern Statistics for Modern Biology <span class="citation" data-cites="Holmes2019">(<a href="#ref-Holmes2019" role="doc-biblioref">Holmes and Huber 2019</a>)</span> and by Garret Grolemund and Hadley Wickham, the R for Data Science <span class="citation" data-cites="Grolemund2017">(<a href="#ref-Grolemund2017" role="doc-biblioref">Grolemund and Wickham 2017</a>)</span>, and Richard McElreath’s Statistical Rethinking and the associated online resources by Solomon Kurz <span class="citation" data-cites="McElreath2020">(<a href="#ref-McElreath2020" role="doc-biblioref">McElreath 2020</a>)</span> are key references that have advanced reproducible data science training and dissemination.</p>
 </section>
 <section id="how-to-contribute" class="level3">
 <h3 class="anchored" data-anchor-id="how-to-contribute">How to contribute</h3>
@@ -375,12 +388,53 @@ document.addEventListener("click", function (event) {
 <ul>
 <li><p><a href="https://www.aka.fi/">Research Council of Finland</a></p></li>
 <li><p><a href="https://www.findingpheno.eu/">FindingPheno</a> European Union’s Horizon 2020 research and innovation programme under grant agreement No 952914</p></li>
-<li><p>COST Action network on Statistical and Machine Learning Techniques for Human Microbiome Studies (<a href="https://www.ml4microbiome.eu/">ML4microbiome</a>) <span class="citation" data-cites="MorenoIndias2021">[@MorenoIndias2021]</span>.</p></li>
+<li><p>COST Action network on Statistical and Machine Learning Techniques for Human Microbiome Studies (<a href="https://www.ml4microbiome.eu/">ML4microbiome</a>) <span class="citation" data-cites="MorenoIndias2021">(<a href="#ref-MorenoIndias2021" role="doc-biblioref">Moreno-Indias et al. 2021</a>)</span>.</p></li>
 <li><p>Computational Life Science Research Program, <a href="https://biocityturku.fi/">Biocity Turku</a></p></li>
 <li><p><a href="https://www.yliopistosaatio.fi/en/">Turku University Foundation</a></p></li>
 </ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Amezquita2020natmeth" class="csl-entry" role="listitem">
+Amezquita, Robert A., Aaron T. L. Lun, Etienne Becht, Vince J. Carey, Lindsay N. Carpp, Ludwig Geistlinger, Federico Marini, et al. 2020. <span>“Orchestrating Single-Cell Analysis with Bioconductor.”</span> <em>Nature Methods</em> 17: 137–45. <a href="https://doi.org/10.1038/s41592-019-0654-x">https://doi.org/10.1038/s41592-019-0654-x</a>.
+</div>
+<div id="ref-Ernst2020" class="csl-entry" role="listitem">
+Ernst, F. G. M., S. A. Shetty, R. Huang, Braccia D. J., Bravo H. C., and L. Lahti. 2020. <span>“The Emerging r Ecosystem for Microbiome Research.”</span> <em>F1000Research</em> 9. <a href="https://doi.org/10.7490/f1000research.1118445.1">https://doi.org/10.7490/f1000research.1118445.1</a>.
+</div>
+<div id="ref-Gentleman2004" class="csl-entry" role="listitem">
+Gentleman, Robert C, Vincent J Carey, Douglas M Bates, Ben Bolstad, Marcel Dettling, Sandrine Dudoit, Byron Ellis, et al. 2004. <span>“Bioconductor: Open Software Development for Computational Biology and Bioinformatics.”</span> <em>Genome Biology</em> 5: R80.
+</div>
+<div id="ref-Grolemund2017" class="csl-entry" role="listitem">
+Grolemund, Garret, and Hadley Wickham. 2017. <em>R for Data Science</em>. Vol. 77(21); e39–42. O’Reilly.
+</div>
+<div id="ref-Holmes2019" class="csl-entry" role="listitem">
+Holmes, Susan, and Wolfgang Huber. 2019. <em>Modern Statistics for Modern Biology</em>. New York, NY: Cambridge University Press. <a href="https://www.huber.embl.de/msmb/">https://www.huber.embl.de/msmb/</a>.
+</div>
+<div id="ref-R_TreeSummarizedExperiment" class="csl-entry" role="listitem">
+Huang, Ruizhu. 2020. <em>TreeSummarizedExperiment: A S4 Class for Data with Tree Structures</em>.
+</div>
+<div id="ref-Huber2015" class="csl-entry" role="listitem">
+Huber, W., V. J. Carey, R. Gentleman, S. Anders, M. Carlson, B. S. Carvalho, H. C. Bravo, et al. 2015. <span>“<span>O</span>rchestrating High-Throughput Genomic Analysis with <span>B</span>ioconductor.”</span> <em>Nature Methods</em> 12 (2): 115–21. <a href="http://www.nature.com/nmeth/journal/v12/n2/full/nmeth.3252.html">http://www.nature.com/nmeth/journal/v12/n2/full/nmeth.3252.html</a>.
+</div>
+<div id="ref-McElreath2020" class="csl-entry" role="listitem">
+McElreath, R. 2020. <em>Statistical Rethinking</em>. Chapman; Hall/CRC.
+</div>
+<div id="ref-McMurdie2013" class="csl-entry" role="listitem">
+McMurdie, PJ, and S Holmes. 2013. <span>“<span><em>Phyloseq:</em></span> An r Package for Reproducible Interactive Analysis and Graphics of Microbiome Census Data.”</span> <em>PLoS ONE</em> 8: e61217. <a href="https://doi.org/10.1371/journal.pone.0061217">https://doi.org/10.1371/journal.pone.0061217</a>.
+</div>
+<div id="ref-MorenoIndias2021" class="csl-entry" role="listitem">
+Moreno-Indias, Isabel, Leo Lahti, Miroslava Nedyalkova, Ilze Elbere, Gennady V. Roshchupkin, Muhamed Adilovic, Onder Aydemir, et al. 2021. <span>“Statistical and Machine Learning Techniques in Human Microbiome Studies: Contemporary Challenges and Solutions.”</span> <em>Frontiers in Microbiology</em> 12: 277. <a href="https://doi.org/10.3389/fmicb.2021.635781">https://doi.org/10.3389/fmicb.2021.635781</a>.
+</div>
+<div id="ref-Pasolli2017" class="csl-entry" role="listitem">
+Pasolli, E, L Schiffer, P Manghi, A Renson, V Obenchain, D Truong, F Beghini, et al. 2017. <span>“Accessible, Curated Metagenomic Data Through ExperimentHub.”</span> <em>Nature Methods</em> 14: 1023–24. <a href="https://doi.org/10.1038/nmeth.4468">https://doi.org/10.1038/nmeth.4468</a>.
+</div>
+<div id="ref-Ramos2017" class="csl-entry" role="listitem">
+Ramos, Marcel, Lucas Schiffer, Angela Re, Rimsha Azhar, Azfar Basunia, Carmen Rodriguez Cabrera, Tiffany Chan, et al. 2017. <span>“Software for the Integration of Multiomics Experiments in Bioconductor.”</span> <em>Cancer Research</em>. <a href="https://doi.org/10.1158/0008-5472.CAN-17-0344">https://doi.org/10.1158/0008-5472.CAN-17-0344</a>.
+</div>
+<div id="ref-Shetty2019" class="csl-entry" role="listitem">
+Shetty, Sudarshan, and Leo Lahti. 2019. <span>“Microbiome Data Science.”</span> <em>Journal of Biosciences</em> 44: 115. <a href="https://doi.org/10.1007/s12038-019-9930-2">https://doi.org/10.1007/s12038-019-9930-2</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->

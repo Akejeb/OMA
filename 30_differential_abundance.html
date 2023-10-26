@@ -54,7 +54,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -277,12 +296,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Sessioninfo</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./99_bibliography.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Bibliography</span></a>
-  </div>
-</li>
       </ul>
   </li>
     </ul>
@@ -372,17 +385,17 @@ document.addEventListener("click", function (event) {
 }
 </style>
 <p>This section provides an introduction to Differential Abundance Analysis (DAA), which is used to identify differences in the abundances of individual taxa (at any taxonomic level) between two or more groups, such as treatment and control. Here, we demonstrate its implementation on Tengeler2020, described in chapter @ref(tengeler-desc).</p>
-<p>The goal of DAA is to identify biomarkers of a certain phenotype or condition, and gain understanding of a complex system by looking at its isolated components. For example, the identification of a bacterial taxon that is differentially abundant between healthy patients and diseased patients can lead to important insights into the pathophysiology of the disease. In other words, differentially abundant taxa can be involved in the dynamics of the disease, which in turn helps understand the system as a whole. Despite its relevance in current research, the DAA approach has also been subject to debate <span class="citation" data-cites="Quinn2021">[@Quinn2021]</span>.</p>
+<p>The goal of DAA is to identify biomarkers of a certain phenotype or condition, and gain understanding of a complex system by looking at its isolated components. For example, the identification of a bacterial taxon that is differentially abundant between healthy patients and diseased patients can lead to important insights into the pathophysiology of the disease. In other words, differentially abundant taxa can be involved in the dynamics of the disease, which in turn helps understand the system as a whole. Despite its relevance in current research, the DAA approach has also been subject to debate <span class="citation" data-cites="Quinn2021">(<a href="#ref-Quinn2021" role="doc-biblioref">Quinn, Gordon-Rodriguez, and Erb 2021</a>)</span>.</p>
 <section id="statistical-challenges-of-microbiome-data" class="level2" data-number="12.1">
 <h2 data-number="12.1" class="anchored" data-anchor-id="statistical-challenges-of-microbiome-data"><span class="header-section-number">12.1</span> Statistical challenges of microbiome data</h2>
 <p>Microbiome data display unique properties that are exclusively addressed by DAA tools developed for microbiome analysis. Specifically, microbiome data are characterized by high variability, zero-inflation and compositionality. <strong>High variability</strong> expresses that abundance of taxa often varies by several orders of magnitude from sample to sample. <strong>Zero-inflation</strong> means that typically more than 70% of the values are zeros, which could be due to either physical absence (structural zeros) or insufficient sampling effort (sampling zeros). <strong>Compositionality</strong> implies that a change in the absolute abundance of one taxon will lead to apparent variations in the relative abundances of other taxa in the same sample. If neglected, such properties may cause significant bias in the results of DAA. Therefore, several approaches have been developed to address the unique properties of microbiome data and provide statistically useful results.</p>
 <p>The first approach to target zero-inflated data consists of specialized models, such as <strong>over-dispersed count models</strong> and <strong>zero-inflated mixture models</strong>. DESeq2, edgeR and corncorb are based on over-dispersed count models, whereas metagenomeSeq, RAIDA, ZIBB and Omnibus implement zero-inflated mixture models to address zero-inflation. Typically, these models assume a negative binomial, beta-binomial or normal/log-normal distribution. Alternatively, <strong>zero imputation</strong> also represents a valid approach to deal with zero-inflated data. ALDEx2 and eBay apply a Bayesian model to impute the zeros when working with proportion data, accounting for sampling variability and sequencing depth variation. Other methods, such as MaAsLin2 and ANCOMBC impute the zeros with a pseudo-count strategy.</p>
-<p>Regarding the compositionality of microbiome data, several approaches have been developed to perform <strong>robust normalization</strong> with methods specifically designed to reduce the bias found in compositional data. Some examples include trimmed mean of M-values (TMM) normalization used by edgeR, relative log expression (RLE) normalization used by DESeq2, cumulative sum scaling (CSS) normalization used by metagenomeSeq, centered log-ratio transformation (CLR) normalization used by ALDEx2 and geometric mean of pairwise ratios (GMPR) normalization used by Omnibus and Wrench normalization <span class="citation" data-cites="Kumar2018">[@Kumar2018]</span>, which corrects the compositional bias by an empirical Bayes approach. Other methods to deal with compositional data entail reference taxa approach used by DACOMP and RAIDA, analyzing the pattern of pairwise log ratios as done by ANCOM and bias-correction applied by ANCOMBC.</p>
-<p>We recommend to have a look at <span class="citation" data-cites="Nearing2022">@Nearing2022</span>. In this study, multiple DAA methods were applied to 38 different datasets and their results were compared to one another. Because each method follows a slightly different approach in terms of assumptions and normalization techniques, it was shown that results on the same dataset may differ substantially depending on the method. Recently, <span class="citation" data-cites="Yang2022">@Yang2022</span> comprehensively evaluated DAA methods via a semi-parametric framework and 106 real datasets. This study also concluded that different methods can produce contradictory results, creating the risk of cherry-picking the most favorable options for one’s own hypothesis. Therefore, it is highly recommended to perform DAA with multiple methods to determine whether the findings can be reproduced by different approaches. Built on the findings of <span class="citation" data-cites="Calgaro2020">@Calgaro2020</span>, the <em>benchdamic</em> <span class="citation" data-cites="Calgaro2022">[@Calgaro2022]</span> package could offer a valuable support in this regard. Through a comprehensive evaluation process it serves both practitioners by comparing DA methods from existing literature, and method developers by providing an impartial tool to evaluate their new approaches in comparison to what is already available. For details, check its extensive <a href="https://www.bioconductor.org/packages/release/bioc/vignettes/benchdamic/inst/doc/intro.html">vignette</a>.</p>
+<p>Regarding the compositionality of microbiome data, several approaches have been developed to perform <strong>robust normalization</strong> with methods specifically designed to reduce the bias found in compositional data. Some examples include trimmed mean of M-values (TMM) normalization used by edgeR, relative log expression (RLE) normalization used by DESeq2, cumulative sum scaling (CSS) normalization used by metagenomeSeq, centered log-ratio transformation (CLR) normalization used by ALDEx2 and geometric mean of pairwise ratios (GMPR) normalization used by Omnibus and Wrench normalization <span class="citation" data-cites="Kumar2018">(<a href="#ref-Kumar2018" role="doc-biblioref">Kumar et al. 2018</a>)</span>, which corrects the compositional bias by an empirical Bayes approach. Other methods to deal with compositional data entail reference taxa approach used by DACOMP and RAIDA, analyzing the pattern of pairwise log ratios as done by ANCOM and bias-correction applied by ANCOMBC.</p>
+<p>We recommend to have a look at <span class="citation" data-cites="Nearing2022">Nearing et al. (<a href="#ref-Nearing2022" role="doc-biblioref">2022</a>)</span>. In this study, multiple DAA methods were applied to 38 different datasets and their results were compared to one another. Because each method follows a slightly different approach in terms of assumptions and normalization techniques, it was shown that results on the same dataset may differ substantially depending on the method. Recently, <span class="citation" data-cites="Yang2022">Yang and Chen (<a href="#ref-Yang2022" role="doc-biblioref">2022</a>)</span> comprehensively evaluated DAA methods via a semi-parametric framework and 106 real datasets. This study also concluded that different methods can produce contradictory results, creating the risk of cherry-picking the most favorable options for one’s own hypothesis. Therefore, it is highly recommended to perform DAA with multiple methods to determine whether the findings can be reproduced by different approaches. Built on the findings of <span class="citation" data-cites="Calgaro2020">Calgaro et al. (<a href="#ref-Calgaro2020" role="doc-biblioref">2020</a>)</span>, the <em>benchdamic</em> <span class="citation" data-cites="Calgaro2022">(<a href="#ref-Calgaro2022" role="doc-biblioref">Calgaro et al. 2022</a>)</span> package could offer a valuable support in this regard. Through a comprehensive evaluation process it serves both practitioners by comparing DA methods from existing literature, and method developers by providing an impartial tool to evaluate their new approaches in comparison to what is already available. For details, check its extensive <a href="https://www.bioconductor.org/packages/release/bioc/vignettes/benchdamic/inst/doc/intro.html">vignette</a>.</p>
 </section>
 <section id="using-the-tools" class="level2" data-number="12.2">
 <h2 data-number="12.2" class="anchored" data-anchor-id="using-the-tools"><span class="header-section-number">12.2</span> Using the tools</h2>
-<p>In this section we demonstrate the use of four methods that can be recommended based on recent literature (ANCOM-BC <span class="citation" data-cites="ancombc2020">[@ancombc2020]</span>, <em>ALDEx2</em> <span class="citation" data-cites="Gloor2016">[@Gloor2016]</span>, <em>Maaslin2</em> <span class="citation" data-cites="Mallick2020">[@Mallick2020]</span>, <em>LinDA</em> <span class="citation" data-cites="Zhou2022">[@Zhou2022]</span> and <em>ZicoSeq</em> <span class="citation" data-cites="Yang2022">[@Yang2022]</span>).</p>
+<p>In this section we demonstrate the use of four methods that can be recommended based on recent literature (ANCOM-BC <span class="citation" data-cites="ancombc2020">(<a href="#ref-ancombc2020" role="doc-biblioref">Lin and Peddada 2020</a>)</span>, <em>ALDEx2</em> <span class="citation" data-cites="Gloor2016">(<a href="#ref-Gloor2016" role="doc-biblioref">Gloor, Macklaim, and Fernandes 2016</a>)</span>, <em>Maaslin2</em> <span class="citation" data-cites="Mallick2020">(<a href="#ref-Mallick2020" role="doc-biblioref">Mallick, Rahnavard, and McIver 2020</a>)</span>, <em>LinDA</em> <span class="citation" data-cites="Zhou2022">(<a href="#ref-Zhou2022" role="doc-biblioref">H. Zhou et al. 2022</a>)</span> and <em>ZicoSeq</em> <span class="citation" data-cites="Yang2022">(<a href="#ref-Yang2022" role="doc-biblioref">Yang and Chen 2022</a>)</span>).</p>
 <p>The purpose of this section is to show how to perform DAA in R, not how to correctly do causal inference. Depending on your experimental setup and your theory, you must determine how to specify any model exactly. E.g., there might be confounding factors that might drive (the absence of) differences between the shown groups that we ignore here for simplicity. Or your dataset is repeated sampling design, matched-pair design or the general longitudianl design. We will demonstrate how to include covariates in those models. We picked a dataset that merely has microbial abundances in a TSE object as well as a grouping variable in the sample data. We simplify the examples by only including two of the three groups.</p>
 <div class="cell" data-hash="30_differential_abundance_cache/html/import-daa-data_9bbc8bb21ab309bc8736948f27f5587c">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mia)</span>
@@ -440,7 +453,7 @@ document.addEventListener("click", function (event) {
 </section>
 <section id="aldex2" class="level3" data-number="12.2.2">
 <h3 data-number="12.2.2" class="anchored" data-anchor-id="aldex2"><span class="header-section-number">12.2.2</span> ALDEx2</h3>
-<p>In this section, we will show how to perform DAA with ALDEx2, which can be regarded as the method of choice for its consistency, as it normally identifies features that are also found by complementary methods <span class="citation" data-cites="Nearing2022">[@Nearing2022]</span>. A more extensive introduction to its functionality is available in the <a href="https://bioconductor.org/packages/release/bioc/vignettes/ALDEx2/inst/doc/ALDEx2_vignette.html">ALDEx2 vignette</a>.</p>
+<p>In this section, we will show how to perform DAA with ALDEx2, which can be regarded as the method of choice for its consistency, as it normally identifies features that are also found by complementary methods <span class="citation" data-cites="Nearing2022">(<a href="#ref-Nearing2022" role="doc-biblioref">Nearing et al. 2022</a>)</span>. A more extensive introduction to its functionality is available in the <a href="https://bioconductor.org/packages/release/bioc/vignettes/ALDEx2/inst/doc/ALDEx2_vignette.html">ALDEx2 vignette</a>.</p>
 <p>ALDEx2 estimates technical variation within each sample per taxon by utilizing the Dirichlet distribution. It furthermore applies the CLR transformation (or closely related log-ratio transforms). Depending on the experimental setup, it will perform a two sample Welch’s t-test and Wilcoxon test or a one-way ANOVA and Kruskal-Wallis test. For more complex study designs, there is a possibility to utilize the <code>glm</code> functionality within ALDEx2. The Benjamini-Hochberg procedure is applied by default to correct for multiple testing.</p>
 <div class="cell" data-hash="30_differential_abundance_cache/html/run-aldex2_c7f6ef8a670626881eae03a964d77a32">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load package</span></span>
@@ -469,7 +482,7 @@ document.addEventListener("click", function (event) {
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># combine all outputs </span></span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>aldex_out <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x_tt, x_effect)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Now, we can create a so called Bland-Altman or MA plot (left). It shows the association between the relative abundance and the magnitude of the difference per sample. Next to that, we can also create a plot that shows the dispersion on the x-axis instead of log-ratio abundance. Red dots represent genera that are differentially abundant (<span class="math inline">\(q \leq 0.1\)</span>) between the 2 groups. Black points are rare taxa and grey ones are abundant taxa. The dashed line represent an effect size of 1. <span class="citation" data-cites="Gloor2016">@Gloor2016</span> provides more information on these plots.</p>
+<p>Now, we can create a so called Bland-Altman or MA plot (left). It shows the association between the relative abundance and the magnitude of the difference per sample. Next to that, we can also create a plot that shows the dispersion on the x-axis instead of log-ratio abundance. Red dots represent genera that are differentially abundant (<span class="math inline">\(q \leq 0.1\)</span>) between the 2 groups. Black points are rare taxa and grey ones are abundant taxa. The dashed line represent an effect size of 1. <span class="citation" data-cites="Gloor2016">Gloor, Macklaim, and Fernandes (<a href="#ref-Gloor2016" role="doc-biblioref">2016</a>)</span> provides more information on these plots.</p>
 <div class="cell" data-hash="30_differential_abundance_cache/html/plot-aldex2_c038f5857e54fc1fa3da258b5d87d2d9">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -524,7 +537,7 @@ document.addEventListener("click", function (event) {
 </section>
 <section id="ancom-bc" class="level3" data-number="12.2.3">
 <h3 data-number="12.2.3" class="anchored" data-anchor-id="ancom-bc"><span class="header-section-number">12.2.3</span> ANCOM-BC</h3>
-<p>The analysis of composition of microbiomes with bias correction (ANCOM-BC) <span class="citation" data-cites="ancombc2020">[@ancombc2020]</span> is a recently developed method for differential abundance testing. It is based on an earlier published approach <span class="citation" data-cites="Mandal2015">[@Mandal2015]</span>. The previous version of ANCOM was among the methods that produced the most consistent results and is probably a conservative approach <span class="citation" data-cites="Nearing2022">[@Nearing2022]</span>. However, the new ANCOM-BC method operates quite differently compared to the former ANCOM method.</p>
+<p>The analysis of composition of microbiomes with bias correction (ANCOM-BC) <span class="citation" data-cites="ancombc2020">(<a href="#ref-ancombc2020" role="doc-biblioref">Lin and Peddada 2020</a>)</span> is a recently developed method for differential abundance testing. It is based on an earlier published approach <span class="citation" data-cites="Mandal2015">(<a href="#ref-Mandal2015" role="doc-biblioref">Mandal et al. 2015</a>)</span>. The previous version of ANCOM was among the methods that produced the most consistent results and is probably a conservative approach <span class="citation" data-cites="Nearing2022">(<a href="#ref-Nearing2022" role="doc-biblioref">Nearing et al. 2022</a>)</span>. However, the new ANCOM-BC method operates quite differently compared to the former ANCOM method.</p>
 <p>As the only method, ANCOM-BC incorporates the so called <em>sampling fraction</em> into the model. The latter term could be empirically estimated by the ratio of the library size to the microbial load. According to the authors, ignoring variations in this sampling fraction would bias DAA results. Furthermore, this method provides p-values and confidence intervals for each taxon. It also controls the FDR and it is computationally simple to implement.</p>
 <p>Note that the original method was implemented in the <code>ancombc()</code> function (see <a href="https://www.bioconductor.org/packages/release/bioc/vignettes/ANCOMBC/inst/doc/ANCOMBC.html">extended tutorial</a>). The method has since then been updated and new features have been added to enable multi-group comparisons and repeated measurements among other improvements. We do not cover the more advanced features of ANCOMBC in this tutorial as these features are documented in detail in this <a href="https://www.bioconductor.org/packages/release/bioc/vignettes/ANCOMBC/inst/doc/ANCOMBC2.html">tutorial</a>.</p>
 <p>We now proceed with a simple example. First, we specify a formula. In this formula, other covariates could potentially be included to adjust for confounding. We show this further below. Again, please make sure to check the <a href="https://rdrr.io/github/FrederickHuangLin/ANCOMBC/man/ancombc.html">function documentation</a> as well as the linked tutorials to learn about the additional arguments that we specify.</p>
@@ -605,7 +618,7 @@ document.addEventListener("click", function (event) {
 </section>
 <section id="maaslin2" class="level3" data-number="12.2.4">
 <h3 data-number="12.2.4" class="anchored" data-anchor-id="maaslin2"><span class="header-section-number">12.2.4</span> MaAsLin2</h3>
-<p>Let us next illustrate MaAsLin2 <span class="citation" data-cites="Mallick2020">[@Mallick2020]</span>. This method is based on generalized linear models and flexible for different study designs and covariate structures. For details, check their <a href="https://github.com/biobakery/biobakery/wiki/maaslin2">Biobakery tutorial</a>.</p>
+<p>Let us next illustrate MaAsLin2 <span class="citation" data-cites="Mallick2020">(<a href="#ref-Mallick2020" role="doc-biblioref">Mallick, Rahnavard, and McIver 2020</a>)</span>. This method is based on generalized linear models and flexible for different study designs and covariate structures. For details, check their <a href="https://github.com/biobakery/biobakery/wiki/maaslin2">Biobakery tutorial</a>.</p>
 <div class="cell" data-hash="30_differential_abundance_cache/html/run-maaslin2_039ef67a63a66345ad4c3ab8b1e20df1">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load package</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Maaslin2)</span>
@@ -718,7 +731,7 @@ document.addEventListener("click", function (event) {
 </section>
 <section id="linda" class="level3" data-number="12.2.5">
 <h3 data-number="12.2.5" class="anchored" data-anchor-id="linda"><span class="header-section-number">12.2.5</span> LinDA</h3>
-<p>Lastly, we cover linear models for differential abundance analysis of microbiome compositional data (<span class="citation" data-cites="Zhou2022">@Zhou2022</span>). This is very similar to ANCOMBC with few differences: 1) LinDA corrects for the compositional bias differently using the mode of all regression coefficients. 2) it is faster (100x-1000x than ANCOMBC and according to the authors); 3) it supports hierarchical models. The latest ANCOMBC versions are also supporting hierarchical models. Nevertheless, LinDA seems a promising tool that achieves a very good power/fdr trade-off together with ANCOMBC according to the review. The speed improvements might make it critical especially for datasets that have higher sample or feature set sizes.</p>
+<p>Lastly, we cover linear models for differential abundance analysis of microbiome compositional data (<span class="citation" data-cites="Zhou2022">H. Zhou et al. (<a href="#ref-Zhou2022" role="doc-biblioref">2022</a>)</span>). This is very similar to ANCOMBC with few differences: 1) LinDA corrects for the compositional bias differently using the mode of all regression coefficients. 2) it is faster (100x-1000x than ANCOMBC and according to the authors); 3) it supports hierarchical models. The latest ANCOMBC versions are also supporting hierarchical models. Nevertheless, LinDA seems a promising tool that achieves a very good power/fdr trade-off together with ANCOMBC according to the review. The speed improvements might make it critical especially for datasets that have higher sample or feature set sizes.</p>
 <div class="cell" data-hash="30_differential_abundance_cache/html/run-linda_e863c18ea835069c6dd41259fe38cab3">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load package</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MicrobiomeStat)</span>
@@ -885,7 +898,7 @@ Completed!</code></pre>
 <section id="selecting-confounders" class="level3" data-number="12.3.1">
 <h3 data-number="12.3.1" class="anchored" data-anchor-id="selecting-confounders"><span class="header-section-number">12.3.1</span> Selecting confounders</h3>
 <p>In addition to patient status, we will now control for two confounders: cohort and library size. The former is a categorical variable with three factors, whereas the latter is a discrete numerical variable. Remarkably, most DAA methods accept these two and several other data types.</p>
-<p>For demonstration, library size is treated as a confounder and included in the formulas of the DAA methods. Although this is a satisfactory approach to control for uneven sequencing efforts across samples, rarefaction generally represents a better solution <span class="citation" data-cites="Schloss2023">[@Schloss2023]</span>. With that said, library size can be readily computed and added to the colData.</p>
+<p>For demonstration, library size is treated as a confounder and included in the formulas of the DAA methods. Although this is a satisfactory approach to control for uneven sequencing efforts across samples, rarefaction generally represents a better solution <span class="citation" data-cites="Schloss2023">(<a href="#ref-Schloss2023" role="doc-biblioref">Schloss 2023</a>)</span>. With that said, library size can be readily computed and added to the colData.</p>
 <div class="cell" data-hash="30_differential_abundance_cache/html/daa-data-libsize_f4c10c3a0396c19f1bd6ebb069e59a8d">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute and store library size in colData</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(tse)<span class="sc">$</span>library_size <span class="ot">&lt;-</span> <span class="fu">colSums</span>(<span class="fu">assay</span>(tse, <span class="st">"counts"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1201,30 +1214,107 @@ Completed!</code></pre>
 <h2 data-number="12.4" class="anchored" data-anchor-id="additional-resources"><span class="header-section-number">12.4</span> Additional resources</h2>
 <p>DAA can be performed by several means. Although most of them provide similar functionality, some may be more suitable than others given a certain study design or data type. Commonly used DAA tools include:</p>
 <ul>
-<li>ALDEx2 <span class="citation" data-cites="Gloor2016">[@Gloor2016]</span></li>
-<li>ANCOM <span class="citation" data-cites="Mandal2015">[@Mandal2015]</span></li>
-<li>ANCOMBC <span class="citation" data-cites="ancombc2020">[@ancombc2020]</span></li>
-<li>corncob <span class="citation" data-cites="Martin2021">[@Martin2021]</span></li>
-<li>DACOMP <span class="citation" data-cites="Brill2019">[@Brill2019]</span></li>
-<li>DESeq2 <span class="citation" data-cites="Love2014">[@Love2014]</span></li>
-<li>eBay <span class="citation" data-cites="Liu2020">[@Liu2020]</span></li>
-<li>edgeR <span class="citation" data-cites="Chen2016">[@Chen2016]</span></li>
-<li>fastANCOM <span class="citation" data-cites="fastANCOM2022">[@fastANCOM2022]</span></li>
-<li>LDM <span class="citation" data-cites="Hu2020">[@Hu2020]</span></li>
-<li>lefser <span class="citation" data-cites="Khlebrodova2021">[@Khlebrodova2021]</span></li>
-<li>limma <span class="citation" data-cites="Ritchie2015">[@Ritchie2015]</span></li>
-<li>LinDA <span class="citation" data-cites="Zhou2022">[@Zhou2022]</span></li>
-<li>MaAsLin2 <span class="citation" data-cites="Mallick2020">[@Mallick2020]</span></li>
-<li>metagenomeSeq <span class="citation" data-cites="Paulson2017">[@Paulson2017]</span></li>
-<li>Omnibus <span class="citation" data-cites="Omnibus2018">[@Omnibus2018]</span></li>
-<li>RAIDA <span class="citation" data-cites="Sohn2015">[@Sohn2015]</span></li>
+<li>ALDEx2 <span class="citation" data-cites="Gloor2016">(<a href="#ref-Gloor2016" role="doc-biblioref">Gloor, Macklaim, and Fernandes 2016</a>)</span></li>
+<li>ANCOM <span class="citation" data-cites="Mandal2015">(<a href="#ref-Mandal2015" role="doc-biblioref">Mandal et al. 2015</a>)</span></li>
+<li>ANCOMBC <span class="citation" data-cites="ancombc2020">(<a href="#ref-ancombc2020" role="doc-biblioref">Lin and Peddada 2020</a>)</span></li>
+<li>corncob <span class="citation" data-cites="Martin2021">(<a href="#ref-Martin2021" role="doc-biblioref">Martin, Witten, and Willis 2021</a>)</span></li>
+<li>DACOMP <span class="citation" data-cites="Brill2019">(<a href="#ref-Brill2019" role="doc-biblioref">Brill, Amnon, and Ruth 2022</a>)</span></li>
+<li>DESeq2 <span class="citation" data-cites="Love2014">(<a href="#ref-Love2014" role="doc-biblioref">Love, Huber, and Anders 2014</a>)</span></li>
+<li>eBay <span class="citation" data-cites="Liu2020">(<a href="#ref-Liu2020" role="doc-biblioref">Liu, Zhao, and Wang 2020</a>)</span></li>
+<li>edgeR <span class="citation" data-cites="Chen2016">(<a href="#ref-Chen2016" role="doc-biblioref">Y. Chen, Lun, and Smyth 2016</a>)</span></li>
+<li>fastANCOM <span class="citation" data-cites="fastANCOM2022">(<a href="#ref-fastANCOM2022" role="doc-biblioref">C. Zhou et al. 2022</a>)</span></li>
+<li>LDM <span class="citation" data-cites="Hu2020">(<a href="#ref-Hu2020" role="doc-biblioref">Hu and Satten 2020</a>)</span></li>
+<li>lefser <span class="citation" data-cites="Khlebrodova2021">(<a href="#ref-Khlebrodova2021" role="doc-biblioref">Khleborodova 2021</a>)</span></li>
+<li>limma <span class="citation" data-cites="Ritchie2015">(<a href="#ref-Ritchie2015" role="doc-biblioref">Ritchie et al. 2015</a>)</span></li>
+<li>LinDA <span class="citation" data-cites="Zhou2022">(<a href="#ref-Zhou2022" role="doc-biblioref">H. Zhou et al. 2022</a>)</span></li>
+<li>MaAsLin2 <span class="citation" data-cites="Mallick2020">(<a href="#ref-Mallick2020" role="doc-biblioref">Mallick, Rahnavard, and McIver 2020</a>)</span></li>
+<li>metagenomeSeq <span class="citation" data-cites="Paulson2017">(<a href="#ref-Paulson2017" role="doc-biblioref">Paulson, Talukder, and Bravo 2017</a>)</span></li>
+<li>Omnibus <span class="citation" data-cites="Omnibus2018">(<a href="#ref-Omnibus2018" role="doc-biblioref">J. Chen et al. 2018</a>)</span></li>
+<li>RAIDA <span class="citation" data-cites="Sohn2015">(<a href="#ref-Sohn2015" role="doc-biblioref">Sohn, Du, and An 2015</a>)</span></li>
 <li>t-test</li>
 <li>Wilcoxon test</li>
-<li>ZicoSeq <span class="citation" data-cites="Yang2022">[@Yang2022]</span></li>
-<li>ZINQ <span class="citation" data-cites="Ling2021">[@Ling2021]</span></li>
+<li>ZicoSeq <span class="citation" data-cites="Yang2022">(<a href="#ref-Yang2022" role="doc-biblioref">Yang and Chen 2022</a>)</span></li>
+<li>ZINQ <span class="citation" data-cites="Ling2021">(<a href="#ref-Ling2021" role="doc-biblioref">Ling et al. 2021</a>)</span></li>
 </ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Brill2019" class="csl-entry" role="listitem">
+Brill, Barak, Amir Amnon, and Heller Ruth. 2022. <span>“Testing for Differential Abundance in Compositional Counts Data, with Application to Microbiome Studies.”</span> <em>The Annals of Applied Statistics</em> 16 (December).
+</div>
+<div id="ref-Calgaro2022" class="csl-entry" role="listitem">
+Calgaro, Matteo, Chiara Romualdi, Davide Risso, and Nicola Vitulo. 2022. <span>“Benchdamic: Benchmarking of Differential Abundance Methods for Microbiome Data.”</span> <em>Bioinformatics</em> 39 (1). <a href="https://doi.org/10.1093/bioinformatics/btac778">https://doi.org/10.1093/bioinformatics/btac778</a>.
+</div>
+<div id="ref-Calgaro2020" class="csl-entry" role="listitem">
+Calgaro, Matteo, Chiara Romualdi, Levi Waldron, Davide Risso, and Nicola Vitulo. 2020. <span>“Assessment of Statistical Methods from Single Cell, Bulk RNA-Seq, and Metagenomics Applied to Microbiome Data.”</span> <em>Genome Biology</em> 21 (1): 191. <a href="https://doi.org/10.1186/s13059-020-02104-1">https://doi.org/10.1186/s13059-020-02104-1</a>.
+</div>
+<div id="ref-Omnibus2018" class="csl-entry" role="listitem">
+Chen, Jun, Emily King, Rebecca Deek, Zhi Wei, Yue Yu, Diane Grill, and Karla Ballman. 2018. <span>“An Omnibus Test for Differential Distribution Analysis of Microbiome Sequencing Data.”</span> <em>Bioinformatics</em> 34 (February).
+</div>
+<div id="ref-Chen2016" class="csl-entry" role="listitem">
+Chen, Yunshun, Aaron TL Lun, and Gordon K Smyth. 2016. <span>“From Reads to Genes to Pathways: Differential Expression Analysis of RNA-Seq Experiments Using Rsubread and the edgeR Quasi-Likelihood Pipeline.”</span> <em>F1000Research</em> 5: 1438. <a href="https://doi.org/10.12688/f1000research.8987.2">https://doi.org/10.12688/f1000research.8987.2</a>.
+</div>
+<div id="ref-Gloor2016" class="csl-entry" role="listitem">
+Gloor, Gregory B., Jean M. Macklaim, and Andrew D. Fernandes. 2016. <span>“Displaying <span>Variation</span> in <span>Large Datasets</span>: <span>Plotting</span> a <span>Visual Summary</span> of <span>Effect Sizes</span>.”</span> <em>Journal of Computational and Graphical Statistics</em> 25 (3): 971–79. <a href="https://doi.org/10.1080/10618600.2015.1131161">https://doi.org/10.1080/10618600.2015.1131161</a>.
+</div>
+<div id="ref-Hu2020" class="csl-entry" role="listitem">
+Hu, Yijuan, and Glen A Satten. 2020. <span>“Testing Hypotheses about the Microbiome Using the Linear Decomposition Model (LDM).”</span> <em>Bioinformatics</em> 36 (July): 4106--4115.
+</div>
+<div id="ref-Khlebrodova2021" class="csl-entry" role="listitem">
+Khleborodova, Asya. 2021. <em>Lefser: R Implementation of the LEfSE Method for Microbiome Biomarker Discovery</em>. <a href="https://github.com/waldronlab/lefser">https://github.com/waldronlab/lefser</a>.
+</div>
+<div id="ref-Kumar2018" class="csl-entry" role="listitem">
+Kumar, M. Senthil, V. Eric Slud, Kwame Okrah, C. Stephanie Hicks, Sridhar Hannenhalli, and Corrada Héctor Bravo. 2018. <span>“Analysis and Correction of Compositional Bias in Sparse Sequencing Count Data.”</span> <em>BMC Genomics</em> 19 (November). <a href="https://doi.org/10.1186/s12864-018-5160-5">https://doi.org/10.1186/s12864-018-5160-5</a>.
+</div>
+<div id="ref-ancombc2020" class="csl-entry" role="listitem">
+Lin, Huang, and Shyamal Das Peddada. 2020. <span>“Analysis of Compositions of Microbiomes with Bias Correction.”</span> <em>Nature Communications</em> 11 (1): 1–11. https://doi.org/<a href="https://doi.org/10.1038/s41467-020-17041-7">https://doi.org/10.1038/s41467-020-17041-7</a>.
+</div>
+<div id="ref-Ling2021" class="csl-entry" role="listitem">
+Ling, Wodan, Zhao Ni, M. Plantinga Anna, J. Launer Lenore, A. Fodor Anthony, A. Meyer Katie, and C. Wu Michael. 2021. <span>“Powerful and Robust Non-Parametric Association Testing for Microbiome Data via a Zero-Inflated Quantile Approach (ZINQ).”</span> <em>Microbiome</em> 181 (September). <a href="https://doi.org/10.1186/s40168-021-01129-3">https://doi.org/10.1186/s40168-021-01129-3</a>.
+</div>
+<div id="ref-Liu2020" class="csl-entry" role="listitem">
+Liu, Tiantian, Hongyu Zhao, and Tao Wang. 2020. <span>“An Empirical Bayes Approach to Normalization and Differential Abundance Testing for Microbiome Data.”</span> <em>BMC Bioinformatics</em> 21 (June). <a href="https://doi.org/10.1186/s12859-020-03552-z">https://doi.org/10.1186/s12859-020-03552-z</a>.
+</div>
+<div id="ref-Love2014" class="csl-entry" role="listitem">
+Love, Michael I., Wolfgang Huber, and Simon Anders. 2014. <span>“Moderated Estimation of Fold Change and Dispersion for RNA-Seq Data with DESeq2.”</span> <em>Genome Biology</em> 15: 550. <a href="https://doi.org/10.1186/s13059-014-0550-8">https://doi.org/10.1186/s13059-014-0550-8</a>.
+</div>
+<div id="ref-Mallick2020" class="csl-entry" role="listitem">
+Mallick, Himel, Ali Rahnavard, and Lauren J. McIver. 2020. <em>MaAsLin 2: Multivariable Association in Population-Scale Meta-Omics Studies.</em> <a href="http://huttenhower.sph.harvard.edu/maaslin2">http://huttenhower.sph.harvard.edu/maaslin2</a>.
+</div>
+<div id="ref-Mandal2015" class="csl-entry" role="listitem">
+Mandal, Siddhartha, Will Van Treuren, Richard A. White, Merete Eggesbø, Rob Knight, and Shyamal D. Peddada. 2015. <span>“Analysis of Composition of Microbiomes: A Novel Method for Studying Microbial Composition.”</span> <em>Microbial Ecology in Health &amp; Disease</em> 26 (0). <a href="https://doi.org/10.3402/mehd.v26.27663">https://doi.org/10.3402/mehd.v26.27663</a>.
+</div>
+<div id="ref-Martin2021" class="csl-entry" role="listitem">
+Martin, Bryan D, Daniela Witten, and Amy D Willis. 2021. <em>Corncob: Count Regression for Correlated Observations with the Beta-Binomial</em>. <a href="https://CRAN.R-project.org/package=corncob">https://CRAN.R-project.org/package=corncob</a>.
+</div>
+<div id="ref-Nearing2022" class="csl-entry" role="listitem">
+Nearing, Jacob T., Gavin M. Douglas, Molly G. Hayes, Jocelyn MacDonald, Dhwani K. Desai, Nicole Allward, Casey M. A. Jones, et al. 2022. <span>“Microbiome Differential Abundance Methods Produce Different Results Across 38 Datasets.”</span> <em>Nature Communications</em> 13 (1): 342. <a href="https://doi.org/10.1038/s41467-022-28034-z">https://doi.org/10.1038/s41467-022-28034-z</a>.
+</div>
+<div id="ref-Paulson2017" class="csl-entry" role="listitem">
+Paulson, JN, H Talukder, and HC Bravo. 2017. <span>“Longitudinal Differential Abundance Analysis of Marker-Gene Surveys Using Smoothing Splines.”</span> <em>Biorxiv</em>. <a href="https://doi.org/10.1101/099457">https://doi.org/10.1101/099457</a>.
+</div>
+<div id="ref-Quinn2021" class="csl-entry" role="listitem">
+Quinn, Thomas P., Elliott Gordon-Rodriguez, and Ionas Erb. 2021. <span>“A <span>Critique</span> of <span>Differential Abundance Analysis</span>, and <span>Advocacy</span> for an <span>Alternative</span>.”</span> <em>arXiv:2104.07266 [q-Bio, Stat]</em>, April. <a href="https://arxiv.org/abs/2104.07266">https://arxiv.org/abs/2104.07266</a>.
+</div>
+<div id="ref-Ritchie2015" class="csl-entry" role="listitem">
+Ritchie, Matthew E, Belinda Phipson, Di Wu, Yifang Hu, Charity W Law, Wei Shi, and Gordon K Smyth. 2015. <span>“<span class="nocase">limma</span> Powers Differential Expression Analyses for <span>RNA</span>-Sequencing and Microarray Studies.”</span> <em>Nucleic Acids Research</em> 43 (7): e47. <a href="https://doi.org/10.1093/nar/gkv007">https://doi.org/10.1093/nar/gkv007</a>.
+</div>
+<div id="ref-Schloss2023" class="csl-entry" role="listitem">
+Schloss, Patrick D. 2023. <span>“Rarefaction Is Currently the Best Approach to Control for Uneven Sequencing Effort in Amplicon Sequence Analyses.”</span> <em>bioRxiv</em>, 2023–06. <a href="https://doi.org/10.1101/2023.06.23.546313">https://doi.org/10.1101/2023.06.23.546313</a>.
+</div>
+<div id="ref-Sohn2015" class="csl-entry" role="listitem">
+Sohn, Michael B., Ruofei Du, and Lingling An. 2015. <span>“A Robust Approach for Identifying Differentially Abundant Features in Metagenomic Samples.”</span> <em>Bioinformatics</em> 31 (July). <a href="https://doi.org/10.1093/bioinformatics/btv165">https://doi.org/10.1093/bioinformatics/btv165</a>.
+</div>
+<div id="ref-Yang2022" class="csl-entry" role="listitem">
+Yang, Lu, and Jun Chen. 2022. <span>“A Comprehensive Evaluation of Microbial Differential Abundance Analysis Methods: Current Status and Potential Solutions.”</span> <em>Microbiome</em> 10 (130): 2049–2618. <a href="https://doi.org/10.1186/s40168-022-01320-0">https://doi.org/10.1186/s40168-022-01320-0</a>.
+</div>
+<div id="ref-fastANCOM2022" class="csl-entry" role="listitem">
+Zhou, Chao, Huimin Wang, Hongyu Zhao, and Tao Wang. 2022. <span>“fastANCOM: A Fast Method for Analysis of Compositions of Microbiomes.”</span> <em>Bioinformatics</em> 38 (March): 2039–41.
+</div>
+<div id="ref-Zhou2022" class="csl-entry" role="listitem">
+Zhou, Huijuan, Kejun He, Jun Chen, and Xianyang Zhang. 2022. <span>“<span>LinDA</span>: Linear Models for Differential Abundance Analysis of Microbiome Compositional Data.”</span> <em>Genome Biology</em> 23 (1): 95. <a href="https://doi.org/10.1186/s13059-022-02655-5">https://doi.org/10.1186/s13059-022-02655-5</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->

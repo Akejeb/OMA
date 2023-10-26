@@ -54,7 +54,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -275,12 +294,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Sessioninfo</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./99_bibliography.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Bibliography</span></a>
-  </div>
-</li>
       </ul>
   </li>
     </ul>
@@ -357,7 +370,7 @@ document.addEventListener("click", function (event) {
 <p>Multi-omics approaches integrate data from multiple sources. For example, we can integrate taxonomic abundance profiles with metabolomic or other biomolecular profiling data to observe associations, make predictions, or aim at causal inferences. Integrating evidence across multiple sources can lead to enhanced predictions, more holistic understanding, or facilitate the discovery of novel biomarkers. In this section we demonstrate common multi-assay data integration tasks.</p>
 <p>Cross-correlation analysis is a straightforward approach that can reveal strength and type of assocations between data sets. For instance, we can analyze if higher presence of a specific taxon relates to higher levels of a biomolecule.</p>
 <p>The analyses can be facilitated by the multi-assay data containers, <em>TreeSummarizedExperiment</em> and <em>MultiAssayExperiment</em>. These are scalable and contain different types of data in a single container, making this framework particularly suited for multi-assay microbiome data incorporating different types of complementary data sources in a single reproducible workflow. Solutions to a number of data integration problems are discussed in more detail in Section @ref(containers). Another experiment can be stored in <em>altExp</em> slot of SE data container. Alternatively, both experiments can be stored side-by-side in a MAE data container (see sections @ref(alt-exp) and @ref(mae) to learn more about altExp and MAE objects, respectively). Different experiments are first imported as single-assay data containers similarly to the case when only one experiment is present. After that, the different experiments can be combined into one multi-assay data container. The result is a MAE object with multiple experiments in its experiment slot, or a TreeSE object with alternative experiments in the altExp slot.</p>
-<p>As an example, we use a dataset from the following publication: <span class="citation" data-cites="Hintikka2021">[-@Hintikka2021]</span> Xylo-oligosaccharides in prevention of hepatic steatosis and adipose tissue inflammation: associating taxonomic and metabolomic patterns in fecal microbiota with biclustering. In this study, mice were fed either with a high-fat or a low-fat diet, and with or without prebiotics, for the purpose studying whether prebiotics attenuate the negative impact of a high-fat diet on health.</p>
+<p>As an example, we use a dataset from the following publication: <span class="citation" data-cites="Hintikka2021">(<a href="#ref-Hintikka2021" role="doc-biblioref">2021</a>)</span> Xylo-oligosaccharides in prevention of hepatic steatosis and adipose tissue inflammation: associating taxonomic and metabolomic patterns in fecal microbiota with biclustering. In this study, mice were fed either with a high-fat or a low-fat diet, and with or without prebiotics, for the purpose studying whether prebiotics attenuate the negative impact of a high-fat diet on health.</p>
 <p>This example data can be loaded from microbiomeDataSets. The data is already in MAE format. It includes three different experiments: microbial abundance data, metabolite concentrations, and data about different biomarkers. If you like to construct the same data object from the original files instead, <a href="https://microbiome.github.io/OMA/containers.html#loading-experimental-microbiome-data">here</a> you can find help for importing data into an SE object.</p>
 <div class="cell" data-hash="23_multi-assay_analyses_cache/html/cross-correlation1_2014f2b9218d30d05ba85a1bd98d2e16">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data</span></span>
@@ -496,7 +509,7 @@ colTree: NULL</code></pre>
 </section>
 <section id="mofa" class="level2" data-number="14.2">
 <h2 data-number="14.2" class="anchored" data-anchor-id="mofa"><span class="header-section-number">14.2</span> Multi-Omics Factor Analysis</h2>
-<p>Multi-Omics Factor Analysis (MOFA) is an unsupervised method for integrating multi-omic data sets in a downstream analysis <span class="citation" data-cites="Argelaguet2018">[@Argelaguet2018]</span>. It could be seen as a generalization of principal component analysis. Yet, with the ability to infer a latent (low-dimensional) representation, shared among the multiple (-omics) data sets in hand.</p>
+<p>Multi-Omics Factor Analysis (MOFA) is an unsupervised method for integrating multi-omic data sets in a downstream analysis <span class="citation" data-cites="Argelaguet2018">(<a href="#ref-Argelaguet2018" role="doc-biblioref">Argelaguet 2018</a>)</span>. It could be seen as a generalization of principal component analysis. Yet, with the ability to infer a latent (low-dimensional) representation, shared among the multiple (-omics) data sets in hand.</p>
 <p>We use the R <a href="https://biofam.github.io/MOFA2/index.html">MOFA2</a> package for the analysis, and <a href="https://biofam.github.io/MOFA2/installation.html">install</a> the corresponding dependencies.</p>
 <div class="cell" data-hash="23_multi-assay_analyses_cache/html/MOFA2_24b6306d1ec85d8a93e4986bd27ba20d">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MOFA2)</span>
@@ -665,12 +678,12 @@ Iteration 3: time=0.00, Factors=5
 Iteration 4: time=0.00, Factors=5
 Iteration 5: time=0.00, Factors=5
 Iteration 6: time=0.00, ELBO=826.57, deltaELBO=4869.348 (22.11935301%), Factors=5
-Iteration 7: time=0.01, Factors=5
+Iteration 7: time=0.00, Factors=5
 Iteration 8: time=0.00, Factors=5
 Iteration 9: time=0.00, Factors=5
 Iteration 10: time=0.00, Factors=5
 Iteration 11: time=0.00, ELBO=861.41, deltaELBO=34.839 (0.15826042%), Factors=5
-Iteration 12: time=0.01, Factors=5
+Iteration 12: time=0.00, Factors=5
 Iteration 13: time=0.00, Factors=5
 Iteration 14: time=0.00, Factors=5
 Iteration 15: time=0.00, Factors=5
@@ -694,17 +707,17 @@ Iteration 32: time=0.00, Factors=5
 Iteration 33: time=0.00, Factors=5
 Iteration 34: time=0.00, Factors=5
 Iteration 35: time=0.00, Factors=5
-Iteration 36: time=0.01, ELBO=875.02, deltaELBO=0.896 (0.00406791%), Factors=5
+Iteration 36: time=0.00, ELBO=875.02, deltaELBO=0.896 (0.00406791%), Factors=5
 Iteration 37: time=0.00, Factors=5
 Iteration 38: time=0.00, Factors=5
 Iteration 39: time=0.00, Factors=5
 Iteration 40: time=0.00, Factors=5
 Iteration 41: time=0.01, ELBO=875.70, deltaELBO=0.678 (0.00307983%), Factors=5
-Iteration 42: time=0.01, Factors=5
-Iteration 43: time=0.01, Factors=5
-Iteration 44: time=0.01, Factors=5
-Iteration 45: time=0.01, Factors=5
-Iteration 46: time=0.01, ELBO=876.23, deltaELBO=0.531 (0.00241391%), Factors=5
+Iteration 42: time=0.00, Factors=5
+Iteration 43: time=0.00, Factors=5
+Iteration 44: time=0.00, Factors=5
+Iteration 45: time=0.00, Factors=5
+Iteration 46: time=0.00, ELBO=876.23, deltaELBO=0.531 (0.00241391%), Factors=5
 Iteration 47: time=0.00, Factors=5
 Iteration 48: time=0.00, Factors=5
 Iteration 49: time=0.00, Factors=5
@@ -718,7 +731,7 @@ Iteration 56: time=0.00, ELBO=877.02, deltaELBO=0.355 (0.00161186%), Factors=5
 Iteration 57: time=0.00, Factors=5
 Iteration 58: time=0.00, Factors=5
 Iteration 59: time=0.00, Factors=5
-Iteration 60: time=0.01, Factors=5
+Iteration 60: time=0.00, Factors=5
 Iteration 61: time=0.00, ELBO=877.31, deltaELBO=0.299 (0.00135825%), Factors=5
 Iteration 62: time=0.00, Factors=5
 Iteration 63: time=0.00, Factors=5
@@ -748,8 +761,8 @@ Iteration 86: time=0.00, ELBO=878.33, deltaELBO=0.161 (0.00073316%), Factors=5
 Iteration 87: time=0.00, Factors=5
 Iteration 88: time=0.00, Factors=5
 Iteration 89: time=0.00, Factors=5
-Iteration 90: time=0.01, Factors=5
-Iteration 91: time=0.01, ELBO=878.48, deltaELBO=0.144 (0.00065437%), Factors=5
+Iteration 90: time=0.00, Factors=5
+Iteration 91: time=0.00, ELBO=878.48, deltaELBO=0.144 (0.00065437%), Factors=5
 Iteration 92: time=0.00, Factors=5
 Iteration 93: time=0.00, Factors=5
 Iteration 94: time=0.00, Factors=5
@@ -759,12 +772,12 @@ Iteration 97: time=0.00, Factors=5
 Iteration 98: time=0.00, Factors=5
 Iteration 99: time=0.00, Factors=5
 Iteration 100: time=0.00, Factors=5
-Iteration 101: time=0.00, ELBO=878.73, deltaELBO=0.121 (0.00055104%), Factors=5
+Iteration 101: time=0.01, ELBO=878.73, deltaELBO=0.121 (0.00055104%), Factors=5
 Iteration 102: time=0.00, Factors=5
 Iteration 103: time=0.00, Factors=5
 Iteration 104: time=0.00, Factors=5
 Iteration 105: time=0.00, Factors=5
-Iteration 106: time=0.01, ELBO=878.84, deltaELBO=0.112 (0.00050962%), Factors=5
+Iteration 106: time=0.00, ELBO=878.84, deltaELBO=0.112 (0.00050962%), Factors=5
 Iteration 107: time=0.00, Factors=5
 Iteration 108: time=0.00, Factors=5
 Iteration 109: time=0.00, Factors=5
@@ -774,7 +787,7 @@ Iteration 112: time=0.00, Factors=5
 Iteration 113: time=0.00, Factors=5
 Iteration 114: time=0.00, Factors=5
 Iteration 115: time=0.00, Factors=5
-Iteration 116: time=0.01, ELBO=879.04, deltaELBO=0.094 (0.00042675%), Factors=5
+Iteration 116: time=0.00, ELBO=879.04, deltaELBO=0.094 (0.00042675%), Factors=5
 
 Converged!
 
@@ -785,7 +798,7 @@ Converged!
 #######################
 
 
-Saving model in /tmp/Rtmp5phfDX/mofa_20231025-123930.hdf5...</code></pre>
+Saving model in /tmp/Rtmpd3Lk4w/mofa_20231026-095850.hdf5...</code></pre>
 </div>
 </div>
 <p>The explained variance is visualized with the <code>plot_variance_explained</code> function:</p>
@@ -826,6 +839,14 @@ Saving model in /tmp/Rtmp5phfDX/mofa_20231025-123930.hdf5...</code></pre>
 <p>More tutorials and examples of using the package are found at <a href="https://biofam.github.io/MOFA2/tutorials.html">link</a></p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Argelaguet2018" class="csl-entry" role="listitem">
+Argelaguet, Ricard et al. 2018. <span>“Multi-Omics Factor Analysis—a Framework for Unsupervised Integration of Multi-Omics Data Sets.”</span> <em>Molecular Systems Biology</em> 14 (6): e8124. <a href="https://doi.org/10.15252/msb.20178124">https://doi.org/10.15252/msb.20178124</a>.
+</div>
+<div id="ref-Hintikka2021" class="csl-entry" role="listitem">
+Hintikka, Jukka, Sanna Lensu, Elina Mäkinen, Sira Karvinen, Marjaana Honkanen, Jere Lindén, Tim Garrels, Satu Pekkala, and Leo Lahti. 2021. <span>“Xylo-Oligosaccharides in Prevention of Hepatic Steatosis and Adipose Tissue Inflammation: Associating Taxonomic and Metabolomic Patterns in Fecal Microbiomes with Biclustering.”</span> <em>International Journal of Environmental Research and Public Health</em> 18 (8): 4049.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->

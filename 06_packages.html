@@ -54,7 +54,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -275,12 +294,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Sessioninfo</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./99_bibliography.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Bibliography</span></a>
-  </div>
-</li>
       </ul>
   </li>
     </ul>
@@ -402,10 +415,10 @@ document.addEventListener("click", function (event) {
 <h3 data-number="3.2.1" class="anchored" data-anchor-id="mia-package-family"><span class="header-section-number">3.2.1</span> mia package family</h3>
 <p>The mia package family provides general methods for microbiome data wrangling, analysis and visualization.</p>
 <ul>
-<li><a href="https://microbiome.github.io/mia/">mia</a>: Microbiome analysis tools <span class="citation" data-cites="R_mia">[@R_mia]</span></li>
-<li><a href="https://microbiome.github.io/miaViz/">miaViz</a>: Microbiome analysis specific visualization <span class="citation" data-cites="Ernst2022">[@Ernst2022]</span></li>
-<li><a href="https://microbiome.github.io/miaSim/">miaSim</a>: Microbiome data simulations <span class="citation" data-cites="Simsek2021">[@Simsek2021]</span></li>
-<li><a href="https://microbiome.github.io/miaTime/">miaTime</a>: Microbiome time series analysis <span class="citation" data-cites="Lahti2021">[@Lahti2021]</span></li>
+<li><a href="https://microbiome.github.io/mia/">mia</a>: Microbiome analysis tools <span class="citation" data-cites="R_mia">(<a href="#ref-R_mia" role="doc-biblioref">Ernst, Shetty, and Lahti 2020</a>)</span></li>
+<li><a href="https://microbiome.github.io/miaViz/">miaViz</a>: Microbiome analysis specific visualization <span class="citation" data-cites="Ernst2022">(<a href="#ref-Ernst2022" role="doc-biblioref">Ernst, Borman, and Lahti 2022</a>)</span></li>
+<li><a href="https://microbiome.github.io/miaSim/">miaSim</a>: Microbiome data simulations <span class="citation" data-cites="Simsek2021">(<a href="#ref-Simsek2021" role="doc-biblioref">Simsek et al. 2021</a>)</span></li>
+<li><a href="https://microbiome.github.io/miaTime/">miaTime</a>: Microbiome time series analysis <span class="citation" data-cites="Lahti2021">(<a href="#ref-Lahti2021" role="doc-biblioref">Lahti 2021</a>)</span></li>
 </ul>
 </section>
 <section id="sub-diff-abund" class="level3" data-number="3.2.2">
@@ -420,7 +433,7 @@ document.addEventListener("click", function (event) {
 <section id="other-packages" class="level3" data-number="3.2.3">
 <h3 data-number="3.2.3" class="anchored" data-anchor-id="other-packages"><span class="header-section-number">3.2.3</span> Other packages</h3>
 <ul>
-<li><a href="http://bioconductor.org/packages/devel/bioc/html/philr.html">philr</a> (<span class="citation" data-cites="Silverman2017">@Silverman2017</span>) phylogeny-aware phILR transformation</li>
+<li><a href="http://bioconductor.org/packages/devel/bioc/html/philr.html">philr</a> (<span class="citation" data-cites="Silverman2017">Silverman et al. (<a href="#ref-Silverman2017" role="doc-biblioref">2017</a>)</span>) phylogeny-aware phILR transformation</li>
 <li><a href="https://bioconductor.org/packages/release/bioc/html/MicrobiotaProcess.html">MicrobiotaProcess</a> for “tidy” analysis of microbiome and other ecological data</li>
 <li><a href="https://microsud.github.io/Tools-Microbiome-Analysis/">Tools for Microbiome Analysis</a> site listed over 130 R packages for microbiome data science in
 <ol start="2023" type="1">
@@ -433,6 +446,23 @@ document.addEventListener("click", function (event) {
 <p>Hundreds of published microbiome data sets are readily available in these data containers (see @ref(example-data)).</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Ernst2022" class="csl-entry" role="listitem">
+Ernst, Felix G. M., Tuomas Borman, and Leo Lahti. 2022. <em>miaViz: Microbiome Analysis Plotting and Visualization</em>.
+</div>
+<div id="ref-R_mia" class="csl-entry" role="listitem">
+Ernst, Felix G. M., Sudarshan Shetty, and Leo Lahti. 2020. <em>Mia: Microbiome Analysis</em>.
+</div>
+<div id="ref-Lahti2021" class="csl-entry" role="listitem">
+Lahti, L. 2021. <em>miaTime: Time Series Analysis</em>.
+</div>
+<div id="ref-Silverman2017" class="csl-entry" role="listitem">
+Silverman, Justin D, Alex D Washburne, Sayan Mukherjee, and Lawrence A David. 2017. <span>“A Phylogenetic Transform Enhances Analysis of Compositional Microbiota Data.”</span> <em>eLife</em> 6. <a href="https://doi.org/10.7554/eLife.21887">https://doi.org/10.7554/eLife.21887</a>.
+</div>
+<div id="ref-Simsek2021" class="csl-entry" role="listitem">
+Simsek, Yagmur, Leo Lahti, Daniel Garza, and Karoline Faust. 2021. <span>“miaSim r Package.”</span> <a href="https://microbiome.github.io/miaSim">microbiome.github.io/miaSim</a>.
+</div>
+</div>
 </section>
 </section>
 

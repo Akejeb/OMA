@@ -54,7 +54,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -275,12 +294,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Sessioninfo</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./99_bibliography.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Bibliography</span></a>
-  </div>
-</li>
       </ul>
   </li>
     </ul>
@@ -409,7 +422,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="bayesian-multinomial-logistic-normal-models" class="level2" data-number="19.3">
 <h2 data-number="19.3" class="anchored" data-anchor-id="bayesian-multinomial-logistic-normal-models"><span class="header-section-number">19.3</span> Bayesian Multinomial Logistic-Normal Models</h2>
 <p>Analysis using such model could be performed with the function <code>pibble</code> from the <code>fido</code> package, wihch is in form of a Multinomial Logistic-Normal Linear Regression model; see <a href="https://jsilve24.github.io/fido/articles/introduction-to-fido.html">vignette</a> of package.</p>
-<p>The following presents such an exemplary analysis based on the data of <span class="citation" data-cites="Sprockett2020">@Sprockett2020</span> available through <code>microbiomeDataSets</code> package.</p>
+<p>The following presents such an exemplary analysis based on the data of <span class="citation" data-cites="Sprockett2020">Sprockett et al. (<a href="#ref-Sprockett2020" role="doc-biblioref">2020</a>)</span> available through <code>microbiomeDataSets</code> package.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fido)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -491,7 +504,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>knit_hooks<span class="sc">$</span><span class="fu">set</span>(<span class="at">webgl =</span> hook_webgl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>In this section we make a 3D version of the earlier Visualizing the most dominant genus on PCoA (see @ref(quality-control)), with the help of the plotly <span class="citation" data-cites="Sievert2020">[@Sievert2020]</span>.</p>
+<p>In this section we make a 3D version of the earlier Visualizing the most dominant genus on PCoA (see @ref(quality-control)), with the help of the plotly <span class="citation" data-cites="Sievert2020">(<a href="#ref-Sievert2020" role="doc-biblioref">Sievert 2020</a>)</span>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importing necessary libraries</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(curatedMetagenomicData)</span>
@@ -533,6 +546,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Sievert2020" class="csl-entry" role="listitem">
+Sievert, Carson. 2020. <em>Interactive Web-Based Data Visualization with r, Plotly, and Shiny</em>. Chapman; Hall/CRC. <a href="https://plotly-r.com">https://plotly-r.com</a>.
+</div>
+<div id="ref-Sprockett2020" class="csl-entry" role="listitem">
+Sprockett, Daniel D., Melanie Martin, Elizabeth K. Costello, Adam R. Burns, Susan P. Holmes, Michael D. Gurven, and David A. Relman. 2020. <span>“Microbiota Assembly, Structure, and Dynamics Among <span>Tsimane</span> Horticulturalists of the <span>Bolivian Amazon</span>.”</span> <em>Nat Commun</em> 11 (1): 3772. <a href="https://doi.org/10.1038/s41467-020-17541-6">https://doi.org/10.1038/s41467-020-17541-6</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->

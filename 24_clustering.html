@@ -275,12 +275,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Sessioninfo</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./99_bibliography.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Bibliography</span></a>
-  </div>
-</li>
       </ul>
   </li>
     </ul>
@@ -563,45 +557,56 @@ Laplace: 7715 BIC: 7802 AIC: 7760
 class: DMN 
 k: 2 
 samples x taxa: 26 x 67 
-Laplace: 7680 BIC: 7902 AIC: 7818 
+Laplace: 7673 BIC: 7927 AIC: 7842 
 
 [[3]]
 class: DMN 
 k: 3 
 samples x taxa: 26 x 67 
-Laplace: 7772 BIC: 8205 AIC: 8077 </code></pre>
+Laplace: 7727 BIC: 8122 AIC: 7995 </code></pre>
 </div>
 </div>
 <p>We can see the Laplace approximation (model evidence) for each model of the k models.</p>
 <div class="cell" data-hash="24_clustering_cache/html/dmm5_bf26afc991be7f57f2a9cbfc1cfd6d34">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"microbiome/miaViz"</span>)</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(miaViz)</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plotDMNFit</span>(tse_dmm, <span class="at">type =</span> <span class="st">"laplace"</span>, <span class="at">name =</span> <span class="st">"DMM"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"microbiome/miaViz"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+── R CMD build ─────────────────────────────────────────────────────────────────
+* checking for file ‘/tmp/RtmpI1FlJj/remotes104941897fd59/microbiome-miaViz-cb3609c/DESCRIPTION’ ... OK
+* preparing ‘miaViz’:
+* checking DESCRIPTION meta-information ... OK
+* checking for LF line-endings in source and make files and shell scripts
+* checking for empty or unneeded directories
+* looking to see if a ‘data/datalist’ file should be added
+* building ‘miaViz_1.9.5.tar.gz’</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(miaViz)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotDMNFit</span>(tse_dmm, <span class="at">type =</span> <span class="st">"laplace"</span>, <span class="at">name =</span> <span class="st">"DMM"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="24_clustering_files/figure-html/dmm5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>On the graph, we can see that the best number of clusters is 2. We can confirm that with the following operation.</p>
 <div class="cell" data-hash="24_clustering_cache/html/dmm6_d71714ba8c8102a5c0d2d3433902026a">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the model that has the best fit</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>bestFit <span class="ot">&lt;-</span> <span class="fu">metadata</span>(tse_dmm)<span class="sc">$</span>DMM<span class="sc">$</span>dmm[[<span class="fu">metadata</span>(tse_dmm)<span class="sc">$</span>DMM<span class="sc">$</span>best]]</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>bestFit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the model that has the best fit</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>bestFit <span class="ot">&lt;-</span> <span class="fu">metadata</span>(tse_dmm)<span class="sc">$</span>DMM<span class="sc">$</span>dmm[[<span class="fu">metadata</span>(tse_dmm)<span class="sc">$</span>DMM<span class="sc">$</span>best]]</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>bestFit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>class: DMN 
 k: 2 
 samples x taxa: 26 x 67 
-Laplace: 7680 BIC: 7902 AIC: 7818 </code></pre>
+Laplace: 7673 BIC: 7927 AIC: 7842 </code></pre>
 </div>
 </div>
 <section id="pcoa-for-asv-level-data-with-bray-curtis-with-dmm-clusters-shown-with-colors" class="level3" data-number="11.3.1">
 <h3 data-number="11.3.1" class="anchored" data-anchor-id="pcoa-for-asv-level-data-with-bray-curtis-with-dmm-clusters-shown-with-colors"><span class="header-section-number">11.3.1</span> PCoA for ASV-level data with Bray-Curtis; with DMM clusters shown with colors</h3>
 <p>Group samples and return DMNGroup object that contains a summary. Patient status is used for grouping.</p>
 <div class="cell" data-hash="24_clustering_cache/html/dmm_group_9a76d7abab5d531dbfd73bb268b182e6">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>dmm_group <span class="ot">&lt;-</span> <span class="fu">calculateDMNgroup</span>(tse_dmm, <span class="at">variable =</span> <span class="st">"SampleType"</span>, </span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>                               <span class="at">assay.type =</span> <span class="st">"counts"</span>, <span class="at">k =</span> <span class="dv">2</span>, </span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                               <span class="at">seed =</span> .Machine<span class="sc">$</span>integer.max)</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>dmm_group</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>dmm_group <span class="ot">&lt;-</span> <span class="fu">calculateDMNgroup</span>(tse_dmm, <span class="at">variable =</span> <span class="st">"SampleType"</span>, </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>                               <span class="at">assay.type =</span> <span class="st">"counts"</span>, <span class="at">k =</span> <span class="dv">2</span>, </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>                               <span class="at">seed =</span> .Machine<span class="sc">$</span>integer.max)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>dmm_group</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>class: DMNGroup 
 summary:
@@ -619,68 +624,68 @@ Tongue             2       2   67  783.0 -107.79   605.0  829.8  918</code></pre
 </div>
 <p>Mixture weights (rough measure of the cluster size).</p>
 <div class="cell" data-hash="24_clustering_cache/html/dmm7_8b9ebbdbb6f7d335fb07fdde51266463">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>DirichletMultinomial<span class="sc">::</span><span class="fu">mixturewt</span>(bestFit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>DirichletMultinomial<span class="sc">::</span><span class="fu">mixturewt</span>(bestFit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>      pi  theta
-1 0.8846  10.76
-2 0.1154 349.02</code></pre>
+<pre><code>      pi theta
+1 0.5385 20.58
+2 0.4615 15.32</code></pre>
 </div>
 </div>
 <p>It’s also possible to get the samples-cluster assignment probabilities: how probable it is that each sample belongs to each cluster</p>
 <div class="cell" data-hash="24_clustering_cache/html/dmm8_2b4a749a83cce89f1a18f58875842ae6">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>prob <span class="ot">&lt;-</span> <span class="fu">metadata</span>(tse_dmm)<span class="sc">$</span>DMM<span class="sc">$</span>prob</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(prob)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>prob <span class="ot">&lt;-</span> <span class="fu">metadata</span>(tse_dmm)<span class="sc">$</span>DMM<span class="sc">$</span>prob</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(prob)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>        1          2
-CL3     1  0.000e+00
-CC1     1  0.000e+00
-SV1     1 2.810e-281
-M31Fcsw 1  0.000e+00
-M11Fcsw 1 3.797e-299
-M31Plmr 1  0.000e+00</code></pre>
+<pre><code>                1         2
+CL3     1.000e+00 4.519e-17
+CC1     1.000e+00 3.438e-22
+SV1     1.000e+00 1.716e-12
+M31Fcsw 7.440e-26 1.000e+00
+M11Fcsw 1.093e-16 1.000e+00
+M31Plmr 1.154e-13 1.000e+00</code></pre>
 </div>
 </div>
 <p>We can also know the contribution of each taxa to each component</p>
 <div class="cell" data-hash="24_clustering_cache/html/dmm9_a02585fa80070f8e13e1826cddd3f86f">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(DirichletMultinomial<span class="sc">::</span><span class="fu">fitted</span>(bestFit))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(DirichletMultinomial<span class="sc">::</span><span class="fu">fitted</span>(bestFit))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                          [,1]    [,2]
-Phylum:Crenarchaeota  0.167450  1.4649
-Phylum:Euryarchaeota  0.155772  2.4072
-Phylum:Actinobacteria 0.882850  6.1727
-Phylum:Spirochaetes   0.144900  1.0869
-Phylum:MVP-15         0.004267  0.2159
-Phylum:Proteobacteria 2.301528 62.3838</code></pre>
+<pre><code>                         [,1]      [,2]
+Phylum:Crenarchaeota  0.30381 0.1354037
+Phylum:Euryarchaeota  0.23114 0.1468863
+Phylum:Actinobacteria 1.21370 1.0581457
+Phylum:Spirochaetes   0.21393 0.1318056
+Phylum:MVP-15         0.02982 0.0007674
+Phylum:Proteobacteria 6.84458 1.8114092</code></pre>
 </div>
 </div>
 <p>Finally, to be able to visualize our data and clusters, we start by computing the euclidean PCoA and storing it as a data frame.</p>
 <div class="cell" data-hash="24_clustering_cache/html/dmm10_e9a0b39048ddde58b98a66a67b90cd46">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Do clr transformation. Pseudocount is added, because data contains zeros.</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(tse, <span class="st">"pseudo"</span>) <span class="ot">&lt;-</span> <span class="fu">assay</span>(tse, <span class="st">"counts"</span>) <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>tse <span class="ot">&lt;-</span> <span class="fu">transformAssay</span>(tse, <span class="at">assay.type =</span> <span class="st">"pseudo"</span>, <span class="at">method =</span> <span class="st">"relabundance"</span>)</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>tse <span class="ot">&lt;-</span> <span class="fu">transformAssay</span>(tse, <span class="st">"relabundance"</span>, <span class="at">method =</span> <span class="st">"clr"</span>)</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Do principal coordinate analysis</span></span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">calculateMDS</span>(tse, <span class="at">assay.type =</span> <span class="st">"clr"</span>, <span class="at">method =</span> <span class="st">"euclidean"</span>)</span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a data frame from principal coordinates</span></span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>euclidean_pcoa_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">pcoa1 =</span> df[, <span class="dv">1</span>], <span class="at">pcoa2 =</span> df[, <span class="dv">2</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Do clr transformation. Pseudocount is added, because data contains zeros.</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(tse, <span class="st">"pseudo"</span>) <span class="ot">&lt;-</span> <span class="fu">assay</span>(tse, <span class="st">"counts"</span>) <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>tse <span class="ot">&lt;-</span> <span class="fu">transformAssay</span>(tse, <span class="at">assay.type =</span> <span class="st">"pseudo"</span>, <span class="at">method =</span> <span class="st">"relabundance"</span>)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>tse <span class="ot">&lt;-</span> <span class="fu">transformAssay</span>(tse, <span class="st">"relabundance"</span>, <span class="at">method =</span> <span class="st">"clr"</span>)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Do principal coordinate analysis</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">calculateMDS</span>(tse, <span class="at">assay.type =</span> <span class="st">"clr"</span>, <span class="at">method =</span> <span class="st">"euclidean"</span>)</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a data frame from principal coordinates</span></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>euclidean_pcoa_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">pcoa1 =</span> df[, <span class="dv">1</span>], <span class="at">pcoa2 =</span> df[, <span class="dv">2</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-hash="24_clustering_cache/html/dmm11_6e7030975a660ac5fd4474439b8b095d">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a data frame that contains principal coordinates and DMM information</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>euclidean_dmm_pcoa_df <span class="ot">&lt;-</span> <span class="fu">cbind</span>(euclidean_pcoa_df,</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>                               <span class="at">dmm_component =</span> <span class="fu">colData</span>(tse_dmm)<span class="sc">$</span>clusters)</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a plot</span></span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>euclidean_dmm_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> euclidean_dmm_pcoa_df,</span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">aes</span>(<span class="at">x =</span> pcoa1, <span class="at">y =</span> pcoa2, <span class="at">color =</span> dmm_component)) <span class="sc">+</span></span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Coordinate 1"</span>,<span class="at">y =</span> <span class="st">"Coordinate 2"</span>, </span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">title =</span> <span class="st">"PCoA with Aitchison distances"</span>) <span class="sc">+</span></span>
-<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="co"># makes titles smaller</span></span>
-<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">hjust =</span> <span class="fl">0.5</span>)) </span>
-<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>euclidean_dmm_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a data frame that contains principal coordinates and DMM information</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>euclidean_dmm_pcoa_df <span class="ot">&lt;-</span> <span class="fu">cbind</span>(euclidean_pcoa_df,</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>                               <span class="at">dmm_component =</span> <span class="fu">colData</span>(tse_dmm)<span class="sc">$</span>clusters)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a plot</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>euclidean_dmm_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> euclidean_dmm_pcoa_df,</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">aes</span>(<span class="at">x =</span> pcoa1, <span class="at">y =</span> pcoa2, <span class="at">color =</span> dmm_component)) <span class="sc">+</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Coordinate 1"</span>,<span class="at">y =</span> <span class="st">"Coordinate 2"</span>, </span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">title =</span> <span class="st">"PCoA with Aitchison distances"</span>) <span class="sc">+</span></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="co"># makes titles smaller</span></span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">hjust =</span> <span class="fl">0.5</span>)) </span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>euclidean_dmm_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="24_clustering_files/figure-html/dmm11-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -707,39 +712,39 @@ Phylum:Proteobacteria 2.301528 62.3838</code></pre>
 <p>When you have microbial abundance matrices, we suggest to use <em>cobiclust</em> which is designed for microbial data.</p>
 <p>Load example data</p>
 <div class="cell" data-hash="24_clustering_cache/html/load-pkg-data2_36d5c5df0096194c4601f3f5cc7e756a">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cobiclust)</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"HintikkaXOData"</span>)</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>mae <span class="ot">&lt;-</span> HintikkaXOData</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cobiclust)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"HintikkaXOData"</span>)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>mae <span class="ot">&lt;-</span> HintikkaXOData</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Only the most prevalent taxa are included in analysis.</p>
 <div class="cell" data-hash="24_clustering_cache/html/cobiclust_1_04cb35202e28dbe94a572a2cecabdd44">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Subset data in the first experiment</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>mae[[<span class="dv">1</span>]] <span class="ot">&lt;-</span> <span class="fu">subsetByPrevalentFeatures</span>(mae[[<span class="dv">1</span>]], <span class="at">rank =</span> <span class="st">"Genus"</span>, </span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">prevalence =</span> <span class="fl">0.2</span>, </span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">detection =</span> <span class="fl">0.001</span>)</span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="co"># rclr-transform in the first experiment</span></span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>mae[[<span class="dv">1</span>]] <span class="ot">&lt;-</span> <span class="fu">transformAssay</span>(mae[[<span class="dv">1</span>]], <span class="at">method =</span> <span class="st">"rclr"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Subset data in the first experiment</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>mae[[<span class="dv">1</span>]] <span class="ot">&lt;-</span> <span class="fu">subsetByPrevalentFeatures</span>(mae[[<span class="dv">1</span>]], <span class="at">rank =</span> <span class="st">"Genus"</span>, </span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">prevalence =</span> <span class="fl">0.2</span>, </span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">detection =</span> <span class="fl">0.001</span>)</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="co"># rclr-transform in the first experiment</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>mae[[<span class="dv">1</span>]] <span class="ot">&lt;-</span> <span class="fu">transformAssay</span>(mae[[<span class="dv">1</span>]], <span class="at">method =</span> <span class="st">"rclr"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><em>cobiclust</em> takes counts table as an input and gives <em>cobiclust</em> object as an output. It includes clusters for taxa and samples.</p>
 <div class="cell" data-hash="24_clustering_cache/html/cobiclust_2_50f419a75fbf1923372542adfb718bbd">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Do clustering using counts table</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>clusters <span class="ot">&lt;-</span> <span class="fu">cobiclust</span>(<span class="fu">assay</span>(mae[[<span class="dv">1</span>]], <span class="st">"counts"</span>))</span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Get clusters</span></span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>row_clusters <span class="ot">&lt;-</span> clusters<span class="sc">$</span>classification<span class="sc">$</span>rowclass</span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>col_clusters <span class="ot">&lt;-</span> clusters<span class="sc">$</span>classification<span class="sc">$</span>colclass</span>
-<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Add clusters to rowdata and coldata</span></span>
-<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a><span class="fu">rowData</span>(mae[[<span class="dv">1</span>]])<span class="sc">$</span>clusters <span class="ot">&lt;-</span> <span class="fu">factor</span>(row_clusters)</span>
-<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(mae[[<span class="dv">1</span>]])<span class="sc">$</span>clusters <span class="ot">&lt;-</span> <span class="fu">factor</span>(col_clusters)</span>
-<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Order data based on clusters</span></span>
-<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>mae[[<span class="dv">1</span>]] <span class="ot">&lt;-</span> mae[[<span class="dv">1</span>]][<span class="fu">order</span>(<span class="fu">rowData</span>(mae[[<span class="dv">1</span>]])<span class="sc">$</span>clusters),</span>
-<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">order</span>(<span class="fu">colData</span>(mae[[<span class="dv">1</span>]])<span class="sc">$</span>clusters)]</span>
-<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Print clusters</span></span>
-<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>clusters<span class="sc">$</span>classification</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Do clustering using counts table</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>clusters <span class="ot">&lt;-</span> <span class="fu">cobiclust</span>(<span class="fu">assay</span>(mae[[<span class="dv">1</span>]], <span class="st">"counts"</span>))</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Get clusters</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>row_clusters <span class="ot">&lt;-</span> clusters<span class="sc">$</span>classification<span class="sc">$</span>rowclass</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>col_clusters <span class="ot">&lt;-</span> clusters<span class="sc">$</span>classification<span class="sc">$</span>colclass</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Add clusters to rowdata and coldata</span></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="fu">rowData</span>(mae[[<span class="dv">1</span>]])<span class="sc">$</span>clusters <span class="ot">&lt;-</span> <span class="fu">factor</span>(row_clusters)</span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(mae[[<span class="dv">1</span>]])<span class="sc">$</span>clusters <span class="ot">&lt;-</span> <span class="fu">factor</span>(col_clusters)</span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Order data based on clusters</span></span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>mae[[<span class="dv">1</span>]] <span class="ot">&lt;-</span> mae[[<span class="dv">1</span>]][<span class="fu">order</span>(<span class="fu">rowData</span>(mae[[<span class="dv">1</span>]])<span class="sc">$</span>clusters),</span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">order</span>(<span class="fu">colData</span>(mae[[<span class="dv">1</span>]])<span class="sc">$</span>clusters)]</span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Print clusters</span></span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a>clusters<span class="sc">$</span>classification</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$rowclass
   [1] 1 1 1 1 1 1 1 1 1 2 2 1 2 1 1 1 2 1 2 1 1 1 2 2 1 1 2 2 1 2 2 1 1 2 1 1 2
@@ -756,47 +761,47 @@ C21 C22 C23 C24 C25 C26 C27 C28 C29 C30 C31 C32 C33 C34 C35 C36 C37 C38 C39 C40
 </div>
 <p>Next we can plot clusters. Annotated heatmap is a common choice.</p>
 <div class="cell" data-hash="24_clustering_cache/html/cobiclust_3a_9353f28c46b46842af85e9740ca49e22">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pheatmap)</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="co"># z-transform for heatmap</span></span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>mae[[<span class="dv">1</span>]] <span class="ot">&lt;-</span> <span class="fu">transformAssay</span>(mae[[<span class="dv">1</span>]], <span class="at">assay.type =</span> <span class="st">"rclr"</span>,</span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">MARGIN =</span> <span class="st">"features"</span>, <span class="at">method =</span> <span class="st">"z"</span>, <span class="at">name =</span> <span class="st">"rclr_z"</span>)</span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create annotations. When column names are equal, they should share levels.</span></span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Here samples include 3 clusters, and taxa 2. That is why we have to make</span></span>
-<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="co"># column names unique.</span></span>
-<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>annotation_col <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">colData</span>(mae[[<span class="dv">1</span>]])[, <span class="st">"clusters"</span>, <span class="at">drop =</span> F])</span>
-<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(annotation_col) <span class="ot">&lt;-</span> <span class="st">"col_clusters"</span></span>
-<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>annotation_row <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">rowData</span>(mae[[<span class="dv">1</span>]])[, <span class="st">"clusters"</span>, <span class="at">drop =</span> F])</span>
-<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(annotation_row) <span class="ot">&lt;-</span> <span class="st">"row_clusters"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pheatmap)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="co"># z-transform for heatmap</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>mae[[<span class="dv">1</span>]] <span class="ot">&lt;-</span> <span class="fu">transformAssay</span>(mae[[<span class="dv">1</span>]], <span class="at">assay.type =</span> <span class="st">"rclr"</span>,</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">MARGIN =</span> <span class="st">"features"</span>, <span class="at">method =</span> <span class="st">"z"</span>, <span class="at">name =</span> <span class="st">"rclr_z"</span>)</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create annotations. When column names are equal, they should share levels.</span></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Here samples include 3 clusters, and taxa 2. That is why we have to make</span></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a><span class="co"># column names unique.</span></span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>annotation_col <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">colData</span>(mae[[<span class="dv">1</span>]])[, <span class="st">"clusters"</span>, <span class="at">drop =</span> F])</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(annotation_col) <span class="ot">&lt;-</span> <span class="st">"col_clusters"</span></span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>annotation_row <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">rowData</span>(mae[[<span class="dv">1</span>]])[, <span class="st">"clusters"</span>, <span class="at">drop =</span> F])</span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(annotation_row) <span class="ot">&lt;-</span> <span class="st">"row_clusters"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Plot the heatmap.</p>
 <div class="cell" data-hash="24_clustering_cache/html/cobiclust_3b_b5b6b481f897bacbb0158731d2c9050b">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pheatmap</span>(<span class="fu">assay</span>(mae[[<span class="dv">1</span>]], <span class="st">"rclr_z"</span>), <span class="at">cluster_rows =</span> F, <span class="at">cluster_cols =</span> F,</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">annotation_col =</span> annotation_col, <span class="at">annotation_row =</span> annotation_row)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pheatmap</span>(<span class="fu">assay</span>(mae[[<span class="dv">1</span>]], <span class="st">"rclr_z"</span>), <span class="at">cluster_rows =</span> F, <span class="at">cluster_cols =</span> F,</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">annotation_col =</span> annotation_col, <span class="at">annotation_row =</span> annotation_row)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="24_clustering_files/figure-html/cobiclust_3b-1.png" class="img-fluid" width="1344"></p>
 </div>
 </div>
 <p>Boxplot is commonly used to summarize the results:</p>
 <div class="cell" data-hash="24_clustering_cache/html/cobiclust_4_05bb5517991af8770fb39f53b3d2ef94">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplot requires data in melted format</span></span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>melt_assay <span class="ot">&lt;-</span> <span class="fu">meltAssay</span>(mae[[<span class="dv">1</span>]], <span class="at">assay.type =</span> <span class="st">"rclr"</span>, </span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">add_col_data =</span> T, <span class="at">add_row_data =</span> T)</span>
-<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a><span class="co"># patchwork two plots side-by-side</span></span>
-<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(melt_assay) <span class="sc">+</span></span>
-<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> clusters.x, <span class="at">y =</span> rclr)) <span class="sc">+</span></span>
-<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Taxa clusters"</span>)</span>
-<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(melt_assay) <span class="sc">+</span></span>
-<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> clusters.y, <span class="at">y =</span> rclr)) <span class="sc">+</span></span>
-<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Sample clusters"</span>)</span>
-<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a>p1 <span class="sc">+</span> p2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplot requires data in melted format</span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>melt_assay <span class="ot">&lt;-</span> <span class="fu">meltAssay</span>(mae[[<span class="dv">1</span>]], <span class="at">assay.type =</span> <span class="st">"rclr"</span>, </span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">add_col_data =</span> T, <span class="at">add_row_data =</span> T)</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a><span class="co"># patchwork two plots side-by-side</span></span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(melt_assay) <span class="sc">+</span></span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> clusters.x, <span class="at">y =</span> rclr)) <span class="sc">+</span></span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Taxa clusters"</span>)</span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(melt_assay) <span class="sc">+</span></span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> clusters.y, <span class="at">y =</span> rclr)) <span class="sc">+</span></span>
+<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Sample clusters"</span>)</span>
+<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a>p1 <span class="sc">+</span> p2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="24_clustering_files/figure-html/cobiclust_4-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -806,42 +811,42 @@ C21 C22 C23 C24 C25 C26 C27 C28 C29 C30 C31 C32 C33 C34 C35 C36 C37 C38 C39 C40
 <h3 data-number="11.4.2" class="anchored" data-anchor-id="taxa-vs-biomolecules"><span class="header-section-number">11.4.2</span> Taxa vs biomolecules</h3>
 <p>Here, we analyze cross-correlation between taxa and metabolites. This is a case, where we use <em>biclust</em> method which is suitable for numeric matrices in general. First we pre-process the data.</p>
 <div class="cell" data-hash="24_clustering_cache/html/biclust_1_d20b4a83f987b1fe3a3f2d8ee8fc36f3">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Samples must be in equal order</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co"># (Only 1st experiment was ordered in cobiclust step leading to unequal order)</span></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>mae[[<span class="dv">1</span>]] <span class="ot">&lt;-</span> mae[[<span class="dv">1</span>]][, <span class="fu">colnames</span>(mae[[<span class="dv">2</span>]])]</span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Make rownames unique since it is required by other steps</span></span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(mae[[<span class="dv">1</span>]]) <span class="ot">&lt;-</span> <span class="fu">make.unique</span>(<span class="fu">rownames</span>(mae[[<span class="dv">1</span>]]))</span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Transform the metabolites to be in log basis</span></span>
-<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>mae[[<span class="dv">2</span>]] <span class="ot">&lt;-</span> <span class="fu">transformAssay</span>(mae[[<span class="dv">2</span>]], <span class="at">assay.type =</span> <span class="st">"nmr"</span>, <span class="at">method =</span> <span class="st">"log10"</span>)</span>
-<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Add missing data to the metabolites</span></span>
-<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>replace_na <span class="ot">&lt;-</span> <span class="cf">function</span>(row) {</span>
-<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a>    na_indices <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">is.na</span>(row))</span>
-<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a>    non_na_values <span class="ot">&lt;-</span> row[<span class="sc">!</span><span class="fu">is.na</span>(row)]</span>
-<span id="cb42-15"><a href="#cb42-15" aria-hidden="true" tabindex="-1"></a>    row[na_indices] <span class="ot">&lt;-</span> <span class="fu">sample</span>(non_na_values, <span class="fu">length</span>(na_indices), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb42-16"><a href="#cb42-16" aria-hidden="true" tabindex="-1"></a>    row</span>
-<span id="cb42-17"><a href="#cb42-17" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb42-18"><a href="#cb42-18" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(mae[[<span class="dv">2</span>]], <span class="st">"log10"</span>) <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">apply</span>(<span class="fu">assay</span>(mae[[<span class="dv">2</span>]], <span class="st">"log10"</span>), <span class="dv">1</span>, replace_na))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Samples must be in equal order</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="co"># (Only 1st experiment was ordered in cobiclust step leading to unequal order)</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>mae[[<span class="dv">1</span>]] <span class="ot">&lt;-</span> mae[[<span class="dv">1</span>]][, <span class="fu">colnames</span>(mae[[<span class="dv">2</span>]])]</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Make rownames unique since it is required by other steps</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(mae[[<span class="dv">1</span>]]) <span class="ot">&lt;-</span> <span class="fu">make.unique</span>(<span class="fu">rownames</span>(mae[[<span class="dv">1</span>]]))</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Transform the metabolites to be in log basis</span></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>mae[[<span class="dv">2</span>]] <span class="ot">&lt;-</span> <span class="fu">transformAssay</span>(mae[[<span class="dv">2</span>]], <span class="at">assay.type =</span> <span class="st">"nmr"</span>, <span class="at">method =</span> <span class="st">"log10"</span>)</span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Add missing data to the metabolites</span></span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>replace_na <span class="ot">&lt;-</span> <span class="cf">function</span>(row) {</span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>    na_indices <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">is.na</span>(row))</span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>    non_na_values <span class="ot">&lt;-</span> row[<span class="sc">!</span><span class="fu">is.na</span>(row)]</span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a>    row[na_indices] <span class="ot">&lt;-</span> <span class="fu">sample</span>(non_na_values, <span class="fu">length</span>(na_indices), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a>    row</span>
+<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb44-18"><a href="#cb44-18" aria-hidden="true" tabindex="-1"></a><span class="fu">assay</span>(mae[[<span class="dv">2</span>]], <span class="st">"log10"</span>) <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">apply</span>(<span class="fu">assay</span>(mae[[<span class="dv">2</span>]], <span class="st">"log10"</span>), <span class="dv">1</span>, replace_na))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Next, we compute the spearman correlation matrix.</p>
 <div class="cell" data-hash="24_clustering_cache/html/biclust_2_5073d465b777e7f0ed1586cc011cad71">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate correlations</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>corr <span class="ot">&lt;-</span> <span class="fu">getExperimentCrossCorrelation</span>(mae, <span class="dv">1</span>, <span class="dv">2</span>, <span class="at">assay.type1 =</span> <span class="st">"rclr"</span>,</span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">assay.type2 =</span> <span class="st">"log10"</span>, <span class="at">mode =</span> <span class="st">"matrix"</span>,</span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">correlation =</span> <span class="st">"spearman"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate correlations</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>corr <span class="ot">&lt;-</span> <span class="fu">getExperimentCrossCorrelation</span>(mae, <span class="dv">1</span>, <span class="dv">2</span>, <span class="at">assay.type1 =</span> <span class="st">"rclr"</span>,</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">assay.type2 =</span> <span class="st">"log10"</span>, <span class="at">mode =</span> <span class="st">"matrix"</span>,</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">correlation =</span> <span class="st">"spearman"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><em>biclust</em> takes a matrix as an input and returns a <em>biclust</em> object.</p>
 <div class="cell" data-hash="24_clustering_cache/html/biclust_3_db8d084a7d271938ed031e3eaaf2482f">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(biclust)</span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Set seed for reproducibility</span></span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">3973</span>)</span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Find biclusters</span></span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>bc <span class="ot">&lt;-</span> <span class="fu">biclust</span>(corr, <span class="at">method =</span> <span class="fu">BCPlaid</span>(), <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>bc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(biclust)</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Set seed for reproducibility</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">3973</span>)</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Find biclusters</span></span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>bc <span class="ot">&lt;-</span> <span class="fu">biclust</span>(corr, <span class="at">method =</span> <span class="fu">BCPlaid</span>(), <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>bc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 An object of class Biclust 
@@ -853,73 +858,73 @@ Number of Clusters found:  4
 
 First  4  Cluster sizes:
                    BC 1 BC 2 BC 3 BC 4
-Number of Rows:      15   16   18    3
-Number of Columns:   13   14    9   10</code></pre>
+Number of Rows:      15   16   18    4
+Number of Columns:   13   14    9   11</code></pre>
 </div>
 </div>
 <p>The object includes cluster information. However compared to <em>cobiclust</em>, <em>biclust</em> object includes only information about clusters that were found, not general cluster.</p>
 <p>Meaning that if one cluster size of 5 features was found out of 20 features, those 15 features do not belong to any cluster. That is why we have to create an additional cluster for features/samples that are not assigned into any cluster.</p>
 <div class="cell" data-hash="24_clustering_cache/html/biclust_4_c7dec45602ebbcc3d96060559f7c7457">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Functions for obtaining biclust information</span></span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Get clusters for rows and columns</span></span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>.get_biclusters_from_biclust <span class="ot">&lt;-</span> <span class="cf">function</span>(bc, assay) {</span>
-<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Get cluster information for columns and rows</span></span>
-<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>    bc_columns <span class="ot">&lt;-</span> <span class="fu">t</span>(bc<span class="sc">@</span>NumberxCol)</span>
-<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>    bc_columns <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(bc_columns)</span>
-<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>    bc_rows <span class="ot">&lt;-</span> bc<span class="sc">@</span>RowxNumber</span>
-<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>    bc_rows <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(bc_rows)</span>
-<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Get data into right format</span></span>
-<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a>    bc_columns <span class="ot">&lt;-</span> <span class="fu">.manipulate_bc_data</span>(bc_columns, assay, <span class="st">"col"</span>)</span>
-<span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a>    bc_rows <span class="ot">&lt;-</span> <span class="fu">.manipulate_bc_data</span>(bc_rows, assay, <span class="st">"row"</span>)</span>
-<span id="cb46-14"><a href="#cb46-14" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb46-15"><a href="#cb46-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">bc_columns =</span> bc_columns, <span class="at">bc_rows =</span> bc_rows))</span>
-<span id="cb46-16"><a href="#cb46-16" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb46-17"><a href="#cb46-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-18"><a href="#cb46-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Input clusters, and how many observations there should be, i.e.,</span></span>
-<span id="cb46-19"><a href="#cb46-19" aria-hidden="true" tabindex="-1"></a><span class="co"># the number of samples or features</span></span>
-<span id="cb46-20"><a href="#cb46-20" aria-hidden="true" tabindex="-1"></a>.manipulate_bc_data <span class="ot">&lt;-</span> <span class="cf">function</span>(bc_clusters, assay, row_col) {</span>
-<span id="cb46-21"><a href="#cb46-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Get right dimension</span></span>
-<span id="cb46-22"><a href="#cb46-22" aria-hidden="true" tabindex="-1"></a>    dim <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(row_col <span class="sc">==</span> <span class="st">"col"</span>, <span class="fu">ncol</span>(assay), <span class="fu">nrow</span>(assay))</span>
-<span id="cb46-23"><a href="#cb46-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Get column/row names</span></span>
-<span id="cb46-24"><a href="#cb46-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (row_col <span class="sc">==</span> <span class="st">"col"</span>) {</span>
-<span id="cb46-25"><a href="#cb46-25" aria-hidden="true" tabindex="-1"></a>        names <span class="ot">&lt;-</span> <span class="fu">colnames</span>(assay)</span>
-<span id="cb46-26"><a href="#cb46-26" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
-<span id="cb46-27"><a href="#cb46-27" aria-hidden="true" tabindex="-1"></a>        names <span class="ot">&lt;-</span> <span class="fu">rownames</span>(assay)</span>
-<span id="cb46-28"><a href="#cb46-28" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb46-29"><a href="#cb46-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-30"><a href="#cb46-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If no clusters were found, create one. Otherwise create additional</span></span>
-<span id="cb46-31"><a href="#cb46-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># cluster which</span></span>
-<span id="cb46-32"><a href="#cb46-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># contain those samples that are not included in clusters that were found.</span></span>
-<span id="cb46-33"><a href="#cb46-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">nrow</span>(bc_clusters) <span class="sc">!=</span> dim) {</span>
-<span id="cb46-34"><a href="#cb46-34" aria-hidden="true" tabindex="-1"></a>        bc_clusters <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">cluster =</span> <span class="fu">rep</span>(<span class="cn">TRUE</span>, dim))</span>
-<span id="cb46-35"><a href="#cb46-35" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
-<span id="cb46-36"><a href="#cb46-36" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Create additional cluster that includes those samples/features that</span></span>
-<span id="cb46-37"><a href="#cb46-37" aria-hidden="true" tabindex="-1"></a>        <span class="co"># are not included in other clusters.</span></span>
-<span id="cb46-38"><a href="#cb46-38" aria-hidden="true" tabindex="-1"></a>        vec <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">rowSums</span>(bc_clusters) <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)</span>
-<span id="cb46-39"><a href="#cb46-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-40"><a href="#cb46-40" aria-hidden="true" tabindex="-1"></a>        <span class="co"># If additional cluster contains samples, then add it</span></span>
-<span id="cb46-41"><a href="#cb46-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (<span class="fu">any</span>(vec)) {</span>
-<span id="cb46-42"><a href="#cb46-42" aria-hidden="true" tabindex="-1"></a>            bc_clusters <span class="ot">&lt;-</span> <span class="fu">cbind</span>(bc_clusters, vec)</span>
-<span id="cb46-43"><a href="#cb46-43" aria-hidden="true" tabindex="-1"></a>        }</span>
-<span id="cb46-44"><a href="#cb46-44" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb46-45"><a href="#cb46-45" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb46-46"><a href="#cb46-46" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Adjust row and column names</span></span>
-<span id="cb46-47"><a href="#cb46-47" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rownames</span>(bc_clusters) <span class="ot">&lt;-</span> names</span>
-<span id="cb46-48"><a href="#cb46-48" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(bc_clusters) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"cluster_"</span>, <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(bc_clusters))</span>
-<span id="cb46-49"><a href="#cb46-49" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(bc_clusters)</span>
-<span id="cb46-50"><a href="#cb46-50" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Functions for obtaining biclust information</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Get clusters for rows and columns</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>.get_biclusters_from_biclust <span class="ot">&lt;-</span> <span class="cf">function</span>(bc, assay) {</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Get cluster information for columns and rows</span></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>    bc_columns <span class="ot">&lt;-</span> <span class="fu">t</span>(bc<span class="sc">@</span>NumberxCol)</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>    bc_columns <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(bc_columns)</span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>    bc_rows <span class="ot">&lt;-</span> bc<span class="sc">@</span>RowxNumber</span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>    bc_rows <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(bc_rows)</span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Get data into right format</span></span>
+<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a>    bc_columns <span class="ot">&lt;-</span> <span class="fu">.manipulate_bc_data</span>(bc_columns, assay, <span class="st">"col"</span>)</span>
+<span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a>    bc_rows <span class="ot">&lt;-</span> <span class="fu">.manipulate_bc_data</span>(bc_rows, assay, <span class="st">"row"</span>)</span>
+<span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb48-15"><a href="#cb48-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">bc_columns =</span> bc_columns, <span class="at">bc_rows =</span> bc_rows))</span>
+<span id="cb48-16"><a href="#cb48-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb48-17"><a href="#cb48-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-18"><a href="#cb48-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Input clusters, and how many observations there should be, i.e.,</span></span>
+<span id="cb48-19"><a href="#cb48-19" aria-hidden="true" tabindex="-1"></a><span class="co"># the number of samples or features</span></span>
+<span id="cb48-20"><a href="#cb48-20" aria-hidden="true" tabindex="-1"></a>.manipulate_bc_data <span class="ot">&lt;-</span> <span class="cf">function</span>(bc_clusters, assay, row_col) {</span>
+<span id="cb48-21"><a href="#cb48-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Get right dimension</span></span>
+<span id="cb48-22"><a href="#cb48-22" aria-hidden="true" tabindex="-1"></a>    dim <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(row_col <span class="sc">==</span> <span class="st">"col"</span>, <span class="fu">ncol</span>(assay), <span class="fu">nrow</span>(assay))</span>
+<span id="cb48-23"><a href="#cb48-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Get column/row names</span></span>
+<span id="cb48-24"><a href="#cb48-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (row_col <span class="sc">==</span> <span class="st">"col"</span>) {</span>
+<span id="cb48-25"><a href="#cb48-25" aria-hidden="true" tabindex="-1"></a>        names <span class="ot">&lt;-</span> <span class="fu">colnames</span>(assay)</span>
+<span id="cb48-26"><a href="#cb48-26" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb48-27"><a href="#cb48-27" aria-hidden="true" tabindex="-1"></a>        names <span class="ot">&lt;-</span> <span class="fu">rownames</span>(assay)</span>
+<span id="cb48-28"><a href="#cb48-28" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb48-29"><a href="#cb48-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-30"><a href="#cb48-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If no clusters were found, create one. Otherwise create additional</span></span>
+<span id="cb48-31"><a href="#cb48-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># cluster which</span></span>
+<span id="cb48-32"><a href="#cb48-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># contain those samples that are not included in clusters that were found.</span></span>
+<span id="cb48-33"><a href="#cb48-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">nrow</span>(bc_clusters) <span class="sc">!=</span> dim) {</span>
+<span id="cb48-34"><a href="#cb48-34" aria-hidden="true" tabindex="-1"></a>        bc_clusters <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">cluster =</span> <span class="fu">rep</span>(<span class="cn">TRUE</span>, dim))</span>
+<span id="cb48-35"><a href="#cb48-35" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb48-36"><a href="#cb48-36" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Create additional cluster that includes those samples/features that</span></span>
+<span id="cb48-37"><a href="#cb48-37" aria-hidden="true" tabindex="-1"></a>        <span class="co"># are not included in other clusters.</span></span>
+<span id="cb48-38"><a href="#cb48-38" aria-hidden="true" tabindex="-1"></a>        vec <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">rowSums</span>(bc_clusters) <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb48-39"><a href="#cb48-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-40"><a href="#cb48-40" aria-hidden="true" tabindex="-1"></a>        <span class="co"># If additional cluster contains samples, then add it</span></span>
+<span id="cb48-41"><a href="#cb48-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (<span class="fu">any</span>(vec)) {</span>
+<span id="cb48-42"><a href="#cb48-42" aria-hidden="true" tabindex="-1"></a>            bc_clusters <span class="ot">&lt;-</span> <span class="fu">cbind</span>(bc_clusters, vec)</span>
+<span id="cb48-43"><a href="#cb48-43" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb48-44"><a href="#cb48-44" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb48-45"><a href="#cb48-45" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb48-46"><a href="#cb48-46" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Adjust row and column names</span></span>
+<span id="cb48-47"><a href="#cb48-47" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rownames</span>(bc_clusters) <span class="ot">&lt;-</span> names</span>
+<span id="cb48-48"><a href="#cb48-48" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(bc_clusters) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"cluster_"</span>, <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(bc_clusters))</span>
+<span id="cb48-49"><a href="#cb48-49" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(bc_clusters)</span>
+<span id="cb48-50"><a href="#cb48-50" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-hash="24_clustering_cache/html/biclust_5_f83de9ed148ca0c2e6e313191a72e59b">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get biclusters</span></span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>bcs <span class="ot">&lt;-</span> <span class="fu">.get_biclusters_from_biclust</span>(bc, corr)</span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>bicluster_rows <span class="ot">&lt;-</span> bcs<span class="sc">$</span>bc_rows</span>
-<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>bicluster_columns <span class="ot">&lt;-</span> bcs<span class="sc">$</span>bc_columns</span>
-<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Print biclusters for rows</span></span>
-<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bicluster_rows)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get biclusters</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>bcs <span class="ot">&lt;-</span> <span class="fu">.get_biclusters_from_biclust</span>(bc, corr)</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>bicluster_rows <span class="ot">&lt;-</span> bcs<span class="sc">$</span>bc_rows</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>bicluster_columns <span class="ot">&lt;-</span> bcs<span class="sc">$</span>bc_columns</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Print biclusters for rows</span></span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bicluster_rows)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                          cluster_1 cluster_2 cluster_3 cluster_4 cluster_5
 D_5__Staphylococcus           FALSE     FALSE     FALSE     FALSE      TRUE
@@ -932,50 +937,50 @@ D_5__Pseudomonas              FALSE     FALSE     FALSE     FALSE      TRUE</cod
 </div>
 <p>Let’s collect information for the scatter plot.</p>
 <div class="cell" data-hash="24_clustering_cache/html/biclust_6_ad22112fa4772d07f7aa1ff9e2a92ea0">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function for obtaining sample-wise sum, mean, median, and mean variance</span></span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="co"># for each cluster</span></span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>.sum_mean_median_var <span class="ot">&lt;-</span> <span class="cf">function</span>(tse1, tse2, assay.type1, assay.type2, clusters1, clusters2) {</span>
-<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>    list <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create a data frame that includes all the information</span></span>
-<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(clusters1)) {</span>
-<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Subset data based on cluster</span></span>
-<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>        tse_subset1 <span class="ot">&lt;-</span> tse1[clusters1[, i], ]</span>
-<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>        tse_subset2 <span class="ot">&lt;-</span> tse2[clusters2[, i], ]</span>
-<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Get assay</span></span>
-<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a>        assay1 <span class="ot">&lt;-</span> <span class="fu">assay</span>(tse_subset1, assay.type1)</span>
-<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a>        assay2 <span class="ot">&lt;-</span> <span class="fu">assay</span>(tse_subset2, assay.type2)</span>
-<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Calculate sum, mean, median, and mean variance</span></span>
-<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a>        sum1 <span class="ot">&lt;-</span> <span class="fu">colSums2</span>(assay1, <span class="at">na.rm =</span> T)</span>
-<span id="cb49-16"><a href="#cb49-16" aria-hidden="true" tabindex="-1"></a>        mean1 <span class="ot">&lt;-</span> <span class="fu">colMeans2</span>(assay1, <span class="at">na.rm =</span> T)</span>
-<span id="cb49-17"><a href="#cb49-17" aria-hidden="true" tabindex="-1"></a>        median1 <span class="ot">&lt;-</span> <span class="fu">colMedians</span>(assay1, <span class="at">na.rm =</span> T)</span>
-<span id="cb49-18"><a href="#cb49-18" aria-hidden="true" tabindex="-1"></a>        var1 <span class="ot">&lt;-</span> <span class="fu">colVars</span>(assay1, <span class="at">na.rm =</span> T)</span>
-<span id="cb49-19"><a href="#cb49-19" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb49-20"><a href="#cb49-20" aria-hidden="true" tabindex="-1"></a>        sum2 <span class="ot">&lt;-</span> <span class="fu">colSums2</span>(assay2, <span class="at">na.rm =</span> T)</span>
-<span id="cb49-21"><a href="#cb49-21" aria-hidden="true" tabindex="-1"></a>        mean2 <span class="ot">&lt;-</span> <span class="fu">colMeans2</span>(assay2, <span class="at">na.rm =</span> T)</span>
-<span id="cb49-22"><a href="#cb49-22" aria-hidden="true" tabindex="-1"></a>        median2 <span class="ot">&lt;-</span> <span class="fu">colMedians</span>(assay2, <span class="at">na.rm =</span> T)</span>
-<span id="cb49-23"><a href="#cb49-23" aria-hidden="true" tabindex="-1"></a>        var2 <span class="ot">&lt;-</span> <span class="fu">colVars</span>(assay2, <span class="at">na.rm =</span> T)</span>
-<span id="cb49-24"><a href="#cb49-24" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb49-25"><a href="#cb49-25" aria-hidden="true" tabindex="-1"></a>        list[[i]] <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">sample =</span> <span class="fu">colnames</span>(tse1), sum1, sum2, mean1, </span>
-<span id="cb49-26"><a href="#cb49-26" aria-hidden="true" tabindex="-1"></a>                                 mean2, median1, median2, var1, var2)</span>
-<span id="cb49-27"><a href="#cb49-27" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb49-28"><a href="#cb49-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(list)</span>
-<span id="cb49-29"><a href="#cb49-29" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb49-30"><a href="#cb49-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-31"><a href="#cb49-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate info</span></span>
-<span id="cb49-32"><a href="#cb49-32" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">.sum_mean_median_var</span>(mae[[<span class="dv">1</span>]], mae[[<span class="dv">2</span>]], <span class="st">"rclr"</span>, <span class="st">"log10"</span>, bicluster_rows, bicluster_columns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function for obtaining sample-wise sum, mean, median, and mean variance</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="co"># for each cluster</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>.sum_mean_median_var <span class="ot">&lt;-</span> <span class="cf">function</span>(tse1, tse2, assay.type1, assay.type2, clusters1, clusters2) {</span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>    list <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create a data frame that includes all the information</span></span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(clusters1)) {</span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Subset data based on cluster</span></span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>        tse_subset1 <span class="ot">&lt;-</span> tse1[clusters1[, i], ]</span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>        tse_subset2 <span class="ot">&lt;-</span> tse2[clusters2[, i], ]</span>
+<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Get assay</span></span>
+<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a>        assay1 <span class="ot">&lt;-</span> <span class="fu">assay</span>(tse_subset1, assay.type1)</span>
+<span id="cb51-13"><a href="#cb51-13" aria-hidden="true" tabindex="-1"></a>        assay2 <span class="ot">&lt;-</span> <span class="fu">assay</span>(tse_subset2, assay.type2)</span>
+<span id="cb51-14"><a href="#cb51-14" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Calculate sum, mean, median, and mean variance</span></span>
+<span id="cb51-15"><a href="#cb51-15" aria-hidden="true" tabindex="-1"></a>        sum1 <span class="ot">&lt;-</span> <span class="fu">colSums2</span>(assay1, <span class="at">na.rm =</span> T)</span>
+<span id="cb51-16"><a href="#cb51-16" aria-hidden="true" tabindex="-1"></a>        mean1 <span class="ot">&lt;-</span> <span class="fu">colMeans2</span>(assay1, <span class="at">na.rm =</span> T)</span>
+<span id="cb51-17"><a href="#cb51-17" aria-hidden="true" tabindex="-1"></a>        median1 <span class="ot">&lt;-</span> <span class="fu">colMedians</span>(assay1, <span class="at">na.rm =</span> T)</span>
+<span id="cb51-18"><a href="#cb51-18" aria-hidden="true" tabindex="-1"></a>        var1 <span class="ot">&lt;-</span> <span class="fu">colVars</span>(assay1, <span class="at">na.rm =</span> T)</span>
+<span id="cb51-19"><a href="#cb51-19" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb51-20"><a href="#cb51-20" aria-hidden="true" tabindex="-1"></a>        sum2 <span class="ot">&lt;-</span> <span class="fu">colSums2</span>(assay2, <span class="at">na.rm =</span> T)</span>
+<span id="cb51-21"><a href="#cb51-21" aria-hidden="true" tabindex="-1"></a>        mean2 <span class="ot">&lt;-</span> <span class="fu">colMeans2</span>(assay2, <span class="at">na.rm =</span> T)</span>
+<span id="cb51-22"><a href="#cb51-22" aria-hidden="true" tabindex="-1"></a>        median2 <span class="ot">&lt;-</span> <span class="fu">colMedians</span>(assay2, <span class="at">na.rm =</span> T)</span>
+<span id="cb51-23"><a href="#cb51-23" aria-hidden="true" tabindex="-1"></a>        var2 <span class="ot">&lt;-</span> <span class="fu">colVars</span>(assay2, <span class="at">na.rm =</span> T)</span>
+<span id="cb51-24"><a href="#cb51-24" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb51-25"><a href="#cb51-25" aria-hidden="true" tabindex="-1"></a>        list[[i]] <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">sample =</span> <span class="fu">colnames</span>(tse1), sum1, sum2, mean1, </span>
+<span id="cb51-26"><a href="#cb51-26" aria-hidden="true" tabindex="-1"></a>                                 mean2, median1, median2, var1, var2)</span>
+<span id="cb51-27"><a href="#cb51-27" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb51-28"><a href="#cb51-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(list)</span>
+<span id="cb51-29"><a href="#cb51-29" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb51-30"><a href="#cb51-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-31"><a href="#cb51-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate info</span></span>
+<span id="cb51-32"><a href="#cb51-32" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">.sum_mean_median_var</span>(mae[[<span class="dv">1</span>]], mae[[<span class="dv">2</span>]], <span class="st">"rclr"</span>, <span class="st">"log10"</span>, bicluster_rows, bicluster_columns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now we can create a scatter plot. X-axis includes median clr abundance of microbiome and y-axis median absolute concentration of each metabolite. Each data point represents a single sample.</p>
 <p>From the plots, we can see that there is low negative correlation in both cluster 1 and 3. This means that when abundance of bacteria belonging to cluster 1 or 3 is higher, the concentration of metabolites of cluster 1 or 3 is lower, and vice versa.</p>
 <div class="cell" data-hash="24_clustering_cache/html/biclust_7_b9035666f957333bb6d161e9e82e91d8">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>pics <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(df)) {</span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>    pics[[i]] <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df[[i]]) <span class="sc">+</span></span>
-<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> median1, <span class="at">y =</span> median2)) <span class="sc">+</span></span>
-<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">"Cluster "</span>, i), <span class="at">x =</span> <span class="st">"Taxa (rclr median)"</span>,</span>
-<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> <span class="st">"Metabolites (abs. median)"</span>)</span>
-<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(pics[[i]])</span>
-<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>pics <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(df)) {</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>    pics[[i]] <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df[[i]]) <span class="sc">+</span></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> median1, <span class="at">y =</span> median2)) <span class="sc">+</span></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">"Cluster "</span>, i), <span class="at">x =</span> <span class="st">"Taxa (rclr median)"</span>,</span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> <span class="st">"Metabolites (abs. median)"</span>)</span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(pics[[i]])</span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="24_clustering_files/figure-html/biclust_7-1.png" class="img-fluid" style="width:33.0%"></p>
 </div>
@@ -991,33 +996,33 @@ D_5__Pseudomonas              FALSE     FALSE     FALSE     FALSE      TRUE</cod
 <div class="cell-output-display">
 <p><img src="24_clustering_files/figure-html/biclust_7-5.png" class="img-fluid" style="width:33.0%"></p>
 </div>
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>pics[[<span class="dv">1</span>]] <span class="sc">+</span> pics[[<span class="dv">2</span>]] <span class="sc">+</span> pics[[<span class="dv">3</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>pics[[<span class="dv">1</span>]] <span class="sc">+</span> pics[[<span class="dv">2</span>]] <span class="sc">+</span> pics[[<span class="dv">3</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="24_clustering_files/figure-html/biclust_7-6.png" class="img-fluid" style="width:33.0%"></p>
 </div>
 </div>
 <p><em>pheatmap</em> does not allow boolean values, so they must be converted into factors.</p>
 <div class="cell" data-hash="24_clustering_cache/html/biclust_8_c8c39f753b9e8909e173ab01ce0f2b62">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>bicluster_columns <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">apply</span>(bicluster_columns, <span class="dv">2</span>, as.factor))</span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>bicluster_rows <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">apply</span>(bicluster_rows, <span class="dv">2</span>, as.factor))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>bicluster_columns <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">apply</span>(bicluster_columns, <span class="dv">2</span>, as.factor))</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>bicluster_rows <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">apply</span>(bicluster_rows, <span class="dv">2</span>, as.factor))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Again, we can plot clusters with heatmap.</p>
 <div class="cell" data-hash="24_clustering_cache/html/biclust_9_22d8b693037500ec89d5637c6582cd34">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust colors for all clusters</span></span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">ncol</span>(bicluster_rows) <span class="sc">&gt;</span> <span class="fu">ncol</span>(bicluster_columns)) {</span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>    cluster_names <span class="ot">&lt;-</span> <span class="fu">colnames</span>(bicluster_rows)</span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>    cluster_names <span class="ot">&lt;-</span> <span class="fu">colnames</span>(bicluster_columns)</span>
-<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>annotation_colors <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (name <span class="cf">in</span> cluster_names) {</span>
-<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>    annotation_colors[[name]] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"TRUE"</span> <span class="ot">=</span> <span class="st">"red"</span>, <span class="st">"FALSE"</span> <span class="ot">=</span> <span class="st">"white"</span>)</span>
-<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-12"><a href="#cb53-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a heatmap</span></span>
-<span id="cb53-13"><a href="#cb53-13" aria-hidden="true" tabindex="-1"></a><span class="fu">pheatmap</span>(corr, <span class="at">cluster_cols =</span> F, <span class="at">cluster_rows =</span> F,</span>
-<span id="cb53-14"><a href="#cb53-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">annotation_col =</span> bicluster_columns, <span class="at">annotation_row =</span> bicluster_rows,</span>
-<span id="cb53-15"><a href="#cb53-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">annotation_colors =</span> annotation_colors)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust colors for all clusters</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">ncol</span>(bicluster_rows) <span class="sc">&gt;</span> <span class="fu">ncol</span>(bicluster_columns)) {</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>    cluster_names <span class="ot">&lt;-</span> <span class="fu">colnames</span>(bicluster_rows)</span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>    cluster_names <span class="ot">&lt;-</span> <span class="fu">colnames</span>(bicluster_columns)</span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>annotation_colors <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (name <span class="cf">in</span> cluster_names) {</span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a>    annotation_colors[[name]] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"TRUE"</span> <span class="ot">=</span> <span class="st">"red"</span>, <span class="st">"FALSE"</span> <span class="ot">=</span> <span class="st">"white"</span>)</span>
+<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb55-11"><a href="#cb55-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-12"><a href="#cb55-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a heatmap</span></span>
+<span id="cb55-13"><a href="#cb55-13" aria-hidden="true" tabindex="-1"></a><span class="fu">pheatmap</span>(corr, <span class="at">cluster_cols =</span> F, <span class="at">cluster_rows =</span> F,</span>
+<span id="cb55-14"><a href="#cb55-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">annotation_col =</span> bicluster_columns, <span class="at">annotation_row =</span> bicluster_rows,</span>
+<span id="cb55-15"><a href="#cb55-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">annotation_colors =</span> annotation_colors)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="24_clustering_files/figure-html/biclust_9-1.png" class="img-fluid" width="960"></p>
 </div>

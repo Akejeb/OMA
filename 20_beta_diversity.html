@@ -54,7 +54,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -273,12 +292,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./Session_info.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Sessioninfo</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./99_bibliography.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Bibliography</span></a>
   </div>
 </li>
       </ul>
@@ -719,7 +732,7 @@ document.addEventListener("click", function (event) {
 <td style="text-align: right;">6</td>
 <td style="text-align: right;">1.1157</td>
 <td style="text-align: right;">1.940</td>
-<td style="text-align: right;">0.042</td>
+<td style="text-align: right;">0.045</td>
 <td style="text-align: right;">3.991</td>
 <td style="text-align: right;">0.2795</td>
 </tr>
@@ -728,7 +741,7 @@ document.addEventListener("click", function (event) {
 <td style="text-align: right;">4</td>
 <td style="text-align: right;">0.5837</td>
 <td style="text-align: right;">1.522</td>
-<td style="text-align: right;">0.146</td>
+<td style="text-align: right;">0.136</td>
 <td style="text-align: right;">3.991</td>
 <td style="text-align: right;">0.1463</td>
 </tr>
@@ -737,7 +750,7 @@ document.addEventListener("click", function (event) {
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">0.1679</td>
 <td style="text-align: right;">1.751</td>
-<td style="text-align: right;">0.120</td>
+<td style="text-align: right;">0.108</td>
 <td style="text-align: right;">3.991</td>
 <td style="text-align: right;">0.0421</td>
 </tr>
@@ -801,7 +814,7 @@ document.addEventListener("click", function (event) {
 <td style="text-align: right;">0.0628</td>
 <td style="text-align: right;">2.7440</td>
 <td style="text-align: right;">999</td>
-<td style="text-align: right;">0.108</td>
+<td style="text-align: right;">0.113</td>
 <td style="text-align: right;">1.0288</td>
 <td style="text-align: right;">0.2440</td>
 </tr>
@@ -812,7 +825,7 @@ document.addEventListener("click", function (event) {
 <td style="text-align: right;">0.0103</td>
 <td style="text-align: right;">0.4158</td>
 <td style="text-align: right;">999</td>
-<td style="text-align: right;">0.521</td>
+<td style="text-align: right;">0.516</td>
 <td style="text-align: right;">0.9283</td>
 <td style="text-align: right;">0.0111</td>
 </tr>
@@ -823,7 +836,7 @@ document.addEventListener("click", function (event) {
 <td style="text-align: right;">0.0113</td>
 <td style="text-align: right;">17.0255</td>
 <td style="text-align: right;">999</td>
-<td style="text-align: right;">0.439</td>
+<td style="text-align: right;">0.423</td>
 <td style="text-align: right;">0.3319</td>
 <td style="text-align: right;">0.9860</td>
 </tr>
@@ -848,7 +861,7 @@ document.addEventListener("click", function (event) {
 <h2 data-number="9.3" class="anchored" data-anchor-id="case-studies"><span class="header-section-number">9.3</span> Case studies</h2>
 <section id="pcoa-genus" class="level4" data-number="9.3.0.1">
 <h4 data-number="9.3.0.1" class="anchored" data-anchor-id="pcoa-genus"><span class="header-section-number">9.3.0.1</span> Visualizing the most dominant genus on PCoA</h4>
-<p>In this section, we visualize the most dominant genus on PCoA. A similar visualization was proposed by <span class="citation" data-cites="Salosensaari2021">[-@Salosensaari2021]</span>. First, we agglomerate the data at the Genus level and get the dominant taxa per sample.</p>
+<p>In this section, we visualize the most dominant genus on PCoA. A similar visualization was proposed by <span class="citation" data-cites="Salosensaari2021">(<a href="#ref-Salosensaari2021" role="doc-biblioref">2021</a>)</span>. First, we agglomerate the data at the Genus level and get the dominant taxa per sample.</p>
 <div class="cell" data-hash="20_beta_diversity_cache/html/unnamed-chunk-18_aed73a4938758e169e4b82aa281790e5">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Agglomerate to genus level</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>tse_genus <span class="ot">&lt;-</span> <span class="fu">mergeFeaturesByRank</span>(tse,</span>
@@ -967,7 +980,7 @@ document.addEventListener("click", function (event) {
 </section>
 <section id="dbrda-workflow" class="level3" data-number="9.3.1">
 <h3 data-number="9.3.1" class="anchored" data-anchor-id="dbrda-workflow"><span class="header-section-number">9.3.1</span> Testing differences in community composition between sample groups</h3>
-<p>Permutational Analysis of Variance (PERMANOVA; <span class="citation" data-cites="Anderson2001">[-@Anderson2001]</span>) is a widely used non-parametric multivariate method that aims to estimate the actual statistical significance of differences in the observed community composition between two groups of samples.</p>
+<p>Permutational Analysis of Variance (PERMANOVA; <span class="citation" data-cites="Anderson2001">(<a href="#ref-Anderson2001" role="doc-biblioref">2001</a>)</span>) is a widely used non-parametric multivariate method that aims to estimate the actual statistical significance of differences in the observed community composition between two groups of samples.</p>
 <p>PERMANOVA tests the hypothesis that the centroids and dispersion of the community are equivalent between the compared groups. A p-value smaller than the significance threshold indicates that the groups have a different community composition. This method is implemented with the <a href="https://www.rdocumentation.org/packages/vegan/versions/2.4-2/topics/adonis"><code>adonis2</code></a> function from the vegan package.</p>
 <p>By default, the argument <code>by</code> is set to <code>"terms"</code>, in which the order of variables in the formula matters. In this case, each variable is analyzed sequentially, and the result is different when more than 1 variable is introduced and their order differs. Therefore, it is recommended to set <code>by = "margin"</code>, which specifies that the marginal effect of each variable is analyzed individually. You can view a comparison between the two designs in chapter @ref(compare-permanova).</p>
 <p>We can perform PERMANOVA either with <code>adonis2</code> function or by first performing dbRDA and then applying permutational test its results. An advantage of the latter approach is that by doing so we can get coefficients: how much each taxa affects the variation between communities.</p>
@@ -1038,7 +1051,7 @@ dbRDA+anova.cca     0.02</code></pre>
 </section>
 <section id="checking-the-homogeneity-condition" class="level3" data-number="9.3.2">
 <h3 data-number="9.3.2" class="anchored" data-anchor-id="checking-the-homogeneity-condition"><span class="header-section-number">9.3.2</span> Checking the homogeneity condition</h3>
-<p>It is important to note that the application of PERMANOVA assumes homogeneous group dispersions (variances). This can be tested with the PERMDISP2 method <span class="citation" data-cites="Anderson2006">[@Anderson2006]</span> by using the same assay and distance method than in PERMANOVA.</p>
+<p>It is important to note that the application of PERMANOVA assumes homogeneous group dispersions (variances). This can be tested with the PERMDISP2 method <span class="citation" data-cites="Anderson2006">(<a href="#ref-Anderson2006" role="doc-biblioref">Anderson 2006</a>)</span> by using the same assay and distance method than in PERMANOVA.</p>
 <div class="cell" data-hash="20_beta_diversity_cache/html/unnamed-chunk-25_89d6d2faca02eef2543d1fc44cec5cb9">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(<span class="fu">betadisper</span>(<span class="fu">vegdist</span>(<span class="fu">t</span>(<span class="fu">assay</span>(tse, <span class="st">"counts"</span>))), <span class="fu">colData</span>(tse)<span class="sc">$</span>Group))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1076,6 +1089,17 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Anderson2001" class="csl-entry" role="listitem">
+Anderson, Marti J. 2001. <span>“A New Method for Non-Parametric Multivariate Analysis of Variance.”</span> <em>Austral Ecology</em> 26 (1): 32–46. <a href="https://doi.org/10.1111/j.1442-9993.2001.01070.pp.x">https://doi.org/10.1111/j.1442-9993.2001.01070.pp.x</a>.
+</div>
+<div id="ref-Anderson2006" class="csl-entry" role="listitem">
+———. 2006. <span>“Distance-Based Tests for Homogeneity of Multivariate Dispersions.”</span> <em>Biometrics</em> 62: 245–53. <a href="https://doi.org/10.1111/j.1541-0420.2005.00440.x">https://doi.org/10.1111/j.1541-0420.2005.00440.x</a>.
+</div>
+<div id="ref-Salosensaari2021" class="csl-entry" role="listitem">
+Salosensaari, Aaro, Ville Laitinen, Aki Havulinna, Guillaume Méric, Susan Cheng, Markus Perola, Liisa Valsta, et al. 2021. <span>“Taxonomic Signatures of Cause-Specific Mortality Risk in Human Gut Microbiome.”</span> <em>Nature Communications</em> 12: 1–8. <a href="https://www.nature.com/articles/s41467-021-22962-y">https://www.nature.com/articles/s41467-021-22962-y</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->

@@ -54,7 +54,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -275,12 +294,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Sessioninfo</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./99_bibliography.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Bibliography</span></a>
-  </div>
-</li>
       </ul>
   </li>
     </ul>
@@ -382,11 +395,11 @@ document.addEventListener("click", function (event) {
 <p>There are a number of methods to assign taxonomic information. We like to give a short introduction about the methods available without ranking one over the other. This has to be your choice based on the result for the individual dataset.</p>
 <section id="dada2" class="level3" data-number="7.1.1">
 <h3 data-number="7.1.1" class="anchored" data-anchor-id="dada2"><span class="header-section-number">7.1.1</span> dada2</h3>
-<p>The dada2 package <span class="citation" data-cites="Callahan2016dada2">[@Callahan2016dada2]</span> implements the <code>assignTaxonomy</code> function, which takes as input the ASV sequences associated with each row of data and a training dataset. For more information visit the <a href="https://benjjneb.github.io/dada2/assign.html">dada2 homepage</a>.</p>
+<p>The dada2 package <span class="citation" data-cites="Callahan2016dada2">(<a href="#ref-Callahan2016dada2" role="doc-biblioref">Callahan et al. 2016</a>)</span> implements the <code>assignTaxonomy</code> function, which takes as input the ASV sequences associated with each row of data and a training dataset. For more information visit the <a href="https://benjjneb.github.io/dada2/assign.html">dada2 homepage</a>.</p>
 </section>
 <section id="decipher" class="level3" data-number="7.1.2">
 <h3 data-number="7.1.2" class="anchored" data-anchor-id="decipher"><span class="header-section-number">7.1.2</span> DECIPHER</h3>
-<p>The DECIPHER package <span class="citation" data-cites="R_DECIPHER">[@R_DECIPHER]</span> implements the <code>IDTAXA</code> algorithm to assign either taxonomic information or function information. For <code>mia</code> only the first option is of interest for now and more information can be found on the <a href="http://www2.decipher.codes/Classification.html">DECIPHER website</a>.</p>
+<p>The DECIPHER package <span class="citation" data-cites="R_DECIPHER">(<a href="#ref-R_DECIPHER" role="doc-biblioref">Wright 2020</a>)</span> implements the <code>IDTAXA</code> algorithm to assign either taxonomic information or function information. For <code>mia</code> only the first option is of interest for now and more information can be found on the <a href="http://www2.decipher.codes/Classification.html">DECIPHER website</a>.</p>
 </section>
 </section>
 <section id="functions-to-access-taxonomic-information" class="level2" data-number="7.2">
@@ -490,7 +503,7 @@ FALSE  TRUE
 [4] "Phylum:Actinobacteria" "Phylum:Actinobacteria" "Phylum:Spirochaetes"  </code></pre>
 </div>
 </div>
-<p>To apply the loop resolving function <code>resolveLoop</code> from the <code>TreeSummarizedExperiment</code> package <span class="citation" data-cites="R_TreeSummarizedExperiment">[@R_TreeSummarizedExperiment]</span> within <code>getTaxonomyLabels</code>, set <code>resolve_loops = TRUE</code>.</p>
+<p>To apply the loop resolving function <code>resolveLoop</code> from the <code>TreeSummarizedExperiment</code> package <span class="citation" data-cites="R_TreeSummarizedExperiment">(<a href="#ref-R_TreeSummarizedExperiment" role="doc-biblioref">Huang 2020</a>)</span> within <code>getTaxonomyLabels</code>, set <code>resolve_loops = TRUE</code>.</p>
 <p>The function <code>getUniqueFeatures</code> gives a list of unique taxa for the specified taxonomic rank.</p>
 <div class="cell" data-hash="11_taxonomic_information_cache/html/unnamed-chunk-10_8e710fc854ba90ce5466b1064db242e3">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">getUniqueFeatures</span>(tse, <span class="at">rank =</span> <span class="st">"Phylum"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -538,7 +551,7 @@ colLinks: NULL
 colTree: NULL</code></pre>
 </div>
 </div>
-<p>The implementation is based on the <code>toTree</code> function from the <code>TreeSummarizedExperiment</code> package <span class="citation" data-cites="R_TreeSummarizedExperiment">[@R_TreeSummarizedExperiment]</span>.</p>
+<p>The implementation is based on the <code>toTree</code> function from the <code>TreeSummarizedExperiment</code> package <span class="citation" data-cites="R_TreeSummarizedExperiment">(<a href="#ref-R_TreeSummarizedExperiment" role="doc-biblioref">Huang 2020</a>)</span>.</p>
 </section>
 </section>
 <section id="data-agglomeration" class="level2" data-number="7.3">
@@ -860,6 +873,17 @@ names(4): counts relabundance clr pa</code></pre>
 </div>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Callahan2016dada2" class="csl-entry" role="listitem">
+Callahan, Benjamin J, Paul J McMurdie, Michael J Rosen, Andrew W Han, Amy Jo A Johnson, and Susan P Holmes. 2016. <span>“DADA2: High-Resolution Sample Inference from Illumina Amplicon Data.”</span> <em>Nature Methods</em> 13: 581–83. <a href="https://doi.org/10.1038/nmeth.3869">https://doi.org/10.1038/nmeth.3869</a>.
+</div>
+<div id="ref-R_TreeSummarizedExperiment" class="csl-entry" role="listitem">
+Huang, Ruizhu. 2020. <em>TreeSummarizedExperiment: A S4 Class for Data with Tree Structures</em>.
+</div>
+<div id="ref-R_DECIPHER" class="csl-entry" role="listitem">
+Wright, Erik. 2020. <em>DECIPHER: Tools for Curating, Analyzing, and Manipulating Biological Sequences</em>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
