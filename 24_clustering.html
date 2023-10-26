@@ -191,7 +191,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./20_beta_diversity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">global knitr options</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Community Similarity</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -563,7 +563,7 @@ Laplace: 7673 BIC: 7927 AIC: 7842
 class: DMN 
 k: 3 
 samples x taxa: 26 x 67 
-Laplace: 7727 BIC: 8122 AIC: 7995 </code></pre>
+Laplace: 7690 BIC: 8076 AIC: 7948 </code></pre>
 </div>
 </div>
 <p>We can see the Laplace approximation (model evidence) for each model of the k models.</p>
@@ -572,7 +572,7 @@ Laplace: 7727 BIC: 8122 AIC: 7995 </code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 ── R CMD build ─────────────────────────────────────────────────────────────────
-* checking for file ‘/tmp/RtmpI1FlJj/remotes104941897fd59/microbiome-miaViz-cb3609c/DESCRIPTION’ ... OK
+* checking for file ‘/tmp/RtmpxjcdRr/remotesfe444cab7f90/microbiome-miaViz-cb3609c/DESCRIPTION’ ... OK
 * preparing ‘miaViz’:
 * checking DESCRIPTION meta-information ... OK
 * checking for LF line-endings in source and make files and shell scripts
@@ -611,15 +611,15 @@ Laplace: 7673 BIC: 7927 AIC: 7842 </code></pre>
 <pre><code>class: DMNGroup 
 summary:
                    k samples taxa    NLE  LogDet Laplace    BIC  AIC
-Feces              2       4   67 1078.3 -106.26   901.1 1171.9 1213
-Freshwater         2       2   67  889.6  -97.20   716.9  936.4 1025
-Freshwater (creek) 2       3   67 1600.3  862.19  1907.3 1674.5 1735
-Mock               2       3   67 1008.4  -55.40   856.6 1082.5 1143
-Ocean              2       3   67 1096.7  -56.66   944.3 1170.9 1232
+Feces              2       4   67 1078.3 -106.19   901.1 1171.9 1213
+Freshwater         2       2   67  889.6  -97.28   716.9  936.4 1025
+Freshwater (creek) 2       3   67 1600.3  860.08  1906.3 1674.5 1735
+Mock               2       3   67 1008.4  -55.37   856.6 1082.5 1143
+Ocean              2       3   67 1096.7  -56.21   944.6 1170.9 1232
 Sediment (estuary) 2       3   67 1195.5   18.63  1080.8 1269.7 1331
-Skin               2       3   67  992.6  -85.05   826.1 1066.8 1128
-Soil               2       3   67 1380.3   11.20  1261.8 1454.5 1515
-Tongue             2       2   67  783.0 -107.79   605.0  829.8  918</code></pre>
+Skin               2       3   67  992.6  -84.81   826.2 1066.8 1128
+Soil               2       3   67 1380.3   11.21  1261.8 1454.5 1515
+Tongue             2       2   67  783.0 -107.74   605.1  829.8  918</code></pre>
 </div>
 </div>
 <p>Mixture weights (rough measure of the cluster size).</p>
@@ -628,7 +628,7 @@ Tongue             2       2   67  783.0 -107.79   605.0  829.8  918</code></pre
 <div class="cell-output cell-output-stdout">
 <pre><code>      pi theta
 1 0.5385 20.58
-2 0.4615 15.32</code></pre>
+2 0.4615 15.28</code></pre>
 </div>
 </div>
 <p>It’s also possible to get the samples-cluster assignment probabilities: how probable it is that each sample belongs to each cluster</p>
@@ -637,12 +637,12 @@ Tongue             2       2   67  783.0 -107.79   605.0  829.8  918</code></pre
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(prob)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                1         2
-CL3     1.000e+00 4.519e-17
-CC1     1.000e+00 3.438e-22
-SV1     1.000e+00 1.716e-12
-M31Fcsw 7.440e-26 1.000e+00
-M11Fcsw 1.093e-16 1.000e+00
-M31Plmr 1.154e-13 1.000e+00</code></pre>
+CL3     1.000e+00 5.055e-17
+CC1     1.000e+00 3.910e-22
+SV1     1.000e+00 1.958e-12
+M31Fcsw 7.870e-26 1.000e+00
+M11Fcsw 1.132e-16 1.000e+00
+M31Plmr 1.122e-13 1.000e+00</code></pre>
 </div>
 </div>
 <p>We can also know the contribution of each taxa to each component</p>
@@ -650,12 +650,12 @@ M31Plmr 1.154e-13 1.000e+00</code></pre>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(DirichletMultinomial<span class="sc">::</span><span class="fu">fitted</span>(bestFit))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                         [,1]      [,2]
-Phylum:Crenarchaeota  0.30381 0.1354037
-Phylum:Euryarchaeota  0.23114 0.1468863
-Phylum:Actinobacteria 1.21370 1.0581457
-Phylum:Spirochaetes   0.21393 0.1318056
-Phylum:MVP-15         0.02982 0.0007674
-Phylum:Proteobacteria 6.84458 1.8114092</code></pre>
+Phylum:Crenarchaeota  0.30381 0.1354654
+Phylum:Euryarchaeota  0.23114 0.1468627
+Phylum:Actinobacteria 1.21355 1.0600690
+Phylum:Spirochaetes   0.21392 0.1318414
+Phylum:MVP-15         0.02982 0.0007675
+Phylum:Proteobacteria 6.84489 1.8151477</code></pre>
 </div>
 </div>
 <p>Finally, to be able to visualize our data and clusters, we start by computing the euclidean PCoA and storing it as a data frame.</p>
@@ -854,12 +854,12 @@ An object of class Biclust
 call:
     biclust(x = corr, method = BCPlaid(), verbose = FALSE)
 
-Number of Clusters found:  4 
+Number of Clusters found:  7 
 
-First  4  Cluster sizes:
-                   BC 1 BC 2 BC 3 BC 4
-Number of Rows:      15   16   18    4
-Number of Columns:   13   14    9   11</code></pre>
+First  5  Cluster sizes:
+                   BC 1 BC 2 BC 3 BC 4 BC 5
+Number of Rows:      16   15   17    3    7
+Number of Columns:   13   14    9   11    8</code></pre>
 </div>
 </div>
 <p>The object includes cluster information. However compared to <em>cobiclust</em>, <em>biclust</em> object includes only information about clusters that were found, not general cluster.</p>
@@ -927,12 +927,19 @@ Number of Columns:   13   14    9   11</code></pre>
 <span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bicluster_rows)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                          cluster_1 cluster_2 cluster_3 cluster_4 cluster_5
-D_5__Staphylococcus           FALSE     FALSE     FALSE     FALSE      TRUE
-D_5__Klebsiella               FALSE     FALSE     FALSE     FALSE      TRUE
-D_5__Streptococcus            FALSE     FALSE     FALSE     FALSE      TRUE
-D_5__Escherichia-Shigella     FALSE     FALSE     FALSE     FALSE      TRUE
+D_5__Staphylococcus           FALSE     FALSE     FALSE     FALSE     FALSE
+D_5__Klebsiella               FALSE     FALSE     FALSE     FALSE     FALSE
+D_5__Streptococcus            FALSE     FALSE     FALSE     FALSE     FALSE
+D_5__Escherichia-Shigella     FALSE     FALSE     FALSE     FALSE     FALSE
 D_5__Ruminiclostridium 5       TRUE     FALSE      TRUE     FALSE     FALSE
-D_5__Pseudomonas              FALSE     FALSE     FALSE     FALSE      TRUE</code></pre>
+D_5__Pseudomonas              FALSE     FALSE     FALSE     FALSE     FALSE
+                          cluster_6 cluster_7 cluster_8
+D_5__Staphylococcus           FALSE     FALSE      TRUE
+D_5__Klebsiella               FALSE      TRUE     FALSE
+D_5__Streptococcus            FALSE     FALSE      TRUE
+D_5__Escherichia-Shigella     FALSE     FALSE      TRUE
+D_5__Ruminiclostridium 5      FALSE     FALSE     FALSE
+D_5__Pseudomonas              FALSE     FALSE      TRUE</code></pre>
 </div>
 </div>
 <p>Let’s collect information for the scatter plot.</p>
@@ -996,9 +1003,18 @@ D_5__Pseudomonas              FALSE     FALSE     FALSE     FALSE      TRUE</cod
 <div class="cell-output-display">
 <p><img src="24_clustering_files/figure-html/biclust_7-5.png" class="img-fluid" style="width:33.0%"></p>
 </div>
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>pics[[<span class="dv">1</span>]] <span class="sc">+</span> pics[[<span class="dv">2</span>]] <span class="sc">+</span> pics[[<span class="dv">3</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="24_clustering_files/figure-html/biclust_7-6.png" class="img-fluid" style="width:33.0%"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="24_clustering_files/figure-html/biclust_7-7.png" class="img-fluid" style="width:33.0%"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="24_clustering_files/figure-html/biclust_7-8.png" class="img-fluid" style="width:33.0%"></p>
+</div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>pics[[<span class="dv">1</span>]] <span class="sc">+</span> pics[[<span class="dv">2</span>]] <span class="sc">+</span> pics[[<span class="dv">3</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="24_clustering_files/figure-html/biclust_7-9.png" class="img-fluid" style="width:33.0%"></p>
 </div>
 </div>
 <p><em>pheatmap</em> does not allow boolean values, so they must be converted into factors.</p>
