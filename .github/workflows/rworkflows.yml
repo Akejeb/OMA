@@ -4,6 +4,7 @@ name: rworkflows
 'on':
   push:
     branches:
+    - master
     - devel
     - RELEASE_**
   pull_request:

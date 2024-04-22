@@ -3,6 +3,7 @@ name: biocbook
 on:
   push:
     branches:
+      - master
       - devel
       - RELEASE_**
 
