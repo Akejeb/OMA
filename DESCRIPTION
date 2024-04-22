@@ -96,6 +96,7 @@ Suggests:
     dada2
 Remotes:
     github::microbiome/miaTime
+    github::microbiome/mia
 VignetteBuilder: knitr
 RoxygenNote: 7.2.3
 BiocType: Book
