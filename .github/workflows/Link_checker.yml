@@ -1,0 +1,48 @@
+name: Link Checker
+
+on:
+  repository_dispatch:
+    types:
+      - trigger-link-check-workflow
+  workflow_dispatch:
+
+jobs:
+  link_checker:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Check links
+        run: |
+          failure=false
+          # List all HTML files
+          html_files=$(find . -name "*.html")
+
+          # Loop through each HTML file
+          for file in $html_files; do
+            echo "Checking links in $file"
+
+            # Loop through each link not matching the pattern
+            for link in $other_links; do
+              # Check if the link starts with "http://" or "https://"
+              if [[ $link == http://* ]] || [[ $link == https://* ]]; then
+                # Check the return code of the HTTP link
+                status_code=$(curl -s -o /dev/null -w "%{http_code}" "$link")
+
+                if [ "$status_code" -eq 200 ] || [ "$status_code" -ge 300 ] && [ "$status_code" -lt 400 ]; then
+                  echo "    [✓] Link is valid: $link"
+                else
+                  echo "    [✖] Link is invalid: $link (HTTP $status_code)"
+                  failure=true
+                fi
+              fi
+            done
+          done || failure=true
+          
+          # Exit the workflow with a failure status if any failure occurred
+          if [ "$failure" = true ]; then
+            echo "Error: At least one link doesn't work"
+            exit 1
+          fi
