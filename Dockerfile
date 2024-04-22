@@ -1,4 +1,5 @@
-ARG BIOC_VERSION
+ARG BIOC_VERSION=latest  # default to latest if no version is provided
+
 FROM bioconductor/bioconductor_docker:${BIOC_VERSION}
 COPY . /opt/pkg
 
