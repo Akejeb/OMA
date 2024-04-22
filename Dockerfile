@@ -1,4 +1,4 @@
-ARG BIOC_VERSION=1.1
+ARG BIOC_VERSION
 FROM bioconductor/bioconductor_docker:${BIOC_VERSION}
 COPY . /opt/pkg
 
