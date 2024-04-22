@@ -1,6 +1,6 @@
-ARG BIOC_VERSION=latest  # default to latest if no version is provided
+#ARG BIOC_VERSION=latest  # default to latest if no version is provided
 
-FROM bioconductor/bioconductor_docker:${BIOC_VERSION}
+FROM bioconductor/bioconductor_docker:devel
 COPY . /opt/pkg
 
 # Install book package 
