@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'DESCRIPTION'
+      - '**.yml'
   schedule:
     - cron: '*/5 * * * *' # Optional: schedule a weekly run
 
