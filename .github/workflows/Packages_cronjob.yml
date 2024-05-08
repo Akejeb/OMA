@@ -1,0 +1,33 @@
+name: Extract Packages
+
+on:
+  push:
+    paths:
+      - 'DESCRIPTION'
+      - '.github/workflows/extract_packages.yml' # To rerun the workflow if this file changes
+  schedule:
+    - cron: '*/5 * * * *' # Optional: schedule a weekly run
+
+jobs:
+  extract_packages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v1
+
+      - name: Install R dependencies
+        run: Rscript -e 'install.packages("stringi")' # Install any packages your script needs
+
+      - name: Run extract_packages script
+        run: Rscript extract_packages.R
+
+      - name: Commit files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add packages.csv
+          git commit -m "Update packages.csv" -a || echo "No changes to commit"
+          git push
