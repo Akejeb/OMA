@@ -7,15 +7,17 @@ on:
   schedule:
     - cron: '*/5 * * * *' # Optional: schedule a weekly run
 
+permissions: write-all
+
 jobs:
   extract_packages:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}  # Ensures the token is passed correctly
-          persist-credentials: true           # Allows Git commands to use this token
 
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
@@ -28,8 +30,8 @@ jobs:
 
       - name: Commit and push changes
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --local user.name "$GITHUB_ACTOR"
+          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
           git add oma_packages.csv
           git commit -m "Update oma_packages.csv" -a || echo "No changes to commit"
-          git push
+          git push origin || echo "No changes to commit"
