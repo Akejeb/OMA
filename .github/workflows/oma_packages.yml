@@ -2,11 +2,11 @@ name: Extract Packages
 
 on:
   push:
+    branches:
+      - devel
     paths:
       - 'DESCRIPTION'
       - '**.yml'
-  schedule:
-    - cron: '*/5 * * * *' # Optional: schedule a weekly run
 
 permissions: write-all
 
