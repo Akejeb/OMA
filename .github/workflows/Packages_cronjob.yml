@@ -13,6 +13,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}  # Ensures the token is passed correctly
+          persist-credentials: true           # Allows Git commands to use this token
 
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
@@ -30,5 +33,3 @@ jobs:
           git add oma_packages.csv
           git commit -m "Update oma_packages.csv" -a || echo "No changes to commit"
           git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
