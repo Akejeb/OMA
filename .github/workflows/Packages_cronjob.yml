@@ -4,7 +4,6 @@ on:
   push:
     paths:
       - 'DESCRIPTION'
-      - '.github/workflows/extract_packages.yml' # To rerun the workflow if this file changes
   schedule:
     - cron: '*/5 * * * *' # Optional: schedule a weekly run
 
