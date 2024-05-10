@@ -105,7 +105,8 @@ Suggests:
     topGO,
     vegan,
     WGCNA,
-    ABCD
+    ABCD,
+    efgg
 Remotes:
     github::microbiome/mia,
     github::microbiome/miaTime,
