@@ -28,12 +28,14 @@ jobs:
         run: Rscript -e 'install.packages("stringi")' # Install any packages your script needs
 
       - name: Run extract_packages script
+        working-directory: ./oma_packages
         run: Rscript extract_packages.R
 
       - name: Commit and push changes
         run: |
           git config --local user.name "$GITHUB_ACTOR"
           git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          cd oma_packages
           git add oma_packages.csv
           git commit -m "Update oma_packages.csv" -a || echo "No changes to commit"
           git push origin || echo "No changes to commit"
