@@ -618,7 +618,7 @@ Huang, Ruizhu. 2020. <em>TreeSummarizedExperiment: A S4 Class for Data with Tree
 <p>One of the main applications of taxonomic information in regards to count data is to agglomerate count data on taxonomic levels and track the influence of changing conditions through these levels. For this <code>mia</code> contains the <code>mergeFeaturesByRank</code> function. The ideal location to store the agglomerated data is as an alternative experiment.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mia/man/transformAssay.html">transformAssay</a></span><span class="op">(</span><span class="va">tse</span>, assay.type <span class="op">=</span> <span class="st">"counts"</span>, method <span class="op">=</span> <span class="st">"relabundance"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/SingleCellExperiment/man/altExps.html">altExp</a></span><span class="op">(</span><span class="va">tse</span>, <span class="st">"Family"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mia/man/agglomerate-methods.html">mergeFeaturesByRank</a></span><span class="op">(</span><span class="va">tse</span>, rank <span class="op">=</span> <span class="st">"Family"</span>,</span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/SingleCellExperiment/man/altExps.html">altExp</a></span><span class="op">(</span><span class="va">tse</span>, <span class="st">"Family"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mia/man/deprecate.html">mergeFeaturesByRank</a></span><span class="op">(</span><span class="va">tse</span>, rank <span class="op">=</span> <span class="st">"Family"</span>,</span>
 <span>                                           agglomerateTree <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/SingleCellExperiment/man/altExps.html">altExp</a></span><span class="op">(</span><span class="va">tse</span>, <span class="st">"Family"</span><span class="op">)</span></span>
 <span><span class="co">##  class: TreeSummarizedExperiment </span></span>
@@ -634,7 +634,7 @@ Huang, Ruizhu. 2020. <em>TreeSummarizedExperiment: A S4 Class for Data with Tree
 <span><span class="co">##  mainExpName: NULL</span></span>
 <span><span class="co">##  altExpNames(0):</span></span>
 <span><span class="co">##  rowLinks: a LinkDataFrame (603 rows)</span></span>
-<span><span class="co">##  rowTree: 1 phylo tree(s) (1645 leaves)</span></span>
+<span><span class="co">##  rowTree: 1 phylo tree(s) (353 leaves)</span></span>
 <span><span class="co">##  colLinks: NULL</span></span>
 <span><span class="co">##  colTree: NULL</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -791,7 +791,7 @@ Huang, Ruizhu. 2020. <em>TreeSummarizedExperiment: A S4 Class for Data with Tree
 <p>It’s also possible to merge the rows by cluster.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Aggregate clusters as a sum of each cluster values</span></span>
-<span><span class="va">tse_merged</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mia/man/merge-methods.html">mergeFeatures</a></span><span class="op">(</span><span class="va">tse</span>, <span class="va">clusters_euclidean</span><span class="op">)</span></span>
+<span><span class="va">tse_merged</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mia/man/deprecate.html">mergeFeatures</a></span><span class="op">(</span><span class="va">tse</span>, <span class="va">clusters_euclidean</span><span class="op">)</span></span>
 <span><span class="va">tse_merged</span></span>
 <span><span class="co">##  class: TreeSummarizedExperiment </span></span>
 <span><span class="co">##  dim: 5 58 </span></span>

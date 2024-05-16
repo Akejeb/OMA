@@ -613,7 +613,7 @@ Sprockett, Daniel D., Melanie Martin, Elizabeth K. Costello, Adam R. Burns, Susa
 </div>
 <p>We agglomerate microbiome data to Phylum:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tse_phylum</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mia/man/agglomerate-methods.html">mergeFeaturesByRank</a></span><span class="op">(</span><span class="va">tse</span>, <span class="st">"Phylum"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tse_phylum</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mia/man/deprecate.html">mergeFeaturesByRank</a></span><span class="op">(</span><span class="va">tse</span>, <span class="st">"Phylum"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We extract the counts assay and covariate data to build the model matrix:</p>
 <div class="cell" data-layout-align="center">
@@ -704,7 +704,7 @@ Sievert, Carson. 2020. <em>Interactive Web-Based Data Visualization with r, Plot
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">alcohol</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># excluding missing values</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/pkg/curatedMetagenomicData/man/returnSamples.html">returnSamples</a></span><span class="op">(</span><span class="st">"relative_abundance"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">tse_Genus</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mia/man/agglomerate-methods.html">mergeFeaturesByRank</a></span><span class="op">(</span><span class="va">tse</span>, rank<span class="op">=</span><span class="st">"genus"</span><span class="op">)</span></span>
+<span><span class="va">tse_Genus</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mia/man/deprecate.html">mergeFeaturesByRank</a></span><span class="op">(</span><span class="va">tse</span>, rank<span class="op">=</span><span class="st">"genus"</span><span class="op">)</span></span>
 <span><span class="va">tse_Genus</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mia/man/perSampleDominantTaxa.html">addPerSampleDominantFeatures</a></span><span class="op">(</span><span class="va">tse_Genus</span>,assay.type<span class="op">=</span><span class="st">"relative_abundance"</span>, name <span class="op">=</span> <span class="st">"dominant_taxa"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Performing PCoA with Bray-Curtis dissimilarity.</span></span>
@@ -1215,16 +1215,15 @@ Sievert, Carson. 2020. <em>Interactive Web-Based Data Visualization with r, Plot
 <p>Tax_glom removes the taxa which have not been assigned to the level given in taxrank by default (NArm = TRUE). So we will add the onRankOnly = TRUE to mergeFeaturesByRank function which is equivalent to the default behaviour of tax_glom.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/SingleCellExperiment/man/altExps.html">altExp</a></span><span class="op">(</span><span class="va">tse</span>, <span class="st">"Family"</span><span class="op">)</span> <span class="op">&lt;-</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/mia/man/agglomerate-methods.html">mergeFeaturesByRank</a></span><span class="op">(</span><span class="va">tse</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/mia/man/deprecate.html">mergeFeaturesByRank</a></span><span class="op">(</span><span class="va">tse</span>,</span>
 <span>                      rank <span class="op">=</span> <span class="st">"Family"</span>,</span>
 <span>                      onRankOnly <span class="op">=</span> <span class="cn">TRUE</span>, <span class="co"># Let's add the equivalent option to NArm =TRUE</span></span>
 <span>                      agglomerateTree <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">##  Warning in .local(x, ...): 'agglomerateByRank' is deprecated.</span></span>
-<span><span class="co">##  Use 'mergeFeaturesByRank' instead.</span></span>
-<span><span class="co">##  See help("Deprecated") and help("Now agglomerateByRank is deprecated. Use mergeFeaturesByRank instead.-deprecated").</span></span>
+<span><span class="co">##  Warning in mergeFeaturesByRank(tse, rank = "Family", onRankOnly = TRUE, :</span></span>
+<span><span class="co">##  'mergeFeaturesByRank' is deprecated. Use 'agglomerateByRank' instead.</span></span>
 <span><span class="co">##  Warning: 'clr' includes negative values.</span></span>
 <span><span class="co">##  Agglomeration of it might lead to meaningless values.</span></span>
-<span><span class="co">##  Check the assay, and consider doing transformation again manually with agglomerated data.</span></span>
+<span><span class="co">##  Check the assay, and consider doing transformation againmanually with agglomerated data.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/SingleCellExperiment/man/altExps.html">altExp</a></span><span class="op">(</span><span class="va">tse</span>, <span class="st">"Family"</span><span class="op">)</span></span>
 <span><span class="co">##  class: TreeSummarizedExperiment </span></span>
 <span><span class="co">##  dim: 334 26 </span></span>

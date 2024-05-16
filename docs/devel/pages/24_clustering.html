@@ -582,7 +582,7 @@ document.addEventListener("click", function (event) {
 <span><span class="va">tse</span> <span class="op">&lt;-</span> <span class="va">GlobalPatterns</span></span>
 <span></span>
 <span><span class="co"># Agglomerate by rank</span></span>
-<span><span class="va">tse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mia/man/agglomerate-methods.html">mergeFeaturesByRank</a></span><span class="op">(</span><span class="va">tse</span>, rank <span class="op">=</span> <span class="st">"Phylum"</span>, agglomerateTree <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">tse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mia/man/deprecate.html">mergeFeaturesByRank</a></span><span class="op">(</span><span class="va">tse</span>, rank <span class="op">=</span> <span class="st">"Phylum"</span>, agglomerateTree <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In the example below, we calculate model fit using Laplace approximation. The cluster information is added in the metadata with an optional <code>name</code>.</p>
 <div class="cell" data-layout-align="center">
@@ -608,7 +608,7 @@ document.addEventListener("click", function (event) {
 <span><span class="co">##  mainExpName: NULL</span></span>
 <span><span class="co">##  altExpNames(0):</span></span>
 <span><span class="co">##  rowLinks: a LinkDataFrame (67 rows)</span></span>
-<span><span class="co">##  rowTree: 1 phylo tree(s) (19216 leaves)</span></span>
+<span><span class="co">##  rowTree: 1 phylo tree(s) (67 leaves)</span></span>
 <span><span class="co">##  colLinks: NULL</span></span>
 <span><span class="co">##  colTree: NULL</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -646,16 +646,16 @@ document.addEventListener("click", function (event) {
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu">metadata</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/SingleCellExperiment/man/altExps.html">altExp</a></span><span class="op">(</span><span class="va">tse</span>, <span class="st">"dmm"</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">DMM</span><span class="op">$</span><span class="va">prob</span>, <span class="fl">10</span><span class="op">)</span> </span>
 <span><span class="co">##                  1         2</span></span>
-<span><span class="co">##  CL3     1.000e+00 4.999e-17</span></span>
-<span><span class="co">##  CC1     1.000e+00 3.786e-22</span></span>
-<span><span class="co">##  SV1     1.000e+00 2.015e-12</span></span>
-<span><span class="co">##  M31Fcsw 7.215e-26 1.000e+00</span></span>
-<span><span class="co">##  M11Fcsw 1.056e-16 1.000e+00</span></span>
-<span><span class="co">##  M31Plmr 9.966e-14 1.000e+00</span></span>
-<span><span class="co">##  M11Plmr 2.216e-06 1.000e+00</span></span>
-<span><span class="co">##  F21Plmr 2.873e-11 1.000e+00</span></span>
-<span><span class="co">##  M31Tong 1.311e-08 1.000e+00</span></span>
-<span><span class="co">##  M11Tong 2.080e-06 1.000e+00</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">##  CL3     1.000e+00 4.981e-17</span></span>
+<span><span class="co">##  CC1     1.000e+00 3.813e-22</span></span>
+<span><span class="co">##  SV1     1.000e+00 1.939e-12</span></span>
+<span><span class="co">##  M31Fcsw 7.880e-26 1.000e+00</span></span>
+<span><span class="co">##  M11Fcsw 1.131e-16 1.000e+00</span></span>
+<span><span class="co">##  M31Plmr 1.122e-13 1.000e+00</span></span>
+<span><span class="co">##  M11Plmr 3.415e-06 1.000e+00</span></span>
+<span><span class="co">##  F21Plmr 4.327e-11 1.000e+00</span></span>
+<span><span class="co">##  M31Tong 1.450e-08 1.000e+00</span></span>
+<span><span class="co">##  M11Tong 2.226e-06 1.000e+00</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Once the optimal model have been confirmed, we can find out which samples are grouped with each other. The table below shows one sample of each sample type clustered in either of the groups. We can notice that DMM can distinguish environmental samples into one group, and mock and human samples into another. For clarity, in this example, the probabilities for each sample to belong in each cluster have been rounded.</p>
 <div class="cell" data-layout-align="center">
@@ -669,7 +669,7 @@ document.addEventListener("click", function (event) {
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">SampleType</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">Group1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/row_number.html">row_number</a></span><span class="op">(</span><span class="op">)</span><span class="op">==</span><span class="fl">1</span><span class="op">)</span></span>
-<span><span class="co">##  # A tibble: 9 x 3</span></span>
+<span><span class="co">##  # A tibble: 9 × 3</span></span>
 <span><span class="co">##  # Groups:   SampleType [9]</span></span>
 <span><span class="co">##    Group1 Group2 SampleType</span></span>
 <span><span class="co">##    &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;     </span></span>
@@ -679,7 +679,7 @@ document.addEventListener("click", function (event) {
 <span><span class="co">##  4 0      1      Mock      </span></span>
 <span><span class="co">##  5 1      0      Soil      </span></span>
 <span><span class="co">##  6 1      0      Freshwater</span></span>
-<span><span class="co">##  # i 3 more rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">##  # ℹ 3 more rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can also plot the driver Phyla in each group. In this case, it reflects the differences between environmental and human samples.</p>
 <div class="cell" data-layout-align="center">
@@ -723,7 +723,7 @@ document.addEventListener("click", function (event) {
 <span><span class="co">##                     k samples taxa    NLE  LogDet Laplace    BIC  AIC</span></span>
 <span><span class="co">##  Feces              2       4   67 1078.3 -106.26   901.1 1171.9 1213</span></span>
 <span><span class="co">##  Freshwater         2       2   67  889.6  -97.20   716.9  936.4 1025</span></span>
-<span><span class="co">##  Freshwater (creek) 2       3   67 1600.3  793.17  1872.8 1674.5 1735</span></span>
+<span><span class="co">##  Freshwater (creek) 2       3   67 1600.3  862.19  1907.3 1674.5 1735</span></span>
 <span><span class="co">##  Mock               2       3   67 1008.4  -55.40   856.6 1082.5 1143</span></span>
 <span><span class="co">##  Ocean              2       3   67 1096.7  -56.66   944.3 1170.9 1232</span></span>
 <span><span class="co">##  Sediment (estuary) 2       3   67 1195.5   18.63  1080.8 1269.7 1331</span></span>
@@ -735,8 +735,8 @@ document.addEventListener("click", function (event) {
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">DirichletMultinomial</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DirichletMultinomial/man/fitted.html">mixturewt</a></span><span class="op">(</span><span class="va">bestFit</span><span class="op">)</span></span>
 <span><span class="co">##        pi theta</span></span>
-<span><span class="co">##  1 0.5385 20.60</span></span>
-<span><span class="co">##  2 0.4615 15.29</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">##  1 0.5385 20.58</span></span>
+<span><span class="co">##  2 0.4615 15.28</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="pcoa-with-dmm-clusters" class="level3" data-number="9.3.1"><h3 data-number="9.3.1" class="anchored" data-anchor-id="pcoa-with-dmm-clusters">
 <span class="header-section-number">9.3.1</span> PCoA with DMM clusters</h3>
@@ -924,7 +924,7 @@ document.addEventListener("click", function (event) {
 <p>Next, we compute the spearman correlation matrix.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Calculate correlations</span></span>
-<span><span class="va">corr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mia/man/getExperimentCrossAssociation.html">getExperimentCrossCorrelation</a></span><span class="op">(</span><span class="va">mae</span>, <span class="fl">1</span>, <span class="fl">2</span>, assay.type1 <span class="op">=</span> <span class="st">"rclr"</span>,</span>
+<span><span class="va">corr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mia/man/deprecate.html">getExperimentCrossCorrelation</a></span><span class="op">(</span><span class="va">mae</span>, <span class="fl">1</span>, <span class="fl">2</span>, assay.type1 <span class="op">=</span> <span class="st">"rclr"</span>,</span>
 <span>                                      assay.type2 <span class="op">=</span> <span class="st">"log10"</span>, mode <span class="op">=</span> <span class="st">"matrix"</span>,</span>
 <span>                                      correlation <span class="op">=</span> <span class="st">"spearman"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -944,12 +944,12 @@ document.addEventListener("click", function (event) {
 <span><span class="co">##  call:</span></span>
 <span><span class="co">##      biclust(x = corr, method = BCPlaid(), verbose = FALSE)</span></span>
 <span><span class="co">##  </span></span>
-<span><span class="co">##  Number of Clusters found:  3 </span></span>
+<span><span class="co">##  Number of Clusters found:  4 </span></span>
 <span><span class="co">##  </span></span>
-<span><span class="co">##  First  3  Cluster sizes:</span></span>
-<span><span class="co">##                     BC 1 BC 2 BC 3</span></span>
-<span><span class="co">##  Number of Rows:      21   17    9</span></span>
-<span><span class="co">##  Number of Columns:   13   10   10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">##  First  4  Cluster sizes:</span></span>
+<span><span class="co">##                     BC 1 BC 2 BC 3 BC 4</span></span>
+<span><span class="co">##  Number of Rows:      22   20    6    2</span></span>
+<span><span class="co">##  Number of Columns:   12   10   12    7</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The object includes cluster information. However compared to <em>cobiclust</em>, <em>biclust</em> object includes only information about clusters that were found, not general cluster.</p>
 <p>Meaning that if one cluster size of 5 features was found out of 20 features, those 15 features do not belong to any cluster. That is why we have to create an additional cluster for features/samples that are not assigned into any cluster.</p>
@@ -1017,7 +1017,7 @@ document.addEventListener("click", function (event) {
 <span><span class="co">##                                                                                                                        cluster_1</span></span>
 <span><span class="co">##  D_1__Firmicutes_D_2__Bacilli_D_3__Bacillales_D_4__Staphylococcaceae_D_5__Staphylococcus                                   FALSE</span></span>
 <span><span class="co">##  D_1__Proteobacteria_D_2__Gammaproteobacteria_D_3__Enterobacteriales_D_4__Enterobacteriaceae_D_5__Klebsiella               FALSE</span></span>
-<span><span class="co">##  D_1__Firmicutes_D_2__Bacilli_D_3__Lactobacillales_D_4__Streptococcaceae_D_5__Streptococcus                                FALSE</span></span>
+<span><span class="co">##  D_1__Firmicutes_D_2__Bacilli_D_3__Lactobacillales_D_4__Streptococcaceae_D_5__Streptococcus                                 TRUE</span></span>
 <span><span class="co">##  D_1__Proteobacteria_D_2__Gammaproteobacteria_D_3__Enterobacteriales_D_4__Enterobacteriaceae_D_5__Escherichia-Shigella     FALSE</span></span>
 <span><span class="co">##  D_1__Firmicutes_D_2__Clostridia_D_3__Clostridiales_D_4__Ruminococcaceae_D_5__Ruminiclostridium 5                          FALSE</span></span>
 <span><span class="co">##  D_1__Proteobacteria_D_2__Gammaproteobacteria_D_3__Pseudomonadales_D_4__Pseudomonadaceae_D_5__Pseudomonas                  FALSE</span></span>
@@ -1036,9 +1036,16 @@ document.addEventListener("click", function (event) {
 <span><span class="co">##  D_1__Firmicutes_D_2__Clostridia_D_3__Clostridiales_D_4__Ruminococcaceae_D_5__Ruminiclostridium 5                           TRUE</span></span>
 <span><span class="co">##  D_1__Proteobacteria_D_2__Gammaproteobacteria_D_3__Pseudomonadales_D_4__Pseudomonadaceae_D_5__Pseudomonas                  FALSE</span></span>
 <span><span class="co">##                                                                                                                        cluster_4</span></span>
+<span><span class="co">##  D_1__Firmicutes_D_2__Bacilli_D_3__Bacillales_D_4__Staphylococcaceae_D_5__Staphylococcus                                   FALSE</span></span>
+<span><span class="co">##  D_1__Proteobacteria_D_2__Gammaproteobacteria_D_3__Enterobacteriales_D_4__Enterobacteriaceae_D_5__Klebsiella               FALSE</span></span>
+<span><span class="co">##  D_1__Firmicutes_D_2__Bacilli_D_3__Lactobacillales_D_4__Streptococcaceae_D_5__Streptococcus                                FALSE</span></span>
+<span><span class="co">##  D_1__Proteobacteria_D_2__Gammaproteobacteria_D_3__Enterobacteriales_D_4__Enterobacteriaceae_D_5__Escherichia-Shigella     FALSE</span></span>
+<span><span class="co">##  D_1__Firmicutes_D_2__Clostridia_D_3__Clostridiales_D_4__Ruminococcaceae_D_5__Ruminiclostridium 5                          FALSE</span></span>
+<span><span class="co">##  D_1__Proteobacteria_D_2__Gammaproteobacteria_D_3__Pseudomonadales_D_4__Pseudomonadaceae_D_5__Pseudomonas                  FALSE</span></span>
+<span><span class="co">##                                                                                                                        cluster_5</span></span>
 <span><span class="co">##  D_1__Firmicutes_D_2__Bacilli_D_3__Bacillales_D_4__Staphylococcaceae_D_5__Staphylococcus                                    TRUE</span></span>
 <span><span class="co">##  D_1__Proteobacteria_D_2__Gammaproteobacteria_D_3__Enterobacteriales_D_4__Enterobacteriaceae_D_5__Klebsiella                TRUE</span></span>
-<span><span class="co">##  D_1__Firmicutes_D_2__Bacilli_D_3__Lactobacillales_D_4__Streptococcaceae_D_5__Streptococcus                                 TRUE</span></span>
+<span><span class="co">##  D_1__Firmicutes_D_2__Bacilli_D_3__Lactobacillales_D_4__Streptococcaceae_D_5__Streptococcus                                FALSE</span></span>
 <span><span class="co">##  D_1__Proteobacteria_D_2__Gammaproteobacteria_D_3__Enterobacteriales_D_4__Enterobacteriaceae_D_5__Escherichia-Shigella      TRUE</span></span>
 <span><span class="co">##  D_1__Firmicutes_D_2__Clostridia_D_3__Clostridiales_D_4__Ruminococcaceae_D_5__Ruminiclostridium 5                          FALSE</span></span>
 <span><span class="co">##  D_1__Proteobacteria_D_2__Gammaproteobacteria_D_3__Pseudomonadales_D_4__Pseudomonadaceae_D_5__Pseudomonas                   TRUE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1113,10 +1120,16 @@ document.addEventListener("click", function (event) {
 </figure>
 </div>
 </div>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">pics</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">+</span> <span class="va">pics</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">+</span> <span class="va">pics</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="24_clustering_files/figure-html/biclust_7-5.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:33.0%"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">pics</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">+</span> <span class="va">pics</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">+</span> <span class="va">pics</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="24_clustering_files/figure-html/biclust_7-6.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:33.0%"></p>
 </figure>
 </div>
 </div>
